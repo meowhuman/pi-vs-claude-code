@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cinematic Sparkle - Twilight Experience</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="theme-twilight">
+  
+  <!-- Parallax Scene -->
+  <div id="parallax-scene">
+    <div class="layer layer-bg" data-speed="0.15">
+      <div class="stars-container" id="stars-bg"></div>
+    </div>
+    <div class="layer layer-cloud" data-speed="0.35">
+      <div class="cloud-cluster">
+        <div class="sparkle-cloud" id="sparkle-cloud"></div>
+        <div class="cloud-shape cloud-1"></div>
+        <div class="cloud-shape cloud-2"></div>
+        <div class="cloud-shape cloud-3"></div>
+      </div>
+    </div>
+    <div class="layer layer-foreground" data-speed="0.55">
+      <div class="hills">
+        <div class="hill hill-back"></div>
+        <div class="hill hill-mid"></div>
+        <div class="hill hill-front"></div>
+      </div>
+      <div class="sparkle-foreground" id="sparkle-foreground"></div>
+    </div>
+    <div class="layer layer-overlay"></div>
+  </div>
+
+  <!-- Main Content -->
+  <main>
+    
+    <!-- Hero Section -->
+    <section id="hero" class="section section-hero">
+      <div class="glass-card glass-hero" data-depth="0.42">
+        <div class="glass-inner">
+          <h1 class="heading-hero">
+            <span class="gradient-text">Twilight</span>
+            <span class="gradient-text gradient-text-2">Sparkle</span>
+          </h1>
+          <p class="text-subhero">A cinematic journey through crystalline dreams and iridescent horizons</p>
+          <div class="cta-container">
+            <a href="#about" class="cta-button">
+              <span class="cta-text">Begin Journey</span>
+              <span class="cta-glow"></span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section section-about">
+      <div class="section-content split-layout">
+        <div class="glass-card glass-about-text" data-depth="0.42">
+          <div class="glass-inner">
+            <h2 class="section-title">About the Experience</h2>
+            <p class="body-text">
+              Immerse yourself in a world where light dances across crystalline landscapes. 
+              Every sparkle tells a story, every hill hides a secret of iridescent beauty.
+            </p>
+            <p class="body-text">
+              Crafted with pure CSS and vanilla JavaScript, this experience brings 
+              cinematic parallax depth to the web—no heavy libraries required.
+            </p>
+          </div>
+        </div>
+        <div class="glass-card glass-about-visual" data-depth="0.45">
+          <div class="atmospheric-ornament">
+            <div class="orb orb-1"></div>
+            <div class="orb orb-2"></div>
+            <div class="orb orb-3"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="section section-features">
+      <div class="section-content">
+        <h2 class="section-title text-center">Features</h2>
+        <div class="features-grid">
+          <div class="glass-card glass-feature" data-depth="0.40">
+            <div class="glass-inner">
+              <div class="feature-icon">✦</div>
+              <h3 class="feature-title">Parallax Depth</h3>
+              <p class="feature-text">Multi-layer parallax creates immersive depth that responds to every scroll</p>
+            </div>
+          </div>
+          <div class="glass-card glass-feature" data-depth="0.42">
+            <div class="glass-inner">
+              <div class="feature-icon">◈</div>
+              <h3 class="feature-title">Iridescent Sparkle</h3>
+              <p class="feature-text">Dynamically generated particles twinkle with randomized colors and timing</p>
+            </div>
+          </div>
+          <div class="glass-card glass-feature" data-depth="0.44">
+            <div class="glass-inner">
+              <div class="feature-icon">◉</div>
+              <h3 class="feature-title">Glassmorphism</h3>
+              <p class="feature-text">Premium frosted glass cards with subtle glows and backdrop blur</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section section-contact">
+      <div class="section-content">
+        <div class="glass-card glass-contact" data-depth="0.42">
+          <div class="glass-inner">
+            <div class="glow-ring"></div>
+            <h2 class="section-title">Get in Touch</h2>
+            <p class="body-text text-center" style="margin-bottom: 2rem;">
+              Ready to create your own cinematic experience?
+            </p>
+            <div class="contact-links">
+              <a href="#" class="contact-link">
+                <span class="contact-icon">✉</span>
+                <span>hello@sparkle.dev</span>
+              </a>
+              <a href="#" class="contact-link">
+                <span class="contact-icon">⚡</span>
+                <span>@sparkle</span>
+              </a>
+              <a href="#" class="contact-link">
+                <span class="contact-icon">◎</span>
+                <span>GitHub</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

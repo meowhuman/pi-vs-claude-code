@@ -47,3 +47,41 @@ full-review:
       prompt: "Implement this plan:\n\n$INPUT"
     - agent: reviewer
       prompt: "Review this implementation:\n\n$INPUT"
+
+design-build-website:
+  description: "Cross-model workflow: Claude 3.5 Sonnet for Design -> Gemini Pro for Building HTML/CSS"
+  steps:
+    - agent: website-designer
+      prompt: "Analyze the objective and design a beautiful website layout, writing out details for colors, structure, and text based on: $INPUT"
+    - agent: website-builder
+      prompt: "Implement this design plan perfectly into HTML and CSS files located in /Users/terivercheung/Documents/AI/pi-vs-claude-code/resources : \n\n$INPUT"
+
+custom-design-build-review:
+  description: "User specified cross-model workflow: gpt-5.3-codex (Planner) -> glm-4.7 (Builder) -> gpt-5.2-codex (Reviewer)"
+  steps:
+    - agent: custom-planner
+      prompt: "Analyze the objective and design an implementation plan, writing out details based on: $INPUT"
+    - agent: custom-builder
+      prompt: "Implement this plan perfectly: \n\n$INPUT"
+    - agent: custom-reviewer
+      prompt: "Review this implementation for bugs, style, and correctness:\n\n$INPUT"
+
+onchain-monitor:
+  description: "Full onchain intelligence pipeline: Scout → Flow Analysis → RWA/Stablecoin → Report"
+  steps:
+    - agent: onchain-scout
+      prompt: "Fetch current onchain data for this analysis request: $INPUT"
+    - agent: capital-flow-analyst
+      prompt: "Analyze these onchain data points for capital flows and market signals:\n\nOriginal request: $ORIGINAL\n\nRaw data:\n$INPUT"
+    - agent: rwa-stable-monitor
+      prompt: "Analyze RWA and stablecoin metrics from this data. Flag any peg deviations or institutional signals:\n\nOriginal request: $ORIGINAL\n\nContext:\n$INPUT"
+    - agent: chain-reporter
+      prompt: "Synthesize all findings into a comprehensive onchain intelligence report:\n\nOriginal request: $ORIGINAL\n\nAnalysis:\n$INPUT"
+
+onchain-quick:
+  description: "Quick onchain snapshot: Scout → Report (2-step fast analysis)"
+  steps:
+    - agent: onchain-scout
+      prompt: "Fetch key onchain metrics. Focus on: $INPUT"
+    - agent: chain-reporter
+      prompt: "Create a concise onchain summary report:\n\nRequest: $ORIGINAL\n\nData:\n$INPUT"

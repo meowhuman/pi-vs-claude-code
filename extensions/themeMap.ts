@@ -36,6 +36,9 @@ export const THEME_MAP: Record<string, string> = {
 	"tilldone":           "everforest",       // task-focused calm
 	"tool-counter":       "synthwave",        // techy metrics
 	"tool-counter-widget":"synthwave",        // same family
+	"polymarket":         "cyberpunk",        // financial trading terminal
+	"crypto-onchain-monitor": "cyberpunk",   // onchain data terminal
+	"drip-board":             "rose-pine",   // creative, warm — music arts company
 };
 
 // ── Helpers ───────────────────────────────────────────────────────────────

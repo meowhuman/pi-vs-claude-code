@@ -1,0 +1,36 @@
+meeting:
+  discussion_time_minutes: 5
+
+board:
+  - name: brand
+    path: .pi/drip-board/agents/brand.md
+    active: true
+  - name: marketing
+    path: .pi/drip-board/agents/marketing.md
+    active: true
+  - name: grants
+    path: .pi/drip-board/agents/grants.md
+    active: true
+  - name: international
+    path: .pi/drip-board/agents/international.md
+    active: true
+  - name: content
+    path: .pi/drip-board/agents/content.md
+    active: true
+  - name: revenue
+    path: .pi/drip-board/agents/revenue.md
+    active: true
+  - name: contrarian
+    path: .pi/drip-board/agents/contrarian.md
+    active: true
+  - name: community
+    path: .pi/drip-board/agents/community.md
+    active: false
+
+presets:
+  full: [brand, marketing, grants, international, content, revenue, contrarian, community]
+  programming: [brand, international, revenue, contrarian]
+  marketing-campaign: [brand, marketing, content, contrarian]
+  grants-funding: [grants, revenue, international, contrarian]
+  creative: [brand, content, contrarian]
+  quick: [revenue, contrarian]

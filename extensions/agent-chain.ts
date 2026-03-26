@@ -47,6 +47,7 @@ interface AgentDef {
 	description: string;
 	tools: string;
 	systemPrompt: string;
+	model?: string;
 }
 
 interface StepState {
@@ -152,6 +153,7 @@ function parseAgentFile(filePath: string): AgentDef | null {
 			name: frontmatter.name,
 			description: frontmatter.description || "",
 			tools: frontmatter.tools || "read,grep,find,ls",
+			model: frontmatter.model,
 			systemPrompt: match[2].trim(),
 		};
 	} catch {
@@ -179,7 +181,7 @@ function scanAgentDirs(cwd: string): Map<string, AgentDef> {
 					agents.set(def.name.toLowerCase(), def);
 				}
 			}
-		} catch {}
+		} catch { }
 	}
 
 	return agents;
@@ -247,10 +249,10 @@ export default function (pi: ExtensionAPI) {
 
 		const statusColor = state.status === "pending" ? "dim"
 			: state.status === "running" ? "accent"
-			: state.status === "done" ? "success" : "error";
+				: state.status === "done" ? "success" : "error";
 		const statusIcon = state.status === "pending" ? "○"
 			: state.status === "running" ? "●"
-			: state.status === "done" ? "✓" : "✗";
+				: state.status === "done" ? "✓" : "✗";
 
 		const name = displayName(state.agent);
 		const nameStr = theme.fg("accent", theme.bold(truncate(name, w)));
@@ -334,9 +336,9 @@ export default function (pi: ExtensionAPI) {
 		stepIndex: number,
 		ctx: any,
 	): Promise<{ output: string; exitCode: number; elapsed: number }> {
-		const model = ctx.model
+		const model = agentDef.model ? agentDef.model : (ctx.model
 			? `${ctx.model.provider}/${ctx.model.id}`
-			: "openrouter/google/gemini-3-flash-preview";
+			: "openrouter/google/gemini-3-flash-preview");
 
 		const agentKey = agentDef.name.toLowerCase().replace(/\s+/g, "-");
 		const agentSessionFile = join(sessionDir, `chain-${agentKey}.json`);
@@ -395,12 +397,12 @@ export default function (pi: ExtensionAPI) {
 								updateWidget();
 							}
 						}
-					} catch {}
+					} catch { }
 				}
 			});
 
 			proc.stderr!.setEncoding("utf-8");
-			proc.stderr!.on("data", () => {});
+			proc.stderr!.on("data", () => { });
 
 			proc.on("close", (code) => {
 				if (buffer.trim()) {
@@ -410,7 +412,7 @@ export default function (pi: ExtensionAPI) {
 							const delta = event.assistantMessageEvent;
 							if (delta?.type === "text_delta") textChunks.push(delta.delta || "");
 						}
-					} catch {}
+					} catch { }
 				}
 
 				clearInterval(timer);
@@ -742,7 +744,7 @@ ${agentCatalog}
 		if (existsSync(sessDir)) {
 			for (const f of readdirSync(sessDir)) {
 				if (f.startsWith("chain-") && f.endsWith(".json")) {
-					try { unlinkSync(join(sessDir, f)); } catch {}
+					try { unlinkSync(join(sessDir, f)); } catch { }
 				}
 			}
 		}
@@ -771,8 +773,8 @@ ${agentCatalog}
 
 		// Footer: model | chain name | context bar
 		_ctx.ui.setFooter((_tui, theme, _footerData) => ({
-			dispose: () => {},
-			invalidate() {},
+			dispose: () => { },
+			invalidate() { },
 			render(width: number): string[] {
 				const model = _ctx.model?.id || "no-model";
 				const usage = _ctx.getContextUsage();
