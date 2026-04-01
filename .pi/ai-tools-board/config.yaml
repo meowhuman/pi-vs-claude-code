@@ -1,0 +1,32 @@
+meeting:
+  discussion_time_minutes: 10
+
+board:
+  - name: director
+    path: .pi/ai-tools-board/agents/director/director.md
+    active: true
+  - name: music-ai-scout
+    path: .pi/ai-tools-board/agents/music-ai-scout/music-ai-scout.md
+    active: true
+  - name: video-ai-scout
+    path: .pi/ai-tools-board/agents/video-ai-scout/video-ai-scout.md
+    active: true
+  - name: coding-ai-scout
+    path: .pi/ai-tools-board/agents/coding-ai-scout/coding-ai-scout.md
+    active: true
+  - name: system-analyst
+    path: .pi/ai-tools-board/agents/system-analyst/system-analyst.md
+    active: true
+  - name: github-researcher
+    path: .pi/ai-tools-board/agents/github-researcher/github-researcher.md
+    active: true
+
+presets:
+  full: [director, music-ai-scout, video-ai-scout, coding-ai-scout, system-analyst, github-researcher]
+  discovery: [director, music-ai-scout, video-ai-scout, coding-ai-scout]
+  music: [director, music-ai-scout]
+  video: [director, video-ai-scout]
+  coding: [director, coding-ai-scout]
+  github: [director, github-researcher]
+  systems: [director, system-analyst]
+  quick: [director, coding-ai-scout]

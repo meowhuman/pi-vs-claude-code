@@ -39,6 +39,11 @@ export const THEME_MAP: Record<string, string> = {
 	"polymarket":         "cyberpunk",        // financial trading terminal
 	"crypto-onchain-monitor": "cyberpunk",   // onchain data terminal
 	"drip-board":             "rose-pine",   // creative, warm — music arts company
+	"investment-adviser-board": "cyberpunk", // investment terminal
+	"inv-board-member-session": "cyberpunk", // investment board member session
+	"daily-log":                  "everforest", // calm, focused journaling
+	"ai-tools-board":             "tokyo-night", // tech research, sharp focus
+	"ai-tools-board-member-session": "tokyo-night", // 1-on-1 member session
 };
 
 // ── Helpers ───────────────────────────────────────────────────────────────

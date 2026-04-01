@@ -1,0 +1,40 @@
+meeting:
+  discussion_time_minutes: 10
+
+board:
+  - name: ceo
+    path: .pi/investment-adviser-board/agents/ceo/ceo.md
+    active: true
+  - name: macro-strategist
+    path: .pi/investment-adviser-board/agents/macro-strategist/macro-strategist.md
+    active: true
+  - name: fundamental-analyst
+    path: .pi/investment-adviser-board/agents/fundamental-analyst/fundamental-analyst.md
+    active: true
+  - name: technical-analyst
+    path: .pi/investment-adviser-board/agents/technical-analyst/technical-analyst.md
+    active: true
+  - name: risk-officer
+    path: .pi/investment-adviser-board/agents/risk-officer/risk-officer.md
+    active: true
+  - name: market-intelligence
+    path: .pi/investment-adviser-board/agents/market-intelligence/market-intelligence.md
+    active: true
+  - name: prediction-market-analyst
+    path: .pi/investment-adviser-board/agents/prediction-market-analyst/prediction-market-analyst.md
+    active: true
+  - name: backtest
+    path: .pi/investment-adviser-board/agents/backtest/backtest.md
+    active: true
+
+presets:
+  full: [ceo, macro-strategist, fundamental-analyst, technical-analyst, risk-officer, market-intelligence, prediction-market-analyst, backtest]
+  macro-focus: [ceo, macro-strategist, fundamental-analyst, risk-officer, prediction-market-analyst, backtest]
+  swing-trade: [ceo, technical-analyst, risk-officer, backtest]
+  quick: [ceo, technical-analyst, risk-officer]
+  event-driven: [ceo, macro-strategist, prediction-market-analyst, risk-officer, backtest]
+  pm-macro: [ceo, macro-strategist, prediction-market-analyst, backtest]
+  pm-technical: [ceo, prediction-market-analyst, technical-analyst]
+  ta-backtest: [ceo, technical-analyst, backtest]
+  pm-only: [ceo, prediction-market-analyst]
+  ta-only: [ceo, technical-analyst]

@@ -1,0 +1,21 @@
+{
+  "dev-team": {
+    "members": [
+      {
+        "name": "planning-lead",
+        "agent": "planning-lead",
+        "model": "sonnet"
+      },
+      {
+        "name": "engineering-lead",
+        "agent": "engineering-lead",
+        "model": "sonnet"
+      },
+      {
+        "name": "validation-lead",
+        "agent": "validation-lead",
+        "model": "sonnet"
+      }
+    ]
+  }
+}

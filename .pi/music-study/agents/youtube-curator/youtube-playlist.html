@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{TITLE}}</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #0a0a0a; color: #e0e0e0;
+    min-height: 100vh;
+  }
+  .header {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    padding: 40px 20px;
+    text-align: center;
+    border-bottom: 3px solid #e94560;
+  }
+  .header h1 { font-size: 2.2em; color: #fff; margin-bottom: 8px; }
+  .header .emoji { font-size: 1.5em; }
+  .header p {
+    color: #a0a0c0; font-size: 1.1em;
+    max-width: 700px; margin: 0 auto; line-height: 1.6;
+  }
+  .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+  .phase { margin: 36px 0; }
+  .phase-header {
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 16px; padding-bottom: 8px;
+    border-bottom: 1px solid #333;
+  }
+  .phase-number {
+    background: #e94560; color: #fff;
+    width: 36px; height: 36px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: bold; font-size: 1.1em; flex-shrink: 0;
+  }
+  .phase-title { font-size: 1.3em; color: #fff; font-weight: 600; }
+  .phase-desc { color: #888; font-size: 0.95em; margin-bottom: 16px; font-style: italic; line-height: 1.5; }
+
+  /* ── Clickable video card ── */
+  .video-card {
+    background: #151520; border: 1px solid #2a2a3a;
+    border-radius: 12px; margin-bottom: 14px;
+    overflow: hidden; transition: transform 0.2s, border-color 0.2s;
+    display: flex; align-items: stretch;
+    text-decoration: none; color: inherit;
+    cursor: pointer;
+  }
+  .video-card:hover {
+    transform: translateY(-2px); border-color: #e94560;
+    background: #1a1a28;
+  }
+  /* Highlighted card (e.g. Grammy / centerpiece) */
+  .video-card.highlight { border-color: #e94560; border-width: 2px; }
+  .video-card.highlight-gold { border-color: #ffc857; border-width: 2px; }
+  .thumb-col {
+    width: 200px; min-height: 130px; flex-shrink: 0;
+    background-size: cover; background-position: center;
+    position: relative; background-color: #111;
+  }
+  .thumb-col .play-icon {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(0,0,0,0.4);
+    opacity: 0; transition: opacity 0.2s;
+  }
+  .video-card:hover .play-icon { opacity: 1; }
+  .play-icon svg { width: 48px; height: 48px; fill: #fff; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.5)); }
+  .info-col { padding: 16px 20px; flex: 1; display: flex; flex-direction: column; justify-content: center; }
+  .info-col h3 { color: #fff; font-size: 1.05em; margin-bottom: 6px; line-height: 1.3; }
+  .info-col .meta { display: flex; gap: 12px; font-size: 0.82em; color: #888; margin-bottom: 8px; flex-wrap: wrap; align-items: center; }
+  .info-col .why {
+    color: #b0b0c8; font-size: 0.9em; line-height: 1.5;
+    padding: 10px 14px; background: #1a1a2e; border-radius: 8px;
+    border-left: 3px solid #e94560;
+  }
+  .info-col .why.gold-border { border-left-color: #ffc857; }
+
+  /* ── Badges ── */
+  .badge {
+    display: inline-block; padding: 2px 10px; border-radius: 20px;
+    font-size: 0.78em; font-weight: 600;
+  }
+  .badge-core   { background: #e94560; color: #fff; }
+  .badge-deep   { background: #0f3460; color: #8ec8f0; }
+  .badge-bonus  { background: #1a1a2e; color: #a0a0c0; border: 1px solid #333; }
+  .badge-gem    { background: #2d1b00; color: #ffc857; }
+  .badge-custom { background: #1a1a2e; color: #a0a0c0; border: 1px solid #333; }
+  .star { color: #ffd700; }
+
+  /* ── Tip / summary box ── */
+  .tip-box {
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    border: 1px solid #2a2a4a; border-radius: 12px;
+    padding: 20px; margin: 30px 0;
+  }
+  .tip-box h3 { color: #e94560; margin-bottom: 10px; }
+  .tip-box ul { list-style: none; padding: 0; }
+  .tip-box li { padding: 6px 0; color: #c0c0d0; line-height: 1.5; }
+  .tip-box li::before { content: "→ "; color: #e94560; }
+
+  .footer {
+    text-align: center; padding: 40px 20px; color: #555;
+    font-size: 0.9em; border-top: 1px solid #222; margin-top: 40px;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 700px) {
+    .video-card { flex-direction: column; }
+    .thumb-col { width: 100%; min-height: 180px; }
+    .header h1 { font-size: 1.5em; }
+    .phase-title { font-size: 1.1em; }
+  }
+</style>
+</head>
+<body>
+
+<!--
+╔══════════════════════════════════════════════════════════════╗
+║  Music Study Board — YouTube 播放清單模板                    ║
+║                                                              ║
+║  使用方式：                                                   ║
+║  1. 複製此模板                                                ║
+║  2. 替換所有 {{變數}} 佔位符                                   ║
+║  3. 複製 <a class="video-card"> 區塊來新增影片                 ║
+║  4. 複製 <div class="phase"> 區塊來新增階段                    ║
+║                                                              ║
+║  可用 badge 類別：                                            ║
+║    badge-core   → 紅色「必聽」                                 ║
+║    badge-deep   → 藍色「深入」                                 ║
+║    badge-bonus  → 灰色「彩蛋」                                 ║
+║    badge-gem    → 金色「珍寶」                                 ║
+║    badge-custom → 自訂（修改 inline style）                    ║
+║                                                              ║
+║  卡片修飾類別：                                                ║
+║    highlight      → 紅色粗邊框（核心重點）                      ║
+║    highlight-gold → 金色粗邊框（特別收藏）                      ║
+║    .why.gold-border → 金色左側邊線                             ║
+║                                                              ║
+║  縮圖網址格式：                                                ║
+║    https://img.youtube.com/vi/VIDEO_ID/hqdefault.jpg          ║
+║    https://img.youtube.com/vi/VIDEO_ID/maxresdefault.jpg      ║
+║                                                              ║
+║  VIDEO_ID 提取方式：                                          ║
+║    youtube.com/watch?v=VIDEO_ID  → 取 v= 後面的字串            ║
+║    youtu.be/VIDEO_ID              → 取路徑部分                 ║
+╚══════════════════════════════════════════════════════════════╝
+-->
+
+<!-- ══════════ HEADER ══════════ -->
+<div class="header">
+  <div class="emoji">{{HEADER_EMOJI}}</div>
+  <h1>{{HEADER_TITLE}}</h1>
+  <p>{{HEADER_DESCRIPTION}}</p>
+  <p style="margin-top:12px; color:#e94560; font-weight:600;">{{HEADER_SUBTITLE}}</p>
+</div>
+
+<!-- ══════════ BODY ══════════ -->
+<div class="container">
+
+  <!-- ─── 聆聽提示 ───
+  <div class="tip-box">
+    <h3>{{TIP_TITLE}}</h3>
+    <ul>
+      <li>{{TIP_ITEM_1}}</li>
+      <li>{{TIP_ITEM_2}}</li>
+      <li>{{TIP_ITEM_3}}</li>
+      <li>{{TIP_ITEM_4}}</li>
+    </ul>
+  </div>
+  -->
+
+  <!-- ══════════ 階段模板 — 複製此區塊新增階段 ══════════
+  <div class="phase">
+    <div class="phase-header">
+      <div class="phase-number">1</div>
+      <div class="phase-title">{{階段標題}}</div>
+    </div>
+    <div class="phase-desc">{{階段描述}}</div>
+
+    <a href="{{YOUTUBE_URL}}" target="_blank" class="video-card{{CARD_MODIFIER}}">
+      <div class="thumb-col" style="background-image:url('{{THUMB_URL}}')">
+        <div class="play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      </div>
+      <div class="info-col">
+        <h3>{{影片標題}}</h3>
+        <div class="meta">
+          <span class="badge badge-core">{{標籤文字}}</span>
+          <span>{{補充資訊}}</span>
+        </div>
+        <div class="why{{WHY_MODIFIER}}">{{為什麼值得聽}}</div>
+      </div>
+    </a>
+
+    ▲ 複製 <a> 到 </a> 之間的區塊來新增更多影片
+  </div>
+  ══════════ 階段模板結束 ══════════ -->
+
+  <!-- ─── 總覽模板 ───
+  <div class="tip-box" style="margin-top:40px;">
+    <h3>📋 播放清單總覽</h3>
+    <ul>
+      <li><strong>階段 1：</strong>{{總覽項目 1}}</li>
+      <li><strong>階段 2：</strong>{{總覽項目 2}}</li>
+      <li><strong>階段 3：</strong>{{總覽項目 3}}</li>
+    </ul>
+  </div>
+  -->
+
+</div>
+
+<!-- ══════════ FOOTER ══════════ -->
+<div class="footer">
+  <p>Music Study Board 策展 • deep-researcher · youtube-curator · genre-historian · listening-guide</p>
+  <p style="margin-top:8px; color:#e94560;">{{FOOTER_QUOTE}}</p>
+</div>
+
+</body>
+</html>

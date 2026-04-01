@@ -1,0 +1,17 @@
+[project]
+name = "backtest-system"
+version = "2.0.0"
+description = "Backtest system using Tiingo (stocks) and CCXT (crypto) — no external drive needed"
+requires-python = ">=3.12"
+dependencies = [
+    "pandas>=2.2.0",
+    "numpy>=2.0.0",
+    "requests>=2.32.0",
+    "ccxt>=4.0.0",
+    "python-dotenv>=1.0.0",
+    "matplotlib>=3.8.0",
+    "yfinance>=1.2.0",
+]
+
+[tool.uv]
+required-version = ">=0.4"

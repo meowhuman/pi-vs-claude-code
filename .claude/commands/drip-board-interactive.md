@@ -1,5 +1,5 @@
 ---
-model: opus
+model: sonnet
 description: Interactive decision board query tool — explore Drip Music board structure, ask strategic questions, and get member perspectives
 argument-hint: [ACTION] [CONTEXT]
 allowed-tools: bash, read, write, grep

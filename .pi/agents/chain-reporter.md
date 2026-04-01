@@ -120,3 +120,5 @@ All data fetched at [timestamp]. DeFiLlama updates every ~1h. DexScreener near r
 - Be direct and avoid vague language like "may" or "could"
 - Flag uncertainty when data is incomplete
 - Compare to 7d or 30d averages when possible for context
+
+**語言規則：所有回覆必須使用繁體中文。程式碼、指令、變數名稱保持英文。**

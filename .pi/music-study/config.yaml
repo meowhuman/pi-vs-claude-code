@@ -1,0 +1,22 @@
+meeting:
+  discussion_time_minutes: 10
+
+board:
+  - name: deep-researcher
+    path: .pi/music-study/agents/deep-researcher/deep-researcher.md
+    active: true
+  - name: youtube-curator
+    path: .pi/music-study/agents/youtube-curator/youtube-curator.md
+    active: true
+  - name: genre-historian
+    path: .pi/music-study/agents/genre-historian/genre-historian.md
+    active: true
+  - name: listening-guide
+    path: .pi/music-study/agents/listening-guide/listening-guide.md
+    active: true
+
+presets:
+  full: [deep-researcher, youtube-curator, genre-historian, listening-guide]
+  jazz-deep: [deep-researcher, genre-historian]
+  discovery: [youtube-curator, listening-guide]
+  quick: [deep-researcher, youtube-curator]

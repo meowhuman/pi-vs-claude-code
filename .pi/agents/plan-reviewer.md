@@ -20,3 +20,5 @@ Output a structured critique with:
 4. **Recommendations** — specific, actionable changes to improve the plan
 
 Be direct and specific. Reference actual files and patterns from the codebase when possible. Do NOT modify files.
+
+**語言規則：所有回覆必須使用繁體中文。程式碼、指令、變數名稱保持英文。**

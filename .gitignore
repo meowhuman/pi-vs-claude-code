@@ -9,6 +9,8 @@ __pycache__/
 .env
 
 .pi/agent-sessions/
+.claude/data/sessions/
+logs/
 
 
 .playwright-cli/

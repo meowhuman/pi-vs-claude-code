@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🎺 Randy Brecker × "Sozinho" — 音樂研究播放清單</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #0a0a0a; color: #e0e0e0;
+    min-height: 100vh;
+  }
+  .header {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    padding: 40px 20px;
+    text-align: center;
+    border-bottom: 3px solid #e94560;
+  }
+  .header h1 { font-size: 2.2em; color: #fff; margin-bottom: 8px; }
+  .header .emoji { font-size: 1.5em; }
+  .header p {
+    color: #a0a0c0; font-size: 1.1em;
+    max-width: 700px; margin: 0 auto; line-height: 1.6;
+  }
+  .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+  .phase { margin: 36px 0; }
+  .phase-header {
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 16px; padding-bottom: 8px;
+    border-bottom: 1px solid #333;
+  }
+  .phase-number {
+    background: #e94560; color: #fff;
+    width: 36px; height: 36px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: bold; font-size: 1.1em; flex-shrink: 0;
+  }
+  .phase-title { font-size: 1.3em; color: #fff; font-weight: 600; }
+  .phase-desc { color: #888; font-size: 0.95em; margin-bottom: 16px; font-style: italic; line-height: 1.5; }
+
+  .video-card {
+    background: #151520; border: 1px solid #2a2a3a;
+    border-radius: 12px; margin-bottom: 14px;
+    overflow: hidden; transition: transform 0.2s, border-color 0.2s;
+    display: flex; align-items: stretch;
+    text-decoration: none; color: inherit;
+    cursor: pointer;
+  }
+  .video-card:hover {
+    transform: translateY(-2px); border-color: #e94560;
+    background: #1a1a28;
+  }
+  .thumb-col {
+    width: 200px; min-height: 130px; flex-shrink: 0;
+    background-size: cover; background-position: center;
+    position: relative; background-color: #111;
+  }
+  .thumb-col .play-icon {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(0,0,0,0.4);
+    opacity: 0; transition: opacity 0.2s;
+  }
+  .video-card:hover .play-icon { opacity: 1; }
+  .play-icon svg { width: 48px; height: 48px; fill: #fff; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.5)); }
+  .info-col { padding: 16px 20px; flex: 1; display: flex; flex-direction: column; justify-content: center; }
+  .info-col h3 { color: #fff; font-size: 1.05em; margin-bottom: 6px; line-height: 1.3; }
+  .info-col .meta { display: flex; gap: 12px; font-size: 0.82em; color: #888; margin-bottom: 8px; flex-wrap: wrap; align-items: center; }
+  .info-col .why {
+    color: #b0b0c8; font-size: 0.9em; line-height: 1.5;
+    padding: 10px 14px; background: #1a1a2e; border-radius: 8px;
+    border-left: 3px solid #e94560;
+  }
+  .badge {
+    display: inline-block; padding: 2px 10px; border-radius: 20px;
+    font-size: 0.78em; font-weight: 600;
+  }
+  .badge-core { background: #e94560; color: #fff; }
+  .badge-deep { background: #0f3460; color: #8ec8f0; }
+  .badge-bonus { background: #1a1a2e; color: #a0a0c0; border: 1px solid #333; }
+  .badge-gem { background: #2d1b00; color: #ffc857; }
+  .star { color: #ffd700; }
+  .tip-box {
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    border: 1px solid #2a2a4a; border-radius: 12px;
+    padding: 20px; margin: 30px 0;
+  }
+  .tip-box h3 { color: #e94560; margin-bottom: 10px; }
+  .tip-box ul { list-style: none; padding: 0; }
+  .tip-box li { padding: 6px 0; color: #c0c0d0; line-height: 1.5; }
+  .tip-box li::before { content: "→ "; color: #e94560; }
+  .footer {
+    text-align: center; padding: 40px 20px; color: #555;
+    font-size: 0.9em; border-top: 1px solid #222; margin-top: 40px;
+  }
+  @media (max-width: 700px) {
+    .video-card { flex-direction: column; }
+    .thumb-col { width: 100%; min-height: 180px; }
+    .header h1 { font-size: 1.5em; }
+    .phase-title { font-size: 1.1em; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="emoji">🎺🇧🇷</div>
+  <h1>Randy Brecker × "Sozinho"</h1>
+  <p>Randy Brecker 的巴西爵士抒情時期 — 從 Jobim 的原創到葛萊美獲獎演繹的完整聆聽旅程。<br>點擊任何一張卡片即可在 YouTube 上觀看。</p>
+  <p style="margin-top:12px; color:#e94560; font-weight:600;">Music Study Board — 策展播放清單</p>
+</div>
+
+<div class="container">
+
+  <div class="tip-box">
+    <h3>🎧 使用說明</h3>
+    <ul>
+      <li><strong>點擊任意卡片</strong> → 在新分頁中開啟 YouTube 觀看</li>
+      <li>從「階段 1」開始（Jobim 原作），依序往下聆聽</li>
+      <li>專注聆聽 Randy 的 <strong>tone（音色）</strong>、<strong>space（留白）</strong>和 <strong>breath（呼吸感）</strong></li>
+      <li>將 "Sozinho" 與 Brecker Brothers 的 fusion 火力做對比 — 同一個小號手的兩面</li>
+    </ul>
+  </div>
+
+  <!-- ========== 階段 1 ========== -->
+  <div class="phase">
+    <div class="phase-header">
+      <div class="phase-number">1</div>
+      <div class="phase-title">源頭 — Jobim 的 "Sozinho"</div>
+    </div>
+    <div class="phase-desc">從這裡開始。"Sozinho" 在葡萄牙語中意為「孤獨」— Jobim 最私密、最內省的作品之一。先理解原作，再聽 Randy 的演繹。</div>
+
+    <a href="https://www.youtube.com/watch?v=yqJ_2ZbBAjI" target="_blank" class="video-card">
+      <div class="thumb-col" style="background-image:url('https://img.youtube.com/vi/yqJ_2ZbBAjI/hqdefault.jpg')">
+        <div class="play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      </div>
+      <div class="info-col">
+        <h3>Sozinho (Alone) — Brecker Brothers</h3>
+        <div class="meta">
+          <span class="badge badge-core">必聽</span>
+          <span>Priceless Jazz 系列精選</span>
+        </div>
+        <div class="why">Brecker Brothers 對 "Sozinho" 的演繹 — 進入 Randy 如何詮釋這首 Jobim 名曲的入門。爵士的精緻與巴西的靈魂在此交融。</div>
+      </div>
+    </a>
+
+    <a href="https://www.youtube.com/watch?v=khUFBm_osBw" target="_blank" class="video-card">
+      <div class="thumb-col" style="background-image:url('https://img.youtube.com/vi/khUFBm_osBw/hqdefault.jpg')">
+        <div class="play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      </div>
+      <div class="info-col">
+        <h3>Antonio Carlos Jobim — Bossa Nova 經典名曲精選</h3>
+        <div class="meta">
+          <span class="badge badge-core">必聽</span>
+          <span>Jobim • Bossa Nova 合集</span>
+        </div>
+        <div class="why">沉浸式體驗 Jobim 的和聲世界。聆聽他標誌性的憂鬱、延伸和弦與音符間的呼吸感 — 這就是 "Sozinho" 的 DNA。</div>
+      </div>
+    </a>
+  </div>
+
+  <!-- ========== 階段 2 ========== -->
+  <div class="phase">
+    <div class="phase-header">
+      <div class="phase-number">2</div>
+      <div class="phase-title">Randy 與 Eliane — Amanda 時期 (1985)</div>
+    </div>
+    <div class="phase-desc">Randy 最密集投入巴西音樂的時期。與鋼琴家 Eliane Elias 的婚姻催生了專輯《Amanda》— Randy 真正活進巴西音樂裡。</div>
+
+    <a href="https://www.youtube.com/watch?v=s2Rg7JXnoK8" target="_blank" class="video-card">
+      <div class="thumb-col" style="background-image:url('https://img.youtube.com/vi/s2Rg7JXnoK8/hqdefault.jpg')">
+        <div class="play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      </div>
+      <div class="info-col">
+        <h3>Randy Brecker & Eliane Elias — Amanda（完整專輯, 1985）</h3>
+        <div class="meta">
+          <span class="badge badge-core">必聽</span>
+          <span>Passport Jazz • 完整專輯 HQ</span>
+        </div>
+        <div class="why"><strong>就是這張專輯。</strong>Randy + Eliane + Michael Brecker + Will Lee + Dave Weckl + Manolo Badrena。後來定義 "Sozinho" 的抒情性，就是從這裡誕生的。</div>
+      </div>
+    </a>
+
+    <a href="https://www.youtube.com/watch?v=zLrFtLI7IHU" target="_blank" class="video-card">
+      <div class="thumb-col" style="background-image:url('https://img.youtube.com/vi/zLrFtLI7IHU/hqdefault.jpg')">
+        <div class="play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      </div>
+      <div class="info-col">
+        <h3>Eliane Elias & Randy Brecker — "Para Nada"（為無而作）</h3>
+        <div class="meta">
+          <span class="badge badge-deep">關鍵曲目</span>
+          <span>出自 Amanda (1985)</span>
+        </div>
+        <div class="why">Amanda 專輯中最接近 "Sozinho" 精神的一首。Randy 最私密的小號演奏 — 聆聽那份留白與溫暖。</div>
+      </div>
+    </a>
+
+    <a href="https://www.youtube.com/watch?v=8Pvj622LOUU" target="_blank" class="video-card">
+      <div class="thumb-col" style="background-image:url('https://img.youtube.com/vi/8Pvj622LOUU/hqdefault.jpg')">
+        <div class="play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      </div>
+      <div class="info-col">
+        <h3>Randy Brecker & Eliane Elias — Amanda（現場版, 1985）</h3>
+        <div class="meta">
+          <span class="badge badge-deep">深入</span>
+          <span>現場演出錄影</span>
+        </div>
+        <div class="why">現場版展現了即興的化學反應。觀察 Randy 的小號如何即時回應巴西節奏 — 少了棚內的打磨，多了生命的律動。</div>
+      </div>
+    </a>
+  </div>
+
+  <!-- ========== 階段 3 ========== -->
+  <div class="phase">
+    <div class="phase-header">
+      <div class="phase-number">3</div>
+      <div class="phase-title">🏆 "Sozinho" — Randy 的葛萊美獲獎錄音</div>
+    </div>
+    <div class="phase-desc">核心重點。Randy 憑藉 2019 年專輯《Rocks》中 "Sozinho" 的獨奏，贏得他個人生涯第 7 座葛萊美獎。</div>
+
+    <a href="https://www.youtube.com/watch?v=1lALgxGKZlI" target="_blank" class="video-card" style="border-color:#e94560; border-width:2px;">
+      <div class="thumb-col" style="background-image:url('https://img.youtube.com/vi/1lALgxGKZlI/hqdefault.jpg')">
+        <div class="play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      </div>
+      <div class="info-col">
+        <h3>🏆 Randy Brecker & NDR Bigband — Sozinho [黑膠版]</h3>
+        <div class="meta">
+          <span class="badge badge-core">葛萊美獲獎</span>
+          <span class="star">⭐ 第 7 座葛萊美</span>
+          <span>出自《Rocks》(2019)</span>
+        </div>
+        <div class="why" style="border-left-color:#ffd700;"><strong>就是這首。</strong>Randy 的葛萊美獲獎演奏。NDR Bigband 提供了豐富的和聲鋪陳，Randy 交出了他生涯中最抒情的 trumpet solo 之一。數十年的巴西音樂影響，凝聚在一首獨奏之中。</div>
+      </div>
+    </a>
+
+    <a href="https://www.youtube.com/watch?v=6TEqjXqVQ1Y" target="_blank" class="video-card">
+      <div class="thumb-col" style="background-image:url('https://img.youtube.com/vi/6TEqjXqVQ1Y/hqdefault.jpg')">
+        <div class="play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      </div>
+      <div class="info-col">
+        <h3>Randy Brecker × NDR Bigband × Vladyslav Sendecki — Sozinho</h3>
+        <div class="meta">
+          <span class="badge badge-core">必聽</span>
+          <span>出自《Rocks》(2019) — 另一混音版本</span>
+        </div>
+        <div class="why">同一首葛萊美獲獎錄音，由鋼琴家 Vladyslav Sendecki 編曲。對比兩個版本，聽聽編曲如何塑造 Randy 的獨奏表現。</div>
+      </div>
+    </a>
+
+    <a href="https://www.youtube.com/watch?v=DmYU3edO12w" target="_blank" class="video-card">
+      <div class="thumb-col" style="background-image:url('https://img.youtube.com/vi/DmYU3edO12w/hqdefault.jpg')">
+        <div class="play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      </div>
+      <div class="info-col">
+        <h3>"Rocks" — 同名主打曲（feat. David Sanborn & NDR Bigband）</h3>
+        <div class="meta">
+          <span class="badge badge-deep">深入</span>
+          <span>出自《Rocks》(2019)</span>
+        </div>
+        <div class="why">同一張專輯的主打歌。聽聽 Randy 在更有能量的情境中的表現 — 理解 "Sozinho" 如何作為《Rocks》的情感核心而存在。</div>
+      </div>
+    </a>
+  </div>
+
+  <!-- ========== 階段 4 ========== -->
+  <div class="phase">
+    <div class="phase-header">
+      <div class="phase-number">4</div>
+      <div class="phase-title">🌴 Randy in Brasil — 全面沉浸 (2008)</div>
+    </div>
+    <div class="phase-desc">在巴西與巴西音樂家一起錄製。葛萊美獲提名。Randy 全力投入巴西曲目。</div>
+
+    <a href="https://www.youtube.com/watch?v=Q_eMfo2arFs" target="_blank" class="video-card">
+      <div class="thumb-col" style="background-image:url('https://img.youtube.com/vi/Q_eMfo2arFs/hqdefault.jpg')">
+        <div class="play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      </div>
+      <div class="info-col">
+        <h3>Randy Brecker — "Olhos Puxados"（出自 Randy in Brasil）</h3>
+        <div class="meta">
+          <span class="badge badge-deep">深入</span>
+          <span>Randy in Brasil (2008) • 葛萊美獲獎</span>
+        </div>
+        <div class="why">Randy 在純巴西語境中的 flugelhorn — 與頂尖巴西樂手在巴西本土錄製。節奏的敏感度 + 旋律的手法 = 真正的巴西味。</div>
+      </div>
+    </a>
+
+    <a href="https://www.youtube.com/watch?v=bJyJ-bVnGNI" target="_blank" class="video-card">
+      <div class="thumb-col" style="background-image:url('https://img.youtube.com/vi/bJyJ-bVnGNI/hqdefault.jpg')">
+        <div class="play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      </div>
+      <div class="info-col">
+        <h3>Randy Brecker — "Guaruja"（出自 Randy in Brasil）</h3>
+        <div class="meta">
+          <span class="badge badge-deep">深入</span>
+          <span>Randy in Brasil (2008)</span>
+        </div>
+        <div class="why">一首以巴西海岸小鎮為名的曲子。Randy 的 flugelhorn 帶著午後的溫暖歌唱。他精準地嵌入巴西律動，同時不失自己的爵士身份。</div>
+      </div>
+    </a>
+  </div>
+
+  <!-- ========== 階段 5 ========== -->
+  <div class="phase">
+    <div class="phase-header">
+      <div class="phase-number">5</div>
+      <div class="phase-title">🎹 Randy 的抒情聲音 — Emmet's Place 現場</div>
+    </div>
+    <div class="phase-desc">Emmet Cohen 的傳奇直播節目中的私密現場。Randy 最對話式、最美麗的演奏。</div>
+
+    <a href="https://www.youtube.com/watch?v=hL1JiZeJ1wA" target="_blank" class="video-card">
+      <div class="thumb-col" style="background-image:url('https://img.youtube.com/vi/hL1JiZeJ1wA/hqdefault.jpg')">
+        <div class="play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      </div>
+      <div class="info-col">
+        <h3>Live From Emmet's Place Vol.76 — Randy Brecker & Chad LB</h3>
+        <div class="meta">
+          <span class="badge badge-deep">深入</span>
+          <span>Emmet Cohen • 2021</span>
+        </div>
+        <div class="why">Emmet's Place 直播完整場次。小型編制的設定讓 Randy 的抒情性完全展現 — 即使在非巴西曲目上，也能聽到讓 "Sozinho" 如此動人的相同特質。</div>
+      </div>
+    </a>
+
+    <a href="https://www.youtube.com/watch?v=fXTJToZyUI8" target="_blank" class="video-card">
+      <div class="thumb-col" style="background-image:url('https://img.youtube.com/vi/fXTJToZyUI8/hqdefault.jpg')">
+        <div class="play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      </div>
+      <div class="info-col">
+        <h3>Emmet Cohen w/ Randy Brecker — "I Can't Get Started"</h3>
+        <div class="meta">
+          <span class="badge badge-bonus">彩蛋</span>
+          <span>Emmet Cohen • 2021</span>
+        </div>
+        <div class="why">經典 ballad 聖品。聽聽 Randy 如何以耐心和敘事感建構 ballad solo — 讓 "Sozinho" 如此出色的相同特質，在這裡完全呈現。</div>
+      </div>
+    </a>
+
+    <a href="https://www.youtube.com/watch?v=dCJY-3Nn-KA" target="_blank" class="video-card">
+      <div class="thumb-col" style="background-image:url('https://img.youtube.com/vi/dCJY-3Nn-KA/hqdefault.jpg')">
+        <div class="play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      </div>
+      <div class="info-col">
+        <h3>Emmet Cohen w/ Randy Brecker & Chad LB — "My Shining Hour"</h3>
+        <div class="meta">
+          <span class="badge badge-bonus">彩蛋</span>
+          <span>Emmet Cohen • 2021</span>
+        </div>
+        <div class="why">Arlen 的經典之作。Randy 逐漸堆疊強度，從不急躁，永遠服務於旋律。慢燃式抒情性的極致示範。</div>
+      </div>
+    </a>
+  </div>
+
+  <!-- ========== 階段 6 ========== -->
+  <div class="phase">
+    <div class="phase-header">
+      <div class="phase-number">6</div>
+      <div class="phase-title">👨‍👩‍👧 全景 — 家庭與巴西爵士現場</div>
+    </div>
+    <div class="phase-desc">珍貴的家庭時刻與現場巴西爵士演出，完整畫出圓圈。</div>
+
+    <a href="https://www.youtube.com/watch?v=AvsMzwvFBHw" target="_blank" class="video-card" style="border-color:#ffc857; border-width:2px;">
+      <div class="thumb-col" style="background-image:url('https://img.youtube.com/vi/AvsMzwvFBHw/hqdefault.jpg')">
+        <div class="play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      </div>
+      <div class="info-col">
+        <h3>🌟 Eliane Elias & Amanda Brecker & Randy Brecker — "So Danço Samba" @ 北海爵士音樂節 2013</h3>
+        <div class="meta">
+          <span class="badge badge-gem">家族珍寶</span>
+          <span>North Sea Jazz Festival • 2013</span>
+        </div>
+        <div class="why" style="border-left-color:#ffc857;"><strong>極其稀有。</strong>Randy、Eliane 和他們的女兒 Amanda Brecker 同台演出 Jobim 的 "So Danço Samba"。三代巴西爵士傳承，一個舞台上。</div>
+      </div>
+    </a>
+
+    <a href="https://www.youtube.com/watch?v=8Q1olZChGCc" target="_blank" class="video-card">
+      <div class="thumb-col" style="background-image:url('https://img.youtube.com/vi/8Q1olZChGCc/hqdefault.jpg')">
+        <div class="play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      </div>
+      <div class="info-col">
+        <h3>Randy Brecker & Eliane Elias — "Pandamandium"</h3>
+        <div class="meta">
+          <span class="badge badge-bonus">彩蛋</span>
+          <span>出自 Amanda (1985)</span>
+        </div>
+        <div class="why">Randy 巴西時期的放克面 — Michael Brecker 吹 tenor、Dave Weckl 打鼓、Manolo Badrena 敲 percussion。Amanda 專輯的完整面貌。</div>
+      </div>
+    </a>
+
+    <a href="https://www.youtube.com/watch?v=ek__bTn7aks" target="_blank" class="video-card">
+      <div class="thumb-col" style="background-image:url('https://img.youtube.com/vi/ek__bTn7aks/hqdefault.jpg')">
+        <div class="play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      </div>
+      <div class="info-col">
+        <h3>"Invitation" — Emmet Cohen, Randy Brecker & Chad LB (2025)</h3>
+        <div class="meta">
+          <span class="badge badge-bonus">彩蛋</span>
+          <span>Emmet Cohen • 2025</span>
+        </div>
+        <div class="why">Kaper 的 "Invitation" 帶有拉丁/巴西根源。聽 2025 年的 Randy 依然帶著那份巴西調味的抒情性。火焰從未熄滅。</div>
+      </div>
+    </a>
+  </div>
+
+  <!-- 總覽 -->
+  <div class="tip-box" style="margin-top:40px;">
+    <h3>📋 播放清單總覽</h3>
+    <ul>
+      <li><strong>階段 1：</strong>🇧🇷 Jobim 的世界 — 理解源頭</li>
+      <li><strong>階段 2：</strong>💜 Amanda (1985) — Randy 與 Eliane 的巴西結合</li>
+      <li><strong>階段 3：</strong>🏆 "Sozinho" (2019) — 葛萊美獲獎傑作</li>
+      <li><strong>階段 4：</strong>🌴 Randy in Brasil (2008) — 全面巴西沉浸</li>
+      <li><strong>階段 5：</strong>🎹 Emmet's Place — Randy 的抒情聲音現場</li>
+      <li><strong>階段 6：</strong>👨‍👩‍👧 家族與現場時刻 — 完整畫圓</li>
+    </ul>
+  </div>
+
+</div>
+
+<div class="footer">
+  <p>Music Study Board 策展 • deep-researcher · youtube-curator · genre-historian · listening-guide</p>
+  <p style="margin-top:8px; color:#e94560;">🎺 "Sozinho" — 有時樂手能演奏的最有力量的東西……是沉默。</p>
+</div>
+
+</body>
+</html>

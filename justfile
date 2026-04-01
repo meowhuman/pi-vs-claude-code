@@ -115,9 +115,109 @@ ext-drip-board-grants:
 ext-drip-board-programming:
     BOARD_PRESET=programming pi -e extensions/drip-board.ts -e extensions/theme-cycler.ts
 
+# inv-board: Investment Adviser Board — Mode A auto (all members, use board_begin)
+ext-inv-board:
+    pi -e extensions/boards/investment-adviser-board.ts -e extensions/theme-cycler.ts
+
+# inv-board-discuss: Investment Adviser Board — Mode B interactive (you sit in, use board_discuss)
+ext-inv-board-discuss:
+    pi -e extensions/boards/investment-adviser-board.ts -e extensions/theme-cycler.ts
+
+# inv-board-swing: Swing-trade preset: CEO + technical-analyst + risk-officer + backtest
+ext-inv-board-swing:
+    pi -e extensions/boards/investment-adviser-board.ts -e extensions/theme-cycler.ts
+
+# inv-board-macro: Macro preset: CEO + macro-strategist + fundamental-analyst + risk-officer + prediction-market-analyst + backtest
+ext-inv-board-macro:
+    pi -e extensions/boards/investment-adviser-board.ts -e extensions/theme-cycler.ts
+
+# inv-board-quick: Quick preset: CEO + technical-analyst + risk-officer (fastest)
+ext-inv-board-quick:
+    pi -e extensions/boards/investment-adviser-board.ts -e extensions/theme-cycler.ts
+
+# inv-board-pm: Prediction market preset: CEO + macro-strategist + prediction-market-analyst + backtest
+ext-inv-board-pm:
+    pi -e extensions/boards/investment-adviser-board.ts -e extensions/theme-cycler.ts
+
+# inv-member: One-on-one member session (select member + update knowledge)
+ext-inv-member:
+    pi -e extensions/boards/inv-board-member-session.ts -e extensions/theme-cycler.ts
+
+# ai-tools-board: AI Tools Board — Mode A auto (全自動研究，用 board_begin 啟動)
+ext-ai-tools-board:
+    pi -e extensions/boards/ai-tools-board.ts -e extensions/theme-cycler.ts
+
+# ai-tools-board-discuss: AI Tools Board — Mode B interactive (你坐進委員會)
+ext-ai-tools-board-discuss:
+    pi -e extensions/boards/ai-tools-board.ts -e extensions/theme-cycler.ts
+
+# ai-tools-board-discovery: discovery preset — director + music + video + coding scouts
+ext-ai-tools-board-discovery:
+    pi -e extensions/boards/ai-tools-board.ts -e extensions/theme-cycler.ts
+
+# ai-tools-board-coding: coding preset — director + coding-ai-scout
+ext-ai-tools-board-coding:
+    pi -e extensions/boards/ai-tools-board.ts -e extensions/theme-cycler.ts
+
+# ai-tools-board-music: music preset — director + music-ai-scout
+ext-ai-tools-board-music:
+    pi -e extensions/boards/ai-tools-board.ts -e extensions/theme-cycler.ts
+
+# ai-tools-board-video: video preset — director + video-ai-scout
+ext-ai-tools-board-video:
+    pi -e extensions/boards/ai-tools-board.ts -e extensions/theme-cycler.ts
+
+# ai-tools-board-github: github preset — director + github-researcher
+ext-ai-tools-board-github:
+    pi -e extensions/boards/ai-tools-board.ts -e extensions/theme-cycler.ts
+
+# ai-tools-board-systems: systems preset — director + system-analyst
+ext-ai-tools-board-systems:
+    pi -e extensions/boards/ai-tools-board.ts -e extensions/theme-cycler.ts
+
+# ai-tools-member: 1-on-1 session with a specific AI Tools Board member
+ext-ai-tools-member:
+    pi -e extensions/boards/ai-tools-board-member-session.ts -e extensions/theme-cycler.ts
+
+# ai-tools-member-coding: 直接載入 coding-ai-scout 一對一會話
+ext-ai-tools-member-coding:
+    BOARD_MEMBER=coding-ai-scout pi -e extensions/boards/ai-tools-board-member-session.ts -e extensions/theme-cycler.ts
+
+# ai-tools-member-music: 直接載入 music-ai-scout 一對一會話
+ext-ai-tools-member-music:
+    BOARD_MEMBER=music-ai-scout pi -e extensions/boards/ai-tools-board-member-session.ts -e extensions/theme-cycler.ts
+
+# ai-tools-member-video: 直接載入 video-ai-scout 一對一會話
+ext-ai-tools-member-video:
+    BOARD_MEMBER=video-ai-scout pi -e extensions/boards/ai-tools-board-member-session.ts -e extensions/theme-cycler.ts
+
+# ai-tools-member-github: 直接載入 github-researcher 一對一會話
+ext-ai-tools-member-github:
+    BOARD_MEMBER=github-researcher pi -e extensions/boards/ai-tools-board-member-session.ts -e extensions/theme-cycler.ts
+
+# music-study: Full music research board (deep-researcher, curator, historian, guide)
+ext-music-study:
+    pi -e extensions/music-study.ts -e extensions/theme-cycler.ts
+
+# music-study-discovery: Quick discovery (curator + listening guide)
+ext-music-study-discovery:
+    BOARD_PRESET=discovery pi -e extensions/music-study.ts -e extensions/theme-cycler.ts
+
+# music-study-jazz: Deep jazz research (researcher + historian)
+ext-music-study-jazz:
+    BOARD_PRESET=jazz-deep pi -e extensions/music-study.ts -e extensions/theme-cycler.ts
+
+# music-study-quick: Quick 2-member check (researcher + curator)
+ext-music-study-quick:
+    BOARD_PRESET=quick pi -e extensions/music-study.ts -e extensions/theme-cycler.ts
+
 # cldsp: launch claude with skip-permissions (no MCP)
 cldsp:
     claude --dangerously-skip-permissions
+
+# team: start multi-agent team orchestration in tmux (with team status line)
+team:
+    bash .claude/scripts/team_launch.sh
 
 # cldsp-figma: add Figma MCP → launch cldsp → remove MCP on exit (ephemeral)
 cldsp-figma:

@@ -1,0 +1,20 @@
+# Python virtual environments (EBADF prevention)
+.venv/
+venv/
+env/
+__pycache__/
+*.pyc
+*.pyo
+
+# Environment
+.env
+
+# Cache and state
+scripts/cache/
+scripts/state/
+scripts/logs/
+
+# Build artifacts
+*.egg-info/
+dist/
+build/

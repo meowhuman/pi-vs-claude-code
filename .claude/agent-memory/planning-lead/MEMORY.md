@@ -1,0 +1,1 @@
+- [Daily Log Extension Spec](project_daily_log_spec.md) — spec for daily-log.ts, 4 tools, logs/YYYY-MM-DD.md output

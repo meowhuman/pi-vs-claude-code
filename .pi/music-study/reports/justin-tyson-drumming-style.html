@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🥁 Justin Tyson — Drumming Style & Influences 音樂研究報告</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0a0a0a; color: #e0e0e0; min-height: 100vh; }
+  .header { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); padding: 40px 20px; text-align: center; border-bottom: 3px solid #e94560; }
+  .header h1 { font-size: 2.2em; color: #fff; margin-bottom: 8px; }
+  .header .emoji { font-size: 1.5em; }
+  .header p { color: #a0a0c0; font-size: 1.1em; max-width: 700px; margin: 0 auto; line-height: 1.6; }
+  .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+  .phase { margin: 36px 0; }
+  .phase-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 1px solid #333; }
+  .phase-number { background: #e94560; color: #fff; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.1em; flex-shrink: 0; }
+  .phase-title { font-size: 1.3em; color: #fff; font-weight: 600; }
+  .phase-desc { color: #888; font-size: 0.95em; margin-bottom: 16px; font-style: italic; line-height: 1.5; }
+  .video-card { background: #151520; border: 1px solid #2a2a3a; border-radius: 12px; margin-bottom: 14px; overflow: hidden; transition: transform 0.2s, border-color 0.2s; display: flex; align-items: stretch; text-decoration: none; color: inherit; cursor: pointer; }
+  .video-card:hover { transform: translateY(-2px); border-color: #e94560; background: #1a1a28; }
+  .video-card.highlight { border-color: #e94560; border-width: 2px; }
+  .thumb-col { width: 200px; min-height: 130px; flex-shrink: 0; background-size: cover; background-position: center; position: relative; background-color: #111; }
+  .thumb-col .play-icon { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.4); opacity: 0; transition: opacity 0.2s; }
+  .video-card:hover .play-icon { opacity: 1; }
+  .play-icon svg { width: 48px; height: 48px; fill: #fff; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.5)); }
+  .info-col { padding: 16px 20px; flex: 1; display: flex; flex-direction: column; justify-content: center; }
+  .info-col h3 { color: #fff; font-size: 1.05em; margin-bottom: 6px; line-height: 1.3; }
+  .info-col .meta { display: flex; gap: 12px; font-size: 0.82em; color: #888; margin-bottom: 8px; flex-wrap: wrap; align-items: center; }
+  .info-col .why { color: #b0b0c8; font-size: 0.9em; line-height: 1.5; padding: 10px 14px; background: #1a1a2e; border-radius: 8px; border-left: 3px solid #e94560; }
+  .info-col .why.gold-border { border-left-color: #ffc857; }
+  .info-col .why.blue-border { border-left-color: #8ec8f0; }
+  .badge { display: inline-block; padding: 2px 10px; border-radius: 20px; font-size: 0.78em; font-weight: 600; }
+  .badge-core { background: #e94560; color: #fff; }
+  .badge-deep { background: #0f3460; color: #8ec8f0; }
+  .badge-bonus { background: #1a1a2e; color: #a0a0c0; border: 1px solid #333; }
+  .badge-gem { background: #2d1b00; color: #ffc857; }
+  .badge-green { background: #0a2e0a; color: #7ddf7d; }
+  .star { color: #ffd700; }
+  .tip-box { background: linear-gradient(135deg, #1a1a2e, #16213e); border: 1px solid #2a2a4a; border-radius: 12px; padding: 20px; margin: 30px 0; }
+  .tip-box h3 { color: #e94560; margin-bottom: 10px; }
+  .tip-box ul { list-style: none; padding: 0; }
+  .tip-box li { padding: 6px 0; color: #c0c0d0; line-height: 1.5; }
+  .tip-box li::before { content: "→ "; color: #e94560; }
+  .research-section { background: #12121e; border: 1px solid #2a2a3a; border-radius: 12px; padding: 24px; margin: 30px 0; }
+  .research-section h3 { color: #e94560; margin-bottom: 14px; font-size: 1.15em; }
+  .research-section h4 { color: #8ec8f0; margin: 16px 0 8px; font-size: 1em; }
+  .research-section p { color: #b0b0c8; line-height: 1.7; margin-bottom: 10px; }
+  .research-section strong { color: #fff; }
+  .lineage { background: #0d0d18; border: 1px solid #222; border-radius: 8px; padding: 16px; margin: 16px 0; font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.85em; color: #8ec8f0; line-height: 1.6; overflow-x: auto; white-space: pre; }
+  .influence-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0; }
+  .influence-card { background: #1a1a28; border: 1px solid #2a2a3a; border-radius: 10px; padding: 16px; transition: border-color 0.2s; }
+  .influence-card:hover { border-color: #e94560; }
+  .influence-card h5 { color: #ffc857; margin-bottom: 6px; font-size: 1em; }
+  .influence-card .role { color: #888; font-size: 0.8em; margin-bottom: 8px; }
+  .influence-card p { color: #b0b0c8; font-size: 0.88em; line-height: 1.5; }
+  .practice-box { background: linear-gradient(135deg, #0a1a0a, #1a2e1a); border: 1px solid #2a4a2a; border-radius: 12px; padding: 20px; margin: 30px 0; }
+  .practice-box h3 { color: #7ddf7d; margin-bottom: 10px; }
+  .practice-box ol { padding-left: 20px; }
+  .practice-box li { color: #b0c8b0; line-height: 1.6; margin-bottom: 8px; }
+  .refs-section { background: #12121e; border: 1px solid #2a2a3a; border-radius: 12px; padding: 24px; margin: 30px 0; }
+  .refs-section h3 { color: #ffc857; margin-bottom: 14px; }
+  .refs-section a { color: #8ec8f0; text-decoration: none; display: block; padding: 6px 0; line-height: 1.5; }
+  .refs-section a:hover { color: #e94560; text-decoration: underline; }
+  .footer { text-align: center; padding: 40px 20px; color: #555; font-size: 0.9em; border-top: 1px solid #222; margin-top: 40px; }
+  @media (max-width: 700px) {
+    .video-card { flex-direction: column; }
+    .thumb-col { width: 100%; min-height: 180px; }
+    .header h1 { font-size: 1.5em; }
+    .phase-title { font-size: 1.1em; }
+    .influence-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="emoji">🥁🔥</div>
+  <h1>Justin Tyson — Drumming Style & Influences</h1>
+  <p>當代爵士鼓手的「秘密武器」— 從教會到 Berklee，從 gospel chops 到 Herbie Hancock。一個在 jazz、hip-hop 和 R&B 交匯處重新定義現代鼓藝的聲音。</p>
+  <p style="margin-top:12px; color:#e94560; font-weight:600;">Music Study Board — 深度研究報告</p>
+</div>
+
+<div class="container">
+
+  <!-- ═══════ 核心研究 ═══════ -->
+  <div class="research-section">
+    <h3>🧠 核心研究 — Justin Tyson 是誰？他的鼓聲從哪來？</h3>
+
+    <h4>背景</h4>
+    <p>Justin Tyson 出生於密西根州 Grand Rapids，在印第安納州 Indianapolis 長大。<strong>三歲開始打鼓</strong>。在教會環境中長大（ gospel 音樂的節奏 DNA 深植於他的血液）。他就讀 <strong>Berklee College of Music</strong>，在那裡他的音樂視野從 gospel 擴展到 jazz、hip-hop 和 R&B。</p>
+
+    <h4>他的聲音 — 「低調的炸裂」</h4>
+    <p>Modern Drummer 如此描述他："In a crowd, Justin Tyson is unassuming. He's not the loudest in the room... until he sits down at the drum kit." 這就是 Justin Tyson 的核心特質 — <strong>表面低調，坐下來就炸</strong>。他的鼓聲融合了：</p>
+    <p><strong>① Gospel 教會根基</strong> — 教會的 "shout music"、polyrhythmic fills、手腳分離（limb independence）。Gospel chops 是他的母語。</p>
+    <p><strong>② Jazz 的對話感</strong> — 與 Robert Glasper、Esperanza Spalding、Herbie Hancock 合作時，他展現了傳統 jazz drummer 的 interactive 素養 — 聽樂隊、回應 soloist、在 swing 和 straight-8ths 之間無縫切換。</p>
+    <p><strong>③ Hip-Hop 的 pocket</strong> — 他跟 Jessie J、Mos Def、Estelle 等流行/R&B/Hip-hop 藝人合作過，這種經驗讓他的 groove 有一種 hip-hop 的「下沉感」和「地板感」，不是 jazz drummer 常見的 floaty feel。</p>
+    <p><strong>④ Fusion 的爆炸力</strong> — 他的 solo 時刻展現了驚人的技術密度和創造力，但從不為炫技而犧牲 groove。Modern Drummer 稱他為 "remarkably daring drummer"。</p>
+
+    <h4>關鍵合作關係</h4>
+    <p>Justin Tyson 是 Robert Glasper 自 2017 年以來的<strong>「秘密武器」</strong>（DFO Drum Forum 語）。他同時是 <strong>R+R=NOW</strong> 超級樂團的成員（與 Robert Glasper、Terrace Martin、Christian Scott aTunde Adjuah、Derrick Hodge、Taylor McFerrin），也是 <strong>Now vs Now</strong> 三重奏的成員。他曾擔任 <strong>Herbie Hancock 巡迴樂隊</strong>的鼓手，並與 <strong>Esperanza Spalding</strong> 長期合作。</p>
+  </div>
+
+  <!-- ═══════ 五大影響 ═══════ -->
+  <div class="research-section">
+    <h3>🎯 Justin Tyson 自己說的五大鼓英雄（NPR 2025）</h3>
+    <p>在 NPR 的專訪中，Tyson 自己選出了他最重要的五個影響。這不是別人幫他列的，是他自己的話：</p>
+
+    <div class="influence-grid">
+      <div class="influence-card">
+        <h5>1. Tony Williams</h5>
+        <div class="role">Miles Davis Quintet, Lifetime</div>
+        <p>Jazz drumming 的革命者。Tony Williams 在 teens 時就改變了 jazz drums 的語言 — 他的獨立性、他的空間感、他的 explosive dynamics。Justin 從 Tony 身上學到了<strong>「用鼓聲推動音樂前進，而不只是伴奏」</strong>的哲學。</p>
+      </div>
+      <div class="influence-card">
+        <h5>2. Vinnie Colaiuta</h5>
+        <div class="role">Frank Zappa, Sting, Herbie Hancock</div>
+        <p>技術的極致 — 但不是冰冷的技術。Vinnie 的 "feel" 和他的 "chops" 一樣令人驚嘆。Justin 從 Vinnie 身上學到了<strong>跨風格的流暢度</strong>（jazz → rock → fusion → pop 無縫切換）和<strong>極致的動態控制</strong>。</p>
+      </div>
+      <div class="influence-card">
+        <h5>3. Elvin Jones</h5>
+        <div class="role">John Coltrane Quartet</div>
+        <p>Elvin 的三重線（triplet-based）polyrhythmic feel 是 jazz drums 的精神核心。Justin 從 Elvin 身上學到了<strong>「波浪式的律動」</strong> — 鼓聲不只是打拍子，而是像海浪一樣推動整個樂隊的能量。</p>
+      </div>
+      <div class="influence-card">
+        <h5>4. Chris Dave</h5>
+        <div class="role">Robert Glasper, D'Angelo, The Drumhedz</div>
+        <p>同世代的鼓神。Chris Dave 定義了<strong>「jazz + hip-hop + gospel」</strong>的現代鼓聲。Justin 和 Chris Dave 有直接的音樂對話關係（兩人都與 Robert Glasper 合作過），Chris 證明了 jazz drummer 可以同時是 hip-hop 的深淵。</p>
+      </div>
+      <div class="influence-card" style="grid-column: 1 / -1;">
+        <h5>5. Deantoni Parks</h5>
+        <div class="role">The Mars Volta, Kamaal Williams, 上帝角度</div>
+        <p>最前衛的影響。Deantoni Parks 是當代最「異類」的鼓手之一 — 他的風格融合了電子音樂、 avant-garde jazz 和極端的時間感操控。Justin 從 Deantoni 身上學到了<strong>「打破規則但不打破 groove」</strong>的平衡。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════ 影響鏈圖 ═══════ -->
+  <div class="research-section">
+    <h3>📜 Justin Tyson 的鼓聲影響鏈</h3>
+    <div class="lineage">Church / Gospel (Indiana 成長環境)
+    ↓ limb independence, polyrhythms, "shout music", holy groove
+    ↓
+Berklee College of Music
+    ↓ jazz vocabulary meets hip-hop culture
+    ↓
+┌─────────────────────── 五大影響 ───────────────────────┐
+│                                                          │
+│  Tony Williams ── Elvin Jones ── Vinnie Colaiuta        │
+│  (推動力)        (波浪律動)       (跨風格流暢度)          │
+│                                                          │
+│  Chris Dave ────── Deantoni Parks                        │
+│  (jazz+hip-hop)    (前衛+電子)                           │
+│                                                          │
+└──────────────────────────┬───────────────────────────────┘
+                           ↓
+                   JUSTIN TYSON
+                   gospel根基 + jazz對話 + hip-hop pocket
+                           ↓
+          ┌────────────────┼────────────────┐
+          ↓                ↓                ↓
+   Robert Glasper    Herbie Hancock    Esperanza Spalding
+   (R+R=NOW 超級團)  (巡迴樂隊鼓手)    (長期合作)
+   (Black Radio III) (Montreux 2022)
+          ↓                ↓                ↓
+   當代 jazz/hip-hop/R&B 鼓藝的全新典範</div>
+  </div>
+
+  <!-- ═══════ 聆聽提示 ═══════ -->
+  <div class="tip-box">
+    <h3>🎧 使用說明</h3>
+    <ul>
+      <li><strong>點擊任意卡片</strong> → 在新分頁中開啟 YouTube 觀看</li>
+      <li>從「階段 1」開始 — 先聽 Justin 自己說話（訪談），然後聽他的演奏</li>
+      <li>核心關注：他在 jazz 和 hip-hop 之間的<strong>無縫切換</strong>和<strong>groove 的「下沉感」</strong></li>
+      <li>對比他的 Herbie Hancock 演出 vs. Robert Glasper 演出 vs. solo — 同一個人，不同情境</li>
+    </ul>
+  </div>
+
+  <!-- ══════════ 階段 1：訪談與認識 ══════════ -->
+  <div class="phase">
+    <div class="phase-header">
+      <div class="phase-number">1</div>
+      <div class="phase-title">認識 Justin Tyson — 訪談與背景</div>
+    </div>
+    <div class="phase-desc">先聽他自己說話，理解他的音樂觀和影響來源。NPR 的專訪是最佳起點。</div>
+
+    <a href="https://www.npr.org/2025/03/27/nx-s1-5338895/drummer-justin-tyson" target="_blank" class="video-card highlight" style="border-color:#ffd700; border-width:2px;">
+      <div class="thumb-col" style="background-image:url('https://media.npr.org/assets/img/2025/03/27/npr-tyson_square-02_wide-23b6c47ea01e04a28744a6d8e1f0e59cd95b80b4-s1100-c50.jpg'); background-position: center 20%;">
+        <div class="play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      </div>
+      <div class="info-col">
+        <h3>🏆 NPR — A Journey Through the Influences and Trippy Sounds of Drummer Justin Tyson (2025)</h3>
+        <div class="meta">
+          <span class="badge badge-core">必讀</span>
+          <span class="star">⭐ Justin 自己選五大鼓英雄</span>
+        </div>
+        <div class="why gold-border"><strong>最重要的資源。</strong>Justin Tyson 親自解說他的五大影響（Tony Williams、Vinnie Colaiuta、Elvin Jones、Chris Dave、Deantoni Parks）。帶著音樂片段，聽他解釋每個鼓手如何影響了他。如果你只讀一篇，就是這篇。</div>
+      </div>
+    </a>
+
+    <a href="https://www.moderndrummer.com/article/justin-tyson/" target="_blank" class="video-card">
+      <div class="thumb-col" style="background-image:url('https://img.youtube.com/vi/VEoBWycE_SM/hqdefault.jpg')">
+        <div class="play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      </div>
+      <div class="info-col">
+        <h3>Modern Drummer — Justin Tyson 專訪 (2020, by Savannah Harris)</h3>
+        <div class="meta">
+          <span class="badge badge-core">必讀</span>
+          <span>現代鼓手雜誌深度訪談</span>
+        </div>
+        <div class="why">Modern Drummer 的專題文章，由鼓手 Savannah Harris 採訪。文章描述了 Justin 的低調個性和炸裂演奏的反差："not the loudest in the room... until he sits down at the drum kit."</div>
+      </div>
+    </a>
+
+    <a href="https://www.youtube.com/watch?v=VEoBWycE_SM" target="_blank" class="video-card">
+      <div class="thumb-col" style="background-image:url('https://img.youtube.com/vi/VEoBWycE_SM/hqdefault.jpg')">
+        <div class="play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      </div>
+      <div class="info-col">
+        <h3>Justin Tyson | Drummer, Songwriter | Full Interview — The Vibe Chamber (2025)</h3>
+        <div class="meta">
+          <span class="badge badge-core">必看</span>
+          <span>完整訪談影片 • 2025</span>
+        </div>
+        <div class="why">最新完整訪談，聽 Justin 親自談他的音樂旅程、練習哲學和創作過程。</div>
+      </div>
+    </a>
+  </div>
+
+  <!-- ══════════ 階段 2：Glasper 核心 ══════════ -->
+  <div class="phase">
+    <div class="phase-header">
+      <div class="phase-number">2</div>
+      <div class="phase-title">核心 — Robert Glasper 樂團的「秘密武器」</div>
+    </div>
+    <div class="phase-desc">Justin Tyson 自 2017 年起成為 Robert Glasper 的核心鼓手。這是他最頻繁展示風格的舞台 — jazz、hip-hop、soul 和 R&B 的完美熔爐。</div>
+
+    <a href="https://www.youtube.com/watch?v=fvsZkpbZLso" target="_blank" class="video-card highlight">
+      <div class="thumb-col" style="background-image:url('https://img.youtube.com/vi/fvsZkpbZLso/hqdefault.jpg')">
+        <div class="play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      </div>
+      <div class="info-col">
+        <h3>🏆 Justin Tyson — "How Much A Dollar Cost" + Killer Drum Solo (Antwerp 2022)</h3>
+        <div class="meta">
+          <span class="badge badge-core">必看</span>
+          <span>Robert Glasper Trio @ De Roma, Antwerp</span>
+        </div>
+        <div class="why"><strong>Jazz + hip-hop 的完美示範。</strong>Kendrick Lamar 的 "How Much A Dollar Cost" 被 Glasper 重新編曲，Justin 的鼓聲同時服務於 hip-hop 的 groove 和 jazz 的 interactive。結尾的 drum solo 展現了他從 gospel 到 fusion 的完整 vocabulary。</div>
+      </div>
+    </a>
+
+    <a href="https://www.youtube.com/watch?v=WOGQUPvflbU" target="_blank" class="video-card">
+      <div class="thumb-col" style="background-image:url('https://img.youtube.com/vi/WOGQUPvflbU/hqdefault.jpg')">
+        <div class="play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      </div>
+      <div class="info-col">
+        <h3>Justin Tyson — THE COOL Drum Solo with Robert Glasper (Marseille)</h3>
+        <div class="meta">
+          <span class="badge badge-core">必看</span>
+          <span>Drummerworld 官方錄影</span>
+        </div>
+        <div class="why">純 drum solo 的展示。注意他的動態範圍 — 從 whisper 到 explosion 再回到 whisper。不是技術展示，是音樂性的 drum solo。</div>
+      </div>
+    </a>
+
+    <a href="https://www.youtube.com/watch?v=VH8DyhMquqc" target="_blank" class="video-card">
+      <div class="thumb-col" style="background-image:url('https://img.youtube.com/vi/VH8DyhMquqc/hqdefault.jpg')">
+        <div class="play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      </div>
+      <div class="info-col">
+        <h3>Justin Tyson Drum Solo @ Blue Note New York (2019)</h3>
+        <div class="meta">
+          <span class="badge badge-deep">深入</span>
+          <span>Robert Glasper Residency • Blue Note NYC</span>
+        </div>
+        <div class="why">Blue Note NYC 是爵士的聖殿。在這個舞台上 solo，壓力和能量完全不同。聽 Justin 在這個環境中的演奏。</div>
+      </div>
+    </a>
+
+    <a href="https://www.youtube.com/watch?v=xHwGj8qX4tc" target="_blank" class="video-card">
+      <div class="thumb-col" style="background-image:url('https://img.youtube.com/vi/xHwGj8qX4tc/hqdefault.jpg')">
+        <div class="play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      </div>
+      <div class="info-col">
+        <h3>Justin Tyson w/ Robert Glasper — Denver @ Cervantes (Dec 2021)</h3>
+        <div class="meta">
+          <span class="badge badge-deep">深入</span>
+          <span>與 Derrick Hodge、Jahi Sundance</span>
+        </div>
+        <div class="why">完整 set 的演出錄影。聽 Justin 與 Derrick Hodge（bass）和 Jahi Sundance（turntables）之間的化學反應 — 三個聲音如何融合成當代 jazz 的聲景。</div>
+      </div>
+    </a>
+
+    <a href="https://www.youtube.com/watch?v=YGWhr9oAf4c" target="_blank" class="video-card">
+      <div class="thumb-col" style="background-image:url('https://img.youtube.com/vi/YGWhr9oAf4c/hqdefault.jpg')">
+        <div class="play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      </div>
+      <div class="info-col">
+        <h3>Justin Tyson — Crazy Drum Solo (Robert Glasper Trio @ De Roma)</h3>
+        <div class="meta">
+          <span class="badge badge-bonus">彩蛋</span>
+          <span>同一場 Antwerp 演出的另一角度</span>
+        </div>
+        <div class="why">同一場 De Roma 演出的另一個 solo 片段。對比兩個 solo，聽他在同一晚如何用不同的方式處理即興。</div>
+      </div>
+    </a>
+  </div>
+
+  <!-- ══════════ 階段 3：Herbie Hancock ══════════ -->
+  <div class="phase">
+    <div class="phase-header">
+      <div class="phase-number">3</div>
+      <div class="phase-title">Herbie Hancock 樂團 — Jazz 傳承的重量</div>
+    </div>
+    <div class="phase-desc">擔任 Herbie Hancock 巡迴樂隊鼓手是當代爵士鼓手的最高榮譽之一。Justin 在這個舞台上展現了他傳統 jazz vocabulary 的深度。</div>
+
+    <a href="https://www.youtube.com/watch?v=GAVMNUkdFrU" target="_blank" class="video-card highlight">
+      <div class="thumb-col" style="background-image:url('https://img.youtube.com/vi/GAVMNUkdFrU/hqdefault.jpg')">
+        <div class="play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      </div>
+      <div class="info-col">
+        <h3>🏆 Justin Tyson — Drum Spot on "Actual Proof" with Herbie Hancock (Montreux 2022)</h3>
+        <div class="meta">
+          <span class="badge badge-core">必看</span>
+          <span>Montreux Jazz Festival • Switzerland</span>
+        </div>
+        <div class="why"><strong>Herbie Hancock 的 "Actual Proof" — fusion jazz 的經典。</strong>Justin 的鼓 spot 展現了他對 fusion vocabulary 的完全掌握。注意他的手腳分離和 cross-rhythmic fills — 這是 Vinnie Colaiuta 影響的直接體現。</div>
+      </div>
+    </a>
+
+    <a href="https://www.youtube.com/watch?v=9prnAHP-Kp8" target="_blank" class="video-card">
+      <div class="thumb-col" style="background-image:url('https://img.youtube.com/vi/9prnAHP-Kp8/hqdefault.jpg')">
+        <div class="play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      </div>
+      <div class="info-col">
+        <h3>Justin Tyson — Short Drum Spot with Herbie Hancock (Montreux 2022)</h3>
+        <div class="meta">
+          <span class="badge badge-deep">深入</span>
+          <span>Montreux Jazz Festival</span>
+        </div>
+        <div class="why">Montreux 的另一個鼓 spot。更短但更精準 — 注意他如何在極短的時間內從 fusion chops 切換到 jazz swing feel。</div>
+      </div>
+    </a>
+
+    <a href="https://www.youtube.com/watch?v=nvGpICefBNU" target="_blank" class="video-card">
+      <div class="thumb-col" style="background-image:url('https://img.youtube.com/vi/nvGpICefBNU/hqdefault.jpg')">
+        <div class="play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      </div>
+      <div class="info-col">
+        <h3>Herbie Hancock Keytar + Justin Tyson Drum Solo (Seattle 2021)</h3>
+        <div class="meta">
+          <span class="badge badge-deep">深入</span>
+          <span>Paramount Theater, Seattle</span>
+        </div>
+        <div class="why">Herbie Hancock 在 keytar 上即興，Justin Tyson 回應 — trumpet player 和 drummer 之間的對話，這是最純粹的 jazz 互動。</div>
+      </div>
+    </a>
+
+    <a href="https://www.youtube.com/watch?v=zeTSGADPna0" target="_blank" class="video-card">
+      <div class="thumb-col" style="background-image:url('https://img.youtube.com/vi/zeTSGADPna0/hqdefault.jpg')">
+        <div class="play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      </div>
+      <div class="info-col">
+        <h3>Justin Tyson Drums w/ Herbie Hancock @ Monterey Jazz Festival 2021</h3>
+        <div class="meta">
+          <span class="badge badge-deep">深入</span>
+          <span>Monterey Jazz Festival</span>
+        </div>
+        <div class="why">另一個頂級爵士音樂節的演出。注意 Justin 在不同節目中的曲目安排下如何調整他的演奏方式。</div>
+      </div>
+    </a>
+  </div>
+
+  <!-- ══════════ 階段 4：學習與拆解 ══════════ -->
+  <div class="phase">
+    <div class="phase-header">
+      <div class="phase-number">4</div>
+      <div class="phase-title">學習 — Transcription 與技術拆解</div>
+    </div>
+    <div class="phase-desc">如果你想「像 Justin Tyson 一樣打鼓」，這些是現成的教材。The 80/20 Drummer 網站有他的專門 transcription 系列。</div>
+
+    <a href="https://www.youtube.com/watch?v=LRDj4waMiOA" target="_blank" class="video-card">
+      <div class="thumb-col" style="background-image:url('https://img.youtube.com/vi/LRDj4waMiOA/hqdefault.jpg')">
+        <div class="play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      </div>
+      <div class="info-col">
+        <h3>Play Drums Like Justin Tyson 1 — The 80/20 Drummer（含 transcription）</h3>
+        <div class="meta">
+          <span class="badge badge-green">教材</span>
+          <span>附樂譜下載連結</span>
+        </div>
+        <div class="why blue-border">The 80/20 Drummer 的專門 transcription 系列。逐音符拆解 Justin 的 licks 和 vocabulary，附樂譜下載。最直接的學習資源。</div>
+      </div>
+    </a>
+
+    <a href="https://www.youtube.com/watch?v=y32cm1RnAOU" target="_blank" class="video-card">
+      <div class="thumb-col" style="background-image:url('https://img.youtube.com/vi/y32cm1RnAOU/hqdefault.jpg')">
+        <div class="play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      </div>
+      <div class="info-col">
+        <h3>Justin Tyson — Gospel Chops 拆解 — The 80/20 Drummer</h3>
+        <div class="meta">
+          <span class="badge badge-green">教材</span>
+          <span>附樂譜下載連結</span>
+        </div>
+        <div class="why blue-border">專注於 Justin 的 gospel chops vocabulary — 教會根基如何在現代 jazz context 中使用。這是他與很多 jazz drummer 最大的區別。</div>
+      </div>
+    </a>
+
+    <a href="https://www.youtube.com/watch?v=C6qDWhXfnPs" target="_blank" class="video-card">
+      <div class="thumb-col" style="background-image:url('https://img.youtube.com/vi/C6qDWhXfnPs/hqdefault.jpg')">
+        <div class="play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      </div>
+      <div class="info-col">
+        <h3>Justin Tyson — Insane Drum Compilation (2019-2020)</h3>
+        <div class="meta">
+          <span class="badge badge-bonus">彩蛋</span>
+          <span>多場演出精華剪輯</span>
+        </div>
+        <div class="why">多個演出片段的精華剪輯 — 快速瀏覽 Justin 在不同場合、不同曲目中的鼓聲變化。作為「選單」使用，找到你最感興趣的場景再去搜完整版。</div>
+      </div>
+    </a>
+
+    <a href="https://www.youtube.com/watch?v=NEQ3lVi0gbQ" target="_blank" class="video-card">
+      <div class="thumb-col" style="background-image:url('https://img.youtube.com/vi/NEQ3lVi0gbQ/hqdefault.jpg')">
+        <div class="play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      </div>
+      <div class="info-col">
+        <h3>"Best Drum Solo Ever" — Justin Tyson w/ Robert Glasper (Marseille 2017)</h3>
+        <div class="meta">
+          <span class="badge badge-bonus">彩蛋</span>
+          <span>Marseille Jazz des Cinq Continents</span>
+        </div>
+        <div class="why">2017 年的早期 Glasper 合作演出。對比這個 solo 和 2022 年的 solo — 聽五年間 Justin 的鼓聲如何演化。</div>
+      </div>
+    </a>
+  </div>
+
+  <!-- ═══════ 練習建議 ═══════ -->
+  <div class="practice-box">
+    <h3>🎵 練習建議 — 如何發展你自己的 Gospel-Jazz-Hip-Hop Drumming</h3>
+    <ol>
+      <li><strong>先聽 NPR 專訪：</strong>理解 Justin 的五大影響，然後每個影響去聽至少一張專輯（Tony Williams — *Spring*, Elvin Jones — *A Love Supreme*, Vinnie Colaiuta — Frank Zappa *Joe's Garage*, Chris Dave — *Black Radio*, Deantoni Parks — Kamaal Williams *The Return》)</li>
+      <li><strong>Gospel chops 基礎：</strong>用 The 80/20 Drummer 的 transcription 練習 Justin 的 gospel chops — 重點不在速度，在<strong>手腳分離</strong>和<strong>三連音律動</strong>（triplet-based feel）</li>
+      <li><strong>Hip-hop pocket：</strong>在 drum kit 上練習 "boom-bap" 和 "trap" groove，然後在這些 groove 之上加入 jazz 的 interactive vocabulary — 不要從 jazz 開始加 hip-hop，要從 hip-hop 開始加 jazz</li>
+      <li><strong>Swing ↔ Straight 切換：</strong>在一首曲子中練習從 swing feel 到 straight-8ths 再回到 swing 的無縫切換 — 這是 Justin 在 Glasper 樂團中一直在做的事</li>
+      <li><strong>"Actual Proof" 練習：</strong>跟著 Herbie Hancock 的 "Actual Proof" 原版（Mike Clark 或 Harvey Mason 的版本），然後再聽 Justin 的版本，分析他的加減法</li>
+    </ol>
+  </div>
+
+  <!-- ═══════ 總覽 ═══════ -->
+  <div class="tip-box" style="margin-top:40px;">
+    <h3>📋 播放清單總覽</h3>
+    <ul>
+      <li><strong>階段 1：</strong>🟡 認識 Justin — NPR 專訪 + Modern Drummer + Vibe Chamber 訪談</li>
+      <li><strong>階段 2：</strong>🔴 Robert Glasper 核心 — "How Much A Dollar Cost" + drum solos + 完整 set</li>
+      <li><strong>階段 3：</strong>🔵 Herbie Hancock — Montreux + Monterey + Seattle 演出</li>
+      <li><strong>階段 4：</strong>🟢 學習拆解 — The 80/20 Drummer transcription + 精華剪輯</li>
+    </ul>
+  </div>
+
+  <!-- ═══════ 延伸閱讀 ═══════ -->
+  <div class="refs-section">
+    <h3>📚 延伸閱讀</h3>
+    <a href="https://www.npr.org/2025/03/27/nx-s1-5338895/drummer-justin-tyson" target="_blank">NPR — A Journey Through the Influences and Trippy Sounds of Drummer Justin Tyson (2025)</a>
+    <a href="https://www.moderndrummer.com/article/justin-tyson/" target="_blank">Modern Drummer — Justin Tyson 專訪 by Savannah Harris (2020)</a>
+    <a href="https://www.allaboutjazz.com/musicians/justin-tyson/" target="_blank">All About Jazz — Justin Tyson 藝人頁面</a>
+    <a href="https://www.kennedy-center.org/artists/t/to-tz/justin-tyson/" target="_blank">Kennedy Center — Justin Tyson 簡介</a>
+    <a href="https://www.drummingnewsnetwork.com/?p=10443" target="_blank">Drumming News Network — Catch Justin Tyson On Tour With Herbie Hancock</a>
+    <a href="https://www.drumforum.org/threads/justin-tyson-amazing-drummer.182247/" target="_blank">DFO Drum Forum — Justin Tyson 討論串</a>
+    <a href="https://www.reddit.com/r/drums/comments/1fbyuo0/no_drummer_deserves_to_not_know_about_justin_tyson/" target="_blank">Reddit r/drums — "No drummer deserves to not know about Justin Tyson"</a>
+    <a href="http://www.the8020drummer.com/lessons/tyson" target="_blank">The 80/20 Drummer — How to Play Like Justin Tyson（附 transcription）</a>
+    <a href="https://daily.bandcamp.com/features/chris-dave-drumhedz-interview" target="_blank">Bandcamp Daily — Why Chris Dave is "The Most Dangerous Drummer Alive"（對比閱讀）</a>
+    <a href="https://www.drummerworld.com/drummers/Justin_Tyson.html" target="_blank">Drummerworld — Justin Tyson 頁面</a>
+  </div>
+
+</div>
+
+<div class="footer">
+  <p>Music Study Board 策展 • deep-researcher · youtube-curator · genre-historian · listening-guide</p>
+  <p style="margin-top:8px; color:#e94560;">🥁 "He's not the loudest in the room... until he sits down at the drum kit." — Modern Drummer</p>
+</div>
+
+</body>
+</html>

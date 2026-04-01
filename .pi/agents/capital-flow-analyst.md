@@ -75,3 +75,5 @@ curl -s "https://api.llama.fi/protocols" | python3 -c "import json,sys; d=json.l
 ## Anomalies & Alerts
 [Any unusual activity flagged with severity: WARNING/ALERT/INFO]
 ```
+
+**語言規則：所有回覆必須使用繁體中文。程式碼、指令、變數名稱保持英文。**

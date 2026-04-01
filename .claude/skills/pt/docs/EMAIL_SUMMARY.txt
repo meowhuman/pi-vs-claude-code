@@ -1,0 +1,42 @@
+POLYMARKET API 401 ISSUE SUMMARY
+==================================
+
+## PROBLEM DESCRIPTION
+After extensive testing, ALL attempts to use Builder API keys for trading result in:
+401 Unauthorized / Invalid api key
+
+## SUCCESSFUL OPERATIONS
+✅ Can trade successfully via website (polymarket.com)
+✅ Can create EIP-712 signatures with proxy wallet
+✅ Can create HMAC signatures with Builder API credentials
+✅ Can fetch market data via public GET endpoints
+✅ Builder Profile shows keys as ACTIVE
+✅ Cloudflare bypass working (returns 401, not 403)
+
+## FAILED OPERATIONS
+❌ POST /order - returns 401
+❌ POST /orders - returns 401
+❌ GET /balance with HMAC - returns 404 or 401
+❌ py-clob-client L2 mode - requires API credentials then fails with 401
+
+## TESTED CONFIGURATIONS
+- Builder Address: 0xf5459aeE5E781371Fe4D32c6FD74D6154F52cA3B (from Builder Profile)
+- Proxy Wallet PK: 0xec207394fb56205bc3ebad623f8c7ffe75f7fa4fcb0d5511bb9e62e0bccf1b30
+- API Credentials:
+  - Key: 019ae73e-d01f-7ed3-a687-460fe5fcadaa
+  - Secret: hEZphhGEhaDylY6osMJfFoWth_Myy_5ZTn-e5iUscMo=
+  - Passphrase: f194f6615806ba93d3f5a1e64ac171684ab90f7ec7b3ad6722ecd9c412c64092
+- VPN Location: Japan (also tried Singapore, Argentina)
+
+## QUESTIONS FOR SUPPORT
+1. Are Builder API keys only for order attribution, not direct trading?
+2. Does PROXY_ADDR need to match BUILDER_ADDR for API keys to work?
+3. Are additional KYC/verification steps required to activate trading API?
+4. Should we use different endpoint or authentication method?
+5. Is there USDC balance requirement in proxy wallet before API activation?
+
+## EVIDENCE
+- Keys show as ACTIVE in Builder Profile dashboard
+- Can sign messages and verify signatures successfully
+- Website trading works normally
+- All API POST requests consistently return 401

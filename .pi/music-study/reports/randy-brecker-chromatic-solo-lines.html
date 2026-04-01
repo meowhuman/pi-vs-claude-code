@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🎺 Randy Brecker Chromatic Solo Lines — 音樂研究報告</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0a0a0a; color: #e0e0e0; min-height: 100vh; }
+  .header { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); padding: 40px 20px; text-align: center; border-bottom: 3px solid #e94560; }
+  .header h1 { font-size: 2.2em; color: #fff; margin-bottom: 8px; }
+  .header .emoji { font-size: 1.5em; }
+  .header p { color: #a0a0c0; font-size: 1.1em; max-width: 700px; margin: 0 auto; line-height: 1.6; }
+  .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+  .phase { margin: 36px 0; }
+  .phase-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 1px solid #333; }
+  .phase-number { background: #e94560; color: #fff; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.1em; flex-shrink: 0; }
+  .phase-title { font-size: 1.3em; color: #fff; font-weight: 600; }
+  .phase-desc { color: #888; font-size: 0.95em; margin-bottom: 16px; font-style: italic; line-height: 1.5; }
+  .video-card { background: #151520; border: 1px solid #2a2a3a; border-radius: 12px; margin-bottom: 14px; overflow: hidden; transition: transform 0.2s, border-color 0.2s; display: flex; align-items: stretch; text-decoration: none; color: inherit; cursor: pointer; }
+  .video-card:hover { transform: translateY(-2px); border-color: #e94560; background: #1a1a28; }
+  .video-card.highlight { border-color: #e94560; border-width: 2px; }
+  .thumb-col { width: 200px; min-height: 130px; flex-shrink: 0; background-size: cover; background-position: center; position: relative; background-color: #111; }
+  .thumb-col .play-icon { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.4); opacity: 0; transition: opacity 0.2s; }
+  .video-card:hover .play-icon { opacity: 1; }
+  .play-icon svg { width: 48px; height: 48px; fill: #fff; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.5)); }
+  .info-col { padding: 16px 20px; flex: 1; display: flex; flex-direction: column; justify-content: center; }
+  .info-col h3 { color: #fff; font-size: 1.05em; margin-bottom: 6px; line-height: 1.3; }
+  .info-col .meta { display: flex; gap: 12px; font-size: 0.82em; color: #888; margin-bottom: 8px; flex-wrap: wrap; align-items: center; }
+  .info-col .why { color: #b0b0c8; font-size: 0.9em; line-height: 1.5; padding: 10px 14px; background: #1a1a2e; border-radius: 8px; border-left: 3px solid #e94560; }
+  .info-col .why.gold-border { border-left-color: #ffc857; }
+  .badge { display: inline-block; padding: 2px 10px; border-radius: 20px; font-size: 0.78em; font-weight: 600; }
+  .badge-core { background: #e94560; color: #fff; }
+  .badge-deep { background: #0f3460; color: #8ec8f0; }
+  .badge-bonus { background: #1a1a2e; color: #a0a0c0; border: 1px solid #333; }
+  .badge-gem { background: #2d1b00; color: #ffc857; }
+  .star { color: #ffd700; }
+  .tip-box { background: linear-gradient(135deg, #1a1a2e, #16213e); border: 1px solid #2a2a4a; border-radius: 12px; padding: 20px; margin: 30px 0; }
+  .tip-box h3 { color: #e94560; margin-bottom: 10px; }
+  .tip-box ul { list-style: none; padding: 0; }
+  .tip-box li { padding: 6px 0; color: #c0c0d0; line-height: 1.5; }
+  .tip-box li::before { content: "→ "; color: #e94560; }
+  .research-section { background: #12121e; border: 1px solid #2a2a3a; border-radius: 12px; padding: 24px; margin: 30px 0; }
+  .research-section h3 { color: #e94560; margin-bottom: 14px; font-size: 1.15em; }
+  .research-section h4 { color: #8ec8f0; margin: 16px 0 8px; font-size: 1em; }
+  .research-section p { color: #b0b0c8; line-height: 1.7; margin-bottom: 10px; }
+  .research-section strong { color: #fff; }
+  .lineage { background: #0d0d18; border: 1px solid #222; border-radius: 8px; padding: 16px; margin: 16px 0; font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.85em; color: #8ec8f0; line-height: 1.6; overflow-x: auto; white-space: pre; }
+  .layer-stack { margin: 16px 0; }
+  .layer { border: 1px solid #333; border-radius: 8px; padding: 14px 18px; margin-bottom: 6px; transition: border-color 0.2s; }
+  .layer:hover { border-color: #e94560; }
+  .layer-4 { background: linear-gradient(90deg, #2d1b00, transparent); border-left: 4px solid #ffc857; }
+  .layer-3 { background: linear-gradient(90deg, #1a0a2e, transparent); border-left: 4px solid #c77dff; }
+  .layer-2 { background: linear-gradient(90deg, #0a1a2e, transparent); border-left: 4px solid #8ec8f0; }
+  .layer-1 { background: linear-gradient(90deg, #1a0a0a, transparent); border-left: 4px solid #e94560; }
+  .layer strong { color: #fff; }
+  .layer p { color: #b0b0c8; font-size: 0.92em; margin-top: 4px; }
+  .practice-box { background: linear-gradient(135deg, #0a1a0a, #1a2e1a); border: 1px solid #2a4a2a; border-radius: 12px; padding: 20px; margin: 30px 0; }
+  .practice-box h3 { color: #7ddf7d; margin-bottom: 10px; }
+  .practice-box ol { padding-left: 20px; }
+  .practice-box li { color: #b0c8b0; line-height: 1.6; margin-bottom: 8px; }
+  .refs-section { background: #12121e; border: 1px solid #2a2a3a; border-radius: 12px; padding: 24px; margin: 30px 0; }
+  .refs-section h3 { color: #ffc857; margin-bottom: 14px; }
+  .refs-section a { color: #8ec8f0; text-decoration: none; display: block; padding: 6px 0; line-height: 1.5; }
+  .refs-section a:hover { color: #e94560; text-decoration: underline; }
+  .footer { text-align: center; padding: 40px 20px; color: #555; font-size: 0.9em; border-top: 1px solid #222; margin-top: 40px; }
+  @media (max-width: 700px) {
+    .video-card { flex-direction: column; }
+    .thumb-col { width: 100%; min-height: 180px; }
+    .header h1 { font-size: 1.5em; }
+    .phase-title { font-size: 1.1em; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="emoji">🎺🔍</div>
+  <h1>Randy Brecker — Chromatic Solo Lines</h1>
+  <p>從 Clifford Brown 的 chromatic enclosures 到 Randy Brecker 的 fusion chromatic 語法 — 一個 trumpet lineage 的完整分析與聆聽路線。</p>
+  <p style="margin-top:12px; color:#e94560; font-weight:600;">Music Study Board — 深度研究報告</p>
+</div>
+
+<div class="container">
+
+  <!-- ═══════ 核心研究 ═══════ -->
+  <div class="research-section">
+    <h3>🧠 核心研究 — Randy Brecker 的 Chromatic Lines 從哪裡來？</h3>
+    <h4>Layer 1：Clifford Brown — Chromatic 的母語</h4>
+    <p>Randy 的父親 Bob Brecker 是一個「trumpet fanatic」，家裡天天放 <strong>Clifford Brown & Max Roach</strong> 的唱片。Clifford 建立了 hard bop trumpet 的 chromatic 語法標準 — 特別是 <strong>chromatic enclosures</strong>（用上下半音包圍目標音）和 <strong>approach patterns</strong>（用 chromatic notes 走向和弦音）。Randy 從小耳濡目染，這不是學來的知識，是母語。</p>
+    <h4>Layer 2：Woody Shaw — Chromatic 的擴展</h4>
+    <p>Woody Shaw 的風格被形容為「pentatonic scales and chorded tones 的獨特組合」，深受 John Coltrane 和 Eric Dolphy 影響。他把 <strong>fourths</strong>（四度音程）、<strong>pentatonics</strong> 和 <strong>chromaticism</strong> 融合成高度原創的 trumpet 語言。Randy 在 1970s 透過 Horace Silver、Art Blakey 的圈子與 Woody 的音樂深度接觸，Woody 的 chromatic-fourths 語言影響了 Randy 在 Brecker Brothers 時期的 fusion solo。</p>
+    <h4>Layer 3：Fusion Chromatic — Brecker Brothers 時期</h4>
+    <p>與 Michael Brecker 的合作迫使 Randy 在 <strong>chromatic density</strong> 上不斷進化。Michael 的 tenor solo 以極端的 chromatic 複雜度著稱，Randy 必須在這個環境中找到自己的 chromatic 聲音 — 不是模仿 Michael 的密度，而是用更少的音符達到同樣的 harmonic richness。<strong>"Some Skunk Funk"</strong> 成為這種融合的教科書。</p>
+    <h4>Layer 4：完全成熟 — 2000s+</h4>
+    <p>在 <em>Some Skunk Funk</em> (2005, 獲葛萊美) 和 <em>Rocks</em> (2019, "Sozinho" 再獲葛萊美) 中，Randy 的 chromatic vocabulary 完全內化 — Clifford 的精確 + Woody 的開放 + 數十年的融合，聽起來毫不費力。</p>
+  </div>
+
+  <!-- ═══════ 影響鏈圖 ═══════ -->
+  <div class="research-section">
+    <h3>📜 歷史影響鏈 — Chromatic Trumpet Lineage</h3>
+    <div class="lineage">Charlie Parker / Dizzy Gillespie (1940s Bebop)
+    ↓ chromatic improvisation 的革命
+Fats Navarro (1940s-50s) — chromatic fluency + warm tone
+    ↓
+Clifford Brown (1950s) — chromatic enclosures + approach patterns 系統化
+    ↓ ┌──────────────────────────┐
+    ↓                          ↓
+Lee Morgan (1960s)           Woody Shaw (1960s-80s)
+Philly lineage, youthful      Coltrane + Dolphy 影響,
+Clifford energy                fourths + pentatonics + chromatic
+    ↓                          ↓
+    └──────────┬───────────────┘
+               ↓
+         Randy Brecker (1970s+)
+         Clifford 的 chromatic 基礎
+       + Woody 的 fourths/pentatonic 擴展
+       + Michael Brecker 的 chromatic density 壓力
+       + Fusion/Rock 的音域與能量
+               ↓
+         當代 trumpet players
+         (Ambrose Akinmusire, Christian Scott 等)</div>
+  </div>
+
+  <!-- ═══════ 四層結構 ═══════ -->
+  <div class="research-section">
+    <h3>🏗️ Randy Brecker Chromatic Vocabulary — 四層結構</h3>
+    <div class="layer-stack">
+      <div class="layer layer-4">
+        <strong>Layer 4 — Randy 的成熟聲音 (2000s+)</strong>
+        <p>Clifford + Woody + Michael + Brazilian + 數十年融合 = 有機的、毫不費力的 chromatic fluency</p>
+      </div>
+      <div class="layer layer-3">
+        <strong>Layer 3 — Fusion Chromatic (1970s-80s)</strong>
+        <p>Clifford 線條邏輯 + Woody fourths + rock 能量 = 快速、有律動、cross-rhythmic chromatic phrases</p>
+      </div>
+      <div class="layer layer-2">
+        <strong>Layer 2 — The Expansion — Woody Shaw (1960s-70s)</strong>
+        <p>Coltrane influence + fourths + pentatonics = chromatic 不再只是 embellishment，而是結構本身</p>
+      </div>
+      <div class="layer layer-1">
+        <strong>Layer 1 — The Foundation — Clifford Brown (1950s)</strong>
+        <p>Chromatic enclosures + approach patterns = 半音走向和弦音的系統化方法</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════ 聆聽提示 ═══════ -->
+  <div class="tip-box">
+    <h3>🎧 使用說明</h3>
+    <ul>
+      <li><strong>點擊任意卡片</strong> → 在新分頁中開啟 YouTube 觀看</li>
+      <li>從「階段 1」開始 — 先理解 Clifford Brown 的 chromatic 源頭</li>
+      <li>核心關注：Randy 如何用 <strong>chromatic enclosures</strong>（包圍目標音）構建 lines</li>
+      <li>對比 Clifford（1950s）→ Randy fusion（1970s）→ Randy 成熟期（2005+）的演變</li>
+    </ul>
+  </div>
+
+  <!-- ══════════ 階段 1：Clifford Brown ══════════ -->
+  <div class="phase">
+    <div class="phase-header">
+      <div class="phase-number">1</div>
+      <div class="phase-title">源頭 — Clifford Brown 的 Chromatic 語法</div>
+    </div>
+    <div class="phase-desc">Randy chromatic vocabulary 的地基。Clifford Brown 系統化了 chromatic enclosures 和 approach patterns — 這是 Randy 從小在費城家裡聽到的聲音。</div>
+
+    <a href="https://www.youtube.com/watch?v=crFzwtknbh4" target="_blank" class="video-card highlight">
+      <div class="thumb-col" style="background-image:url('https://img.youtube.com/vi/crFzwtknbh4/hqdefault.jpg')">
+        <div class="play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      </div>
+      <div class="info-col">
+        <h3>How To Play Like CLIFFORD BROWN — "Cliffordizing" 解說</h3>
+        <div class="meta">
+          <span class="badge badge-core">必看</span>
+          <span>Chromatic Embellishments 系統分析</span>
+        </div>
+        <div class="why"><strong>"Cliffordizing"</strong> — Clifford Brown 的 chromatic embellishments 作為即興線條基礎構成元素的系統解說。理解這個，你就理解了 Randy chromatic 的源頭。</div>
+      </div>
+    </a>
+
+    <a href="https://www.youtube.com/watch?v=0V-l3JEFEJY" target="_blank" class="video-card">
+      <div class="thumb-col" style="background-image:url('https://img.youtube.com/vi/0V-l3JEFEJY/hqdefault.jpg')">
+        <div class="play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      </div>
+      <div class="info-col">
+        <h3>How to Sound More Like Clifford Brown — Bebop Trumpet</h3>
+        <div class="meta">
+          <span class="badge badge-deep">深入</span>
+          <span>Chromatic Vocabulary 實際教學</span>
+        </div>
+        <div class="why">Clifford Brown 的 chromatic vocabulary 在 trumpet 上的實際應用教學。直接學習他的 approach patterns 和 enclosures。</div>
+      </div>
+    </a>
+
+    <a href="https://www.youtube.com/watch?v=5X4f2tM3N_E" target="_blank" class="video-card">
+      <div class="thumb-col" style="background-image:url('https://img.youtube.com/vi/5X4f2tM3N_E/hqdefault.jpg')">
+        <div class="play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      </div>
+      <div class="info-col">
+        <h3>Clifford Brown — Chromatic Approach Notes 逐音分析</h3>
+        <div class="meta">
+          <span class="badge badge-deep">深入</span>
+          <span>日語解說但樂譜清楚，通用</span>
+        </div>
+        <div class="why">直接分析 Clifford 的 chromatic approach notes。即使語言不通，樂譜和演奏示範完全看得懂 — Randy 的基本功就是這些。</div>
+      </div>
+    </a>
+
+    <a href="https://www.youtube.com/watch?v=voWzQT7CizE" target="_blank" class="video-card">
+      <div class="thumb-col" style="background-image:url('https://img.youtube.com/vi/voWzQT7CizE/hqdefault.jpg')">
+        <div class="play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      </div>
+      <div class="info-col">
+        <h3>How to Sound Like Clifford Brown! — Jazz Vocabulary</h3>
+        <div class="meta">
+          <span class="badge badge-bonus">彩蛋</span>
+          <span>另一個教學角度</span>
+        </div>
+        <div class="why">另一個 Clifford Brown chromatic vocabulary 的教學視角，互補上面幾個影片的內容。</div>
+      </div>
+    </a>
+  </div>
+
+  <!-- ══════════ 階段 2：Randy 的 Chromatic Fusion ══════════ -->
+  <div class="phase">
+    <div class="phase-header">
+      <div class="phase-number">2</div>
+      <div class="phase-title">核心 — Randy Brecker 的 Chromatic Fusion</div>
+    </div>
+    <div class="phase-desc">Brecker Brothers 時期是 Randy chromatic vocabulary 的示範場。"Some Skunk Funk" 是教科書 — Clifford 的線條邏輯 + Woody 的音程擴展 + fusion 的節奏能量。</div>
+
+    <a href="https://www.youtube.com/watch?v=dFWHc_trook" target="_blank" class="video-card highlight" style="border-color:#ffd700; border-width:2px;">
+      <div class="thumb-col" style="background-image:url('https://img.youtube.com/vi/dFWHc_trook/hqdefault.jpg')">
+        <div class="play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      </div>
+      <div class="info-col">
+        <h3>🏆 Randy Brecker — "Some Skunk Funk" Solo Transcription</h3>
+        <div class="meta">
+          <span class="badge badge-core">核心教材</span>
+          <span class="star">⭐ 逐音符 transcription</span>
+        </div>
+        <div class="why gold-border"><strong>最重要的影片。</strong>Randy 的 "Some Skunk Funk" solo 逐音符 transcription。看到他的 chromatic enclosures、approach patterns、和 cross-rhythmic chromatic phrases 的具體構造。如果你只看一個影片，就是這個。</div>
+      </div>
+    </a>
+
+    <a href="https://www.youtube.com/playlist?list=PLJzIoUTz87Y0vPB8rAc1c1Yd_rkBd5v0m" target="_blank" class="video-card">
+      <div class="thumb-col" style="background-image:url('https://img.youtube.com/vi/6Ztj0aEwCHE/hqdefault.jpg')">
+        <div class="play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      </div>
+      <div class="info-col">
+        <h3>Brecker Brothers — Some Skunk Funk (2004 WDR Big Band 完整演出)</h3>
+        <div class="meta">
+          <span class="badge badge-core">必聽</span>
+          <span>完整播放清單 • 獲葛萊美獎版本</span>
+        </div>
+        <div class="why">完整演出播放清單。在 transcription 的基礎上聽完整版本，感受 Randy 的 chromatic lines 在大編制和 fusion 節奏中的完整脈絡。</div>
+      </div>
+    </a>
+
+    <a href="https://www.youtube.com/watch?v=6Ztj0aEwCHE" target="_blank" class="video-card">
+      <div class="thumb-col" style="background-image:url('https://img.youtube.com/vi/6Ztj0aEwCHE/hqdefault.jpg')">
+        <div class="play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      </div>
+      <div class="info-col">
+        <h3>Michael & Randy Brecker — Some Skunk Funk (Live)</h3>
+        <div class="meta">
+          <span class="badge badge-deep">深入</span>
+          <span>現場演出</span>
+        </div>
+        <div class="why">聽 Randy 與 Michael Brecker 同台的 chromatic 對話。注意 Randy 如何在 Michael 極端的 chromatic density 旁邊找到自己的聲音。</div>
+      </div>
+    </a>
+
+    <a href="https://www.youtube.com/watch?v=_TnUbXkvlz4" target="_blank" class="video-card">
+      <div class="thumb-col" style="background-image:url('https://img.youtube.com/vi/_TnUbXkvlz4/hqdefault.jpg')">
+        <div class="play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      </div>
+      <div class="info-col">
+        <h3>Some Skunk Funk — Randy Brecker 多版本剪輯對比</h3>
+        <div class="meta">
+          <span class="badge badge-deep">深入</span>
+          <span>多版本比較</span>
+        </div>
+        <div class="why">多個 "Some Skunk Funk" 演出版本剪輯在一起。對比 Randy 在不同年代、不同場合的 chromatic approach 變化 — 從 1970s 到 2000s 的演變。</div>
+      </div>
+    </a>
+  </div>
+
+  <!-- ══════════ 階段 3：時期演變 ══════════ -->
+  <div class="phase">
+    <div class="phase-header">
+      <div class="phase-number">3</div>
+      <div class="phase-title">演變 — Chromatic Vocabulary 的時期變化</div>
+    </div>
+    <div class="phase-desc">從 1970s 的 fusion 燃燒到 2019 年的葛萊美獲獎抒情 — 同樣的 chromatic knowledge，完全不同的應用情境。</div>
+
+    <a href="https://www.youtube.com/watch?v=rAtSafkeNK4" target="_blank" class="video-card">
+      <div class="thumb-col" style="background-image:url('https://img.youtube.com/vi/rAtSafkeNK4/hqdefault.jpg')">
+        <div class="play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      </div>
+      <div class="info-col">
+        <h3>Randy Brecker — Some Skunk Funk @ Jazz Trumpet Festival 2018 (São Paulo)</h3>
+        <div class="meta">
+          <span class="badge badge-deep">深入</span>
+          <span>2018 • 巴西</span>
+        </div>
+        <div class="why">70+ 歲的 Randy 展示完全成熟的 chromatic vocabulary。同樣的 "Some Skunk Funk"，但技術完全內化，聽起來輕鬆自如。注意與 1970s 版本的差異。</div>
+      </div>
+    </a>
+
+    <a href="https://www.youtube.com/watch?v=6Fb82KbmjvE" target="_blank" class="video-card">
+      <div class="thumb-col" style="background-image:url('https://img.youtube.com/vi/6Fb82KbmjvE/hqdefault.jpg')">
+        <div class="play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      </div>
+      <div class="info-col">
+        <h3>Randy Brecker, Torsten Goods & Jakob Manz — Some Skunk Funk @ Jazz am See 2023</h3>
+        <div class="meta">
+          <span class="badge badge-gem">三代同台</span>
+          <span>2023 • Jazz am See Festival</span>
+        </div>
+        <div class="why gold-border"><strong>三代 trumpet player 同台。</strong>Randy + Torsten Goods + Jakob Manz 演奏 Randy 的經典。觀察下一代如何繼承和詮釋 Randy 的 chromatic language。</div>
+      </div>
+    </a>
+
+    <a href="https://www.youtube.com/watch?v=1lALgxGKZlI" target="_blank" class="video-card">
+      <div class="thumb-col" style="background-image:url('https://img.youtube.com/vi/1lALgxGKZlI/hqdefault.jpg')">
+        <div class="play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      </div>
+      <div class="info-col">
+        <h3>Randy Brecker & NDR Bigband — Sozinho（葛萊美獲獎 solo）</h3>
+        <div class="meta">
+          <span class="badge badge-deep">對比</span>
+          <span>2019 • 第 7 座葛萊美</span>
+        </div>
+        <div class="why">同樣的 chromatic knowledge 用在 slow ballad 中。聽 Randy 如何把 "Some Skunk Funk" 的 chromatic 語言轉化為 lyricism — 技術不變，表達完全不同。這是理解他 chromatic versatility 的關鍵對比。</div>
+      </div>
+    </a>
+
+    <a href="https://www.youtube.com/watch?v=FeAQ0ahG6VI" target="_blank" class="video-card">
+      <div class="thumb-col" style="background-image:url('https://img.youtube.com/vi/FeAQ0ahG6VI/hqdefault.jpg')">
+        <div class="play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      </div>
+      <div class="info-col">
+        <h3>Some Skunk Funk w/ Randy Brecker & John Viavattine (現場)</h3>
+        <div class="meta">
+          <span class="badge badge-bonus">彩蛋</span>
+          <span>Hilton Evening of Jazz</span>
+        </div>
+        <div class="why">另一個現場版本。每次聽 "Some Skunk Funk" 的不同版本，你都能捕捉到 Randy chromatic vocabulary 的即興變化 — 他從不照抄自己。</div>
+      </div>
+    </a>
+  </div>
+
+  <!-- ══════════ 階段 4：Lineage 全景 ══════════ -->
+  <div class="phase">
+    <div class="phase-header">
+      <div class="phase-number">4</div>
+      <div class="phase-title">深水 — Chromatic Trumpet Lineage 全景</div>
+    </div>
+    <div class="phase-desc">把 Randy 放回整條 chromatic trumpet lineage 中理解。</div>
+
+    <a href="https://www.youtube.com/watch?v=FAmmpGH6yrg" target="_blank" class="video-card">
+      <div class="thumb-col" style="background-image:url('https://img.youtube.com/vi/FAmmpGH6yrg/hqdefault.jpg')">
+        <div class="play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      </div>
+      <div class="info-col">
+        <h3>"Some Skunk Funk" — Warren Wolf 翻奏</h3>
+        <div class="meta">
+          <span class="badge badge-bonus">彩蛋</span>
+          <span>非 trumpet，展示 harmonic 複雜度</span>
+        </div>
+        <div class="why">Warren Wolf 在 vibraphone 上詮釋 "Some Skunk Funk"。聽 trumpet 以外的樂器如何處理 Randy 的 chromatic changes — 反過來理解這些和聲的本質。</div>
+      </div>
+    </a>
+  </div>
+
+  <!-- ═══════ 練習建議 ═══════ -->
+  <div class="practice-box">
+    <h3>🎵 練習建議 — 如何發展你自己的 Chromatic Solo Lines</h3>
+    <ol>
+      <li><strong>聽 transcription：</strong>觀看 "Some Skunk Funk" transcription 影片，逐 bar 分析 Randy 的 chromatic approach — 標記出每個 enclosure、每個 approach pattern</li>
+      <li><strong>練習 Clifford 的 enclosures：</strong>在每個 ii-V-I 上練習 chromatic enclosures（上方半音 + 下方半音 → 目標音）。這是 Randy 的基本功</li>
+      <li><strong>Fusion groove 上的 chromatic lines：</strong>用 chromatic notes 代替 diatonic scales 在 funk/straight-8ths feel 上即興 — 感受 Randy 那種「chromatic 但有律動」的 feel</li>
+      <li><strong>練習 Woody Shaw 的 fourths：</strong>用四度 + 半音的組合構建 lines — 這是 Randy chromatic vocabulary 的第二層</li>
+      <li><strong>Ballad 測試：</strong>把你在 up-tempo 學到的 chromatic vocabulary 用在 slow ballad 上 — 像 Randy 在 "Sozinho" 中做的那樣。如果技術是真的內化了，速度不應該影響表達</li>
+    </ol>
+  </div>
+
+  <!-- ═══════ 總覽 ═══════ -->
+  <div class="tip-box" style="margin-top:40px;">
+    <h3>📋 播放清單總覽</h3>
+    <ul>
+      <li><strong>階段 1：</strong>🔴 Clifford Brown 的 chromatic 語法 — 理解源頭</li>
+      <li><strong>階段 2：</strong>🔴 Randy 的 chromatic fusion — "Some Skunk Funk" 教科書</li>
+      <li><strong>階段 3：</strong>🔵 Chromatic vocabulary 的時期演變 — 1970s → 2019</li>
+      <li><strong>階段 4：</strong>⚪ Chromatic trumpet lineage 全景</li>
+    </ul>
+  </div>
+
+  <!-- ═══════ 延伸閱讀 ═══════ -->
+  <div class="refs-section">
+    <h3>📚 延伸閱讀</h3>
+    <a href="https://notesonjazz.blogspot.com/2016/08/an-interview-with-trumpeter-randy_18.html" target="_blank">Notes on Jazz — An Interview with Trumpeter Randy Brecker</a>
+    <a href="https://www.jazzwax.com/2015/09/interview-randy-brecker.html" target="_blank">JazzWax — Interview: Randy Brecker</a>
+    <a href="https://www.jazztimes.com/features/lists/artists-choice-randy-brecker-on-lee-morgan/" target="_blank">JazzTimes — Artist's Choice: Randy Brecker on Lee Morgan</a>
+    <a href="https://www.freejazzlessons.com/clifford-brown-jazz-improvisation-lesson/" target="_blank">FreeJazzLessons — Clifford Brown Jazz Improvisation Lesson (Chromatic Approach Patterns)</a>
+    <a href="https://www.jazzadvice.com/lessons/4-steps-to-mastering-the-solo-break-a-lesson-with-clifford-brown/" target="_blank">Jazzadvice — 4 Steps to Mastering the Solo Break (Clifford Brown)</a>
+    <a href="https://activelistening.substack.com/p/woody-shaw-a-life-in-sound-and-struggle" target="_blank">Active Listening — Woody Shaw: A Life in Sound and Struggle</a>
+    <a href="https://www.saxontheweb.net/threads/brecker-chord-changes.147668/" target="_blank">Sax on the Web — Brecker Chord Changes 討論</a>
+    <a href="https://davidliebman.com/home/ed_articles/a-chromatic-approach-to-jazz-melody-and-harmony-brief-overview/" target="_blank">David Liebman — A Chromatic Approach to Jazz Melody and Harmony</a>
+  </div>
+
+</div>
+
+<div class="footer">
+  <p>Music Study Board 策展 • deep-researcher · youtube-curator · genre-historian · listening-guide</p>
+  <p style="margin-top:8px; color:#e94560;">🎺 從 Clifford 的 enclosures 到 Randy 的 fusion chromatic — 同一條線，不同的聲音。</p>
+</div>
+
+</body>
+</html>
