@@ -1,0 +1,30 @@
+meeting:
+  discussion_time_minutes: 5
+
+board:
+  - name: order-router
+    path: .pi/execution-desk/agents/order-router/order-router.md
+    active: true
+  - name: risk-gate
+    path: .pi/execution-desk/agents/risk-gate/risk-gate.md
+    active: true
+  - name: crypto-executor
+    path: .pi/execution-desk/agents/crypto-executor/crypto-executor.md
+    active: true
+  - name: stock-executor
+    path: .pi/execution-desk/agents/stock-executor/stock-executor.md
+    active: true
+  - name: options-desk
+    path: .pi/execution-desk/agents/options-desk/options-desk.md
+    active: true
+  - name: position-monitor
+    path: .pi/execution-desk/agents/position-monitor/position-monitor.md
+    active: true
+
+presets:
+  full: [order-router, risk-gate, crypto-executor, stock-executor, options-desk, position-monitor]
+  crypto: [order-router, risk-gate, crypto-executor]
+  stock: [order-router, risk-gate, stock-executor]
+  options: [order-router, risk-gate, options-desk]
+  monitor: [order-router, position-monitor]
+  quick: [order-router, risk-gate]

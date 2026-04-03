@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>投資顧問委員會 — VGK 分析報告（互動討論模式）</title>
+<style>
+  :root {
+    --bg: #0f1419;
+    --card: #1a1f2e;
+    --border: #2d3548;
+    --text: #e1e8ed;
+    --muted: #8899a6;
+    --accent: #1da1f2;
+    --green: #17bf63;
+    --red: #e0245e;
+    --orange: #ffad1f;
+    --purple: #9b59b6;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); font-family: -apple-system, 'SF Pro Text', 'Noto Sans TC', sans-serif; line-height: 1.7; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+  .header { text-align: center; padding: 40px 20px; border-bottom: 1px solid var(--border); margin-bottom: 30px; }
+  .header h1 { font-size: 2em; margin-bottom: 8px; background: linear-gradient(135deg, var(--accent), var(--green)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .header .subtitle { color: var(--muted); font-size: 1.1em; }
+  .header .meta { color: var(--muted); font-size: 0.85em; margin-top: 12px; }
+  .badge { display: inline-block; padding: 2px 10px; border-radius: 12px; font-size: 0.75em; font-weight: 600; }
+  .badge-red { background: rgba(224,36,94,0.15); color: var(--red); }
+  .badge-orange { background: rgba(255,173,31,0.15); color: var(--orange); }
+  .badge-green { background: rgba(23,191,99,0.15); color: var(--green); }
+  .badge-blue { background: rgba(29,161,242,0.15); color: var(--accent); }
+  .badge-purple { background: rgba(155,89,182,0.15); color: var(--purple); }
+
+  /* Verdict Box */
+  .verdict-box { background: linear-gradient(135deg, rgba(255,173,31,0.08), rgba(224,36,94,0.08)); border: 1px solid rgba(255,173,31,0.3); border-radius: 12px; padding: 30px; margin-bottom: 30px; }
+  .verdict-box h2 { font-size: 1.5em; margin-bottom: 16px; }
+  .verdict-box .verdict-label { font-size: 2.2em; font-weight: 800; color: var(--orange); margin: 12px 0; }
+  .verdict-box p { color: var(--muted); }
+
+  /* Key Metrics */
+  .metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 30px; }
+  .metric-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 20px; text-align: center; }
+  .metric-card .label { color: var(--muted); font-size: 0.8em; text-transform: uppercase; letter-spacing: 1px; }
+  .metric-card .value { font-size: 1.8em; font-weight: 700; margin: 6px 0; }
+  .metric-card .note { color: var(--muted); font-size: 0.75em; }
+  .metric-green .value { color: var(--green); }
+  .metric-red .value { color: var(--red); }
+  .metric-orange .value { color: var(--orange); }
+  .metric-blue .value { color: var(--accent); }
+
+  /* Consensus Table */
+  .section { margin-bottom: 30px; }
+  .section h2 { font-size: 1.3em; margin-bottom: 16px; padding-left: 12px; border-left: 3px solid var(--accent); }
+  table { width: 100%; border-collapse: collapse; background: var(--card); border-radius: 10px; overflow: hidden; }
+  th { background: rgba(29,161,242,0.1); padding: 12px 16px; text-align: left; font-size: 0.85em; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); }
+  td { padding: 12px 16px; border-top: 1px solid var(--border); font-size: 0.95em; }
+  tr:hover { background: rgba(29,161,242,0.03); }
+
+  /* Member Cards */
+  .member-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 16px; margin-bottom: 30px; }
+  .member-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 20px; }
+  .member-card .member-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+  .member-card .member-icon { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.1em; }
+  .member-card .member-name { font-weight: 700; font-size: 1.05em; }
+  .member-card .stance { font-size: 0.9em; margin-bottom: 12px; }
+  .member-card .key-points { font-size: 0.85em; color: var(--muted); }
+  .member-card .key-points li { margin-bottom: 6px; }
+
+  /* Trading Plan */
+  .plan-box { background: var(--card); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 30px; }
+  .plan-box .plan-header { padding: 16px 20px; font-weight: 700; font-size: 1.1em; }
+  .plan-scenario { padding: 16px 20px; border-top: 1px solid var(--border); }
+  .plan-scenario h4 { margin-bottom: 8px; }
+  .plan-scenario .detail { color: var(--muted); font-size: 0.9em; }
+  .plan-scenario .detail span { color: var(--text); font-weight: 600; }
+
+  /* Narrative Timeline */
+  .timeline { position: relative; padding-left: 30px; margin-bottom: 30px; }
+  .timeline::before { content: ''; position: absolute; left: 8px; top: 0; bottom: 0; width: 2px; background: var(--border); }
+  .timeline-item { position: relative; margin-bottom: 20px; }
+  .timeline-item::before { content: ''; position: absolute; left: -26px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--border); border: 2px solid var(--bg); }
+  .timeline-item.active::before { background: var(--accent); box-shadow: 0 0 8px rgba(29,161,242,0.5); }
+  .timeline-item .time { color: var(--muted); font-size: 0.8em; }
+  .timeline-item .event { font-weight: 600; margin: 4px 0; }
+  .timeline-item .impact { font-size: 0.85em; color: var(--muted); }
+
+  /* Debate Summary */
+  .debate-round { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 20px; margin-bottom: 16px; }
+  .debate-round .round-title { font-weight: 700; color: var(--accent); margin-bottom: 12px; }
+  .debate-round .round-content { font-size: 0.9em; color: var(--muted); }
+  .debate-round .round-content strong { color: var(--text); }
+
+  /* Risk Monitor */
+  .risk-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; margin-bottom: 30px; }
+  .risk-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 20px; }
+  .risk-card .risk-level { font-weight: 700; font-size: 1.1em; margin-bottom: 8px; }
+  .risk-card .risk-detail { font-size: 0.85em; color: var(--muted); }
+
+  /* Footer */
+  .footer { text-align: center; padding: 30px; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.8em; }
+  .confidence-bar { height: 6px; border-radius: 3px; background: var(--border); margin-top: 4px; overflow: hidden; }
+  .confidence-bar .fill { height: 100%; border-radius: 3px; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Header -->
+  <div class="header">
+    <h1>🏛️ 投資顧問委員會 — VGK 分析報告</h1>
+    <div class="subtitle">Vanguard FTSE Europe ETF · 互動討論模式（5 輪辯論）</div>
+    <div class="meta">
+      分析日期：2026-04-01 · 模式：Mode B（互動討論）· 參與委員：7 位 + 人類委員 · 辯論輪次：5 輪
+    </div>
+  </div>
+
+  <!-- Executive Verdict -->
+  <div class="verdict-box">
+    <h2>執行摘要 — CEO 最終裁決</h2>
+    <div class="verdict-label">⏳ 觀望為主 · 微型試探為輔</div>
+    <p>
+      經過 5 輪深度辯論，7 位委員以 <strong>高置信度</strong> 達成共識：<br>
+      VGK 的 1.93 倍異常成交量 <strong>不是</strong> 聰明錢在佈局戰爭降級，而是 <strong>Q1 季末資金輪動</strong> + <strong>伊朗 Hormuz Hope 單日事件</strong> 驅動的短線反彈。<br>
+      放量敘事與 Polymarket 定價（俄烏停火 12%、伊朗核協議 30% 且皆下跌）嚴重背離。<br><br>
+      <strong>核心建議：不要因為放量就 FOMO，等待才是最好的交易。</strong>
+    </p>
+    <div style="margin-top:16px;">
+      <span class="badge badge-red">不建議主動進場</span>
+      <span class="badge badge-orange">保留條件性操作方案</span>
+      <span class="badge badge-blue">搖擺交易為主（2-4 週）</span>
+    </div>
+  </div>
+
+  <!-- Key Metrics -->
+  <div class="metrics">
+    <div class="metric-card metric-red">
+      <div class="label">俄烏停火機率</div>
+      <div class="value">12%</div>
+      <div class="note">Polymarket · 7日跌 38.7%</div>
+    </div>
+    <div class="metric-card metric-orange">
+      <div class="label">伊朗核協議機率</div>
+      <div class="value">30%</div>
+      <div class="note">Polymarket · 7日跌 18.9%</div>
+    </div>
+    <div class="metric-card metric-orange">
+      <div class="label">歐元區通膨率</div>
+      <div class="value">2.5%</div>
+      <div class="note">突破 ECB 目標 · 德國 2.8%</div>
+    </div>
+    <div class="metric-card metric-red">
+      <div class="label">20日歷史波動率</div>
+      <div class="value">25.4%</div>
+      <div class="note">高波動環境</div>
+    </div>
+    <div class="metric-card metric-blue">
+      <div class="label">VGK 當前價格</div>
+      <div class="value">$82.43</div>
+      <div class="note">壓在 20 日 EMA 下方</div>
+    </div>
+    <div class="metric-card metric-green">
+      <div class="label">距低點反彈</div>
+      <div class="value">+4.7%</div>
+      <div class="note">從 $78.70 → $82.43</div>
+    </div>
+  </div>
+
+  <!-- Consensus Matrix -->
+  <div class="section">
+    <h2>📊 委員會共識矩陣</h2>
+    <table>
+      <thead>
+        <tr><th>用戶問題</th><th>委員會結論</th><th>置信度</th><th>共識程度</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>是否為好的進場機會？</strong></td>
+          <td>❌ <strong>目前不是。</strong>1.93x 放量是 Q1 季末輪動 + Hormuz Hope 單日事件，非結構性聰明錢佈局</td>
+          <td><span class="badge badge-red">高</span></td>
+          <td>7/7 委員同意</td>
+        </tr>
+        <tr>
+          <td><strong>何時是好的進場時機？</strong></td>
+          <td>⏳ <strong>等待觸發條件：</strong>價格回測 $80.66（200 EMA）或 $71-75（基本面底部），配合宏觀四條件</td>
+          <td><span class="badge badge-orange">高</span></td>
+          <td>6/7 委員同意</td>
+        </tr>
+        <tr>
+          <td><strong>上漲空間有多大？</strong></td>
+          <td>📈 <strong>基準目標 $86</strong>（+4.3%），樂觀目標 $90（+9.2%），但需條件配合</td>
+          <td><span class="badge badge-blue">中</span></td>
+          <td>5/7 委員同意</td>
+        </tr>
+        <tr>
+          <td><strong>主要風險是什麼？</strong></td>
+          <td>⚠️ <strong>伊朗/俄烏雙線地緣風險</strong> + ECB 滯脹 + 匯率未對沖 + 回測過度擬合</td>
+          <td><span class="badge badge-red">高</span></td>
+          <td>7/7 委員同意</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Narrative Deconstruction -->
+  <div class="section">
+    <h2>🔍 放量敘事拆解 — 真相是什麼？</h2>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="time">市場傳聞</div>
+        <div class="event">❌ 「聰明錢佈局俄烏戰爭降級」</div>
+        <div class="impact">Market Intelligence 搜尋結果：未發現任何機構大舉佈局 VGK 的報導。Australian 養老基金增持屬「逢低買入」資產配置，非主題性押注。</div>
+      </div>
+      <div class="timeline-item">
+        <div class="time">Polymarket 數據</div>
+        <div class="event">❌ 俄烏停火機率僅 12%（-38.7%）</div>
+        <div class="impact">鯨魚多空分歧，幾乎全數虧損。僅 1 位 Smart Money 看多，其餘大戶 PnL 慘烈（最高單戶虧損 -$360K）。這不是聰明錢佈局，而是賭徒廝殺。</div>
+      </div>
+      <div class="timeline-item active">
+        <div class="time">真正催化劑</div>
+        <div class="event">⚠️ Q1 季末資金輪動 + Hormuz Hope</div>
+        <div class="impact">3/31 伊朗官方表示「願意結束戰爭」，油價大跌、全球股市暴漲（道瓊 +1,100 點）。但此敘事僅維持 24 小時，4/1 後無任何新進展。1.93 倍放量更可能是季末投資組合再平衡 + 空頭回補。</div>
+      </div>
+      <div class="timeline-item">
+        <div class="time">伊朗實際機率</div>
+        <div class="event">❌ 核協議機率僅 30%（-18.9%）</div>
+        <div class="impact">31 位鯨魚僅 2 位 Smart Money，其餘全為 LOSER。最大單戶虧損 -$360K。成交量 $910K 中散戶佔主導。無機構級參與。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Trading Plan -->
+  <div class="section">
+    <h2>📋 條件性交易計畫 — 三種情境</h2>
+    <div class="plan-box">
+      <div class="plan-header" style="color:var(--orange);">
+        🟡 情境 A：基準 — 回測 200 EMA 進場（委員會首選）
+      </div>
+      <div class="plan-scenario">
+        <h4>進場條件</h4>
+        <div class="detail">
+          觸發價格：<span>$80.66</span>（200 日 EMA）企穩<br>
+          宏觀條件：Polymarket 停火機率回升至 25%+、ECB 釋放鴿派指引<br>
+          止損位：<span>$78.70</span>（近期低點，-2.4%）<br>
+          目標價：<span>$86.00</span>（布林上軌，+6.6%）<br>
+          風險回報比：<span style="color:var(--green)">1:2.7</span> ✅<br>
+          建議倉位：<span>10% 資金</span>（$100K 帳戶投入 $10,000，約 121 股）<br>
+          持倉時間：<span>2-4 週</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="plan-box">
+      <div class="plan-header" style="color:var(--red);">
+        🔴 情境 B：悲觀 — 基本面底部進場（若地緣惡化）
+      </div>
+      <div class="plan-scenario">
+        <h4>進場條件</h4>
+        <div class="detail">
+          觸發價格：<span>$71-75</span>（P/E 15x，較現價下跌 9-14%）<br>
+          宏觀條件：獲利下修 10-15% 後的估值底部<br>
+          止損位：<span>$69.00</span>（-5.5%）<br>
+          目標價：<span>$82.00</span>（回歸當前估值，+9.2%）<br>
+          風險回報比：<span style="color:var(--green)">1:2.2</span> ✅<br>
+          建議倉位：<span>15% 資金</span>（若觸及，基本面安全邊際充足）<br>
+          持倉時間：<span>4-12 週</span>（可轉為長期部位）
+        </div>
+      </div>
+    </div>
+
+    <div class="plan-box">
+      <div class="plan-header" style="color:var(--muted);">
+        ⛔ 情境 C：不建議 — 現價追漲
+      </div>
+      <div class="plan-scenario">
+        <h4>為什麼不建議？</h4>
+        <div class="detail">
+          進場價：<span>$82.50</span>（突破 20 日 EMA）<br>
+          止損位：<span>$80.66</span>（200 EMA，-2.2%）<br>
+          目標價：<span>$86.00</span>（+4.2%）<br>
+          風險回報比：<span style="color:var(--red)">1:1.9</span> ❌ 未達 1:2 門檻<br>
+          問題：已反彈 4.74%，追高風險高；敘事已消退（Hormuz Hope 僅 24h）；需 46.5% 倉位才能滿足 1% 風險規則（過度集中）
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Macro Conditions -->
+  <div class="section">
+    <h2>🎯 進場四條件框架</h2>
+    <table>
+      <thead>
+        <tr><th>#</th><th>條件</th><th>當前狀態</th><th>監控指標</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>1</strong></td>
+          <td>地緣政治降級</td>
+          <td><span class="badge badge-red">❌ 未滿足</span></td>
+          <td>Polymarket 俄烏停火 &gt;25% 或伊朗核協議 &gt;35%</td>
+        </tr>
+        <tr>
+          <td><strong>2</strong></td>
+          <td>ECB 政策清晰</td>
+          <td><span class="badge badge-orange">⚠️ 模糊</span></td>
+          <td>ECB 釋放明確鴿派前瞻指引</td>
+        </tr>
+        <tr>
+          <td><strong>3</strong></td>
+          <td>技術面確認</td>
+          <td><span class="badge badge-orange">⚠️ 待確認</span></td>
+          <td>價格站穩 200 日 EMA（$80.66）且 20 日 EMA 金叉</td>
+        </tr>
+        <tr>
+          <td><strong>4</strong></td>
+          <td>通膨見頂訊號</td>
+          <td><span class="badge badge-red">❌ 未滿足</span></td>
+          <td>歐元區 CPI 降至 2.2% 以下</td>
+        </tr>
+      </tbody>
+    </table>
+    <div style="margin-top:12px; padding:12px; background:rgba(29,161,242,0.05); border-radius:8px; font-size:0.9em; color:var(--muted);">
+      <strong style="color:var(--accent)">💡 CEO 備註：</strong>四條件需「至少滿足 3 條」才建議建立 10%+ 倉位。僅滿足 2 條時，微型試探倉位上限 5%。
+    </div>
+  </div>
+
+  <!-- Risk Monitor -->
+  <div class="section">
+    <h2>⚠️ 風險監控儀表板</h2>
+    <div class="risk-grid">
+      <div class="risk-card">
+        <div class="risk-level" style="color:var(--red)">🔴 地緣政治風險 — 極高</div>
+        <div class="risk-detail">
+          伊朗/俄烏雙線衝突。俄羅斯春季攻勢已重啟，伊朗戰爭無實質進展。EU 考慮重啟能源危機措施。<br>
+          <strong>監控：</strong>Polymarket 停火/核協議機率。若伊朗核協議 &lt;20%，立即減半倉位；若 &lt;15%，全倉止損。
+        </div>
+      </div>
+      <div class="risk-card">
+        <div class="risk-level" style="color:var(--orange)">🟠 ECB 滯脹風險 — 高</div>
+        <div class="risk-detail">
+          通膨 2.5% 突破目標，Goldman Sachs 預期 4 月和 6 月升息。經濟信心暴跌。央行進退兩難。<br>
+          <strong>監控：</strong>ECB 會議紀要、歐元區 CPI。若 ECB 超預期鷹派，歐股估值將下修。
+        </div>
+      </div>
+      <div class="risk-card">
+        <div class="risk-level" style="color:var(--orange)">🟠 匯率風險 — 高</div>
+        <div class="risk-detail">
+          VGK 不對沖歐元匯率。歐元正經歷 2024 年以來最差季度。能源進口依賴導致貿易條件惡化。<br>
+          <strong>監控：</strong>EUR/USD 匯率。若美元走強 2%+，美元計價回報將額外侵蝕。
+        </div>
+      </div>
+      <div class="risk-card">
+        <div class="risk-level" style="color:var(--orange)">🟠 策略失效風險 — 高</div>
+        <div class="risk-detail">
+          Bollinger Bands 策略 90 天 Sharpe -0.92，僅 2-3 筆交易，統計顯著性不足。回測存在嚴重時間選擇偏誤。<br>
+          <strong>監控：</strong>不依賴單一策略。改採「突破 20 EMA + 宏觀條件」主觀判斷模式。
+        </div>
+      </div>
+      <div class="risk-card">
+        <div class="risk-level" style="color:var(--red)">🔴 尾部風險 — 極高</div>
+        <div class="risk-detail">
+          若地緣政治惡化（伊朗戰爭擴大、俄烏春季攻勢升級），VGK 可能單日跳空下跌 5-8%。止損可能無法執行。<br>
+          <strong>應對：</strong>倉位上限 10%，嚴禁槓桿。考慮購買保護性 Put Option。
+        </div>
+      </div>
+      <div class="risk-card">
+        <div class="risk-level" style="color:var(--blue)">🔵 獲利下修風險 — 中</div>
+        <div class="risk-detail">
+          Q1 財報季可能出現負面驚喜。若獲利下修 10-15%，P/E 實質升至 20x+。估值底部可能下移至 $71-75。<br>
+          <strong>監控：</strong>歐洲企業財報預期、OECD 成長預期。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Committee Members -->
+  <div class="section">
+    <h2>👥 委員立場總覽</h2>
+    <div class="member-grid">
+      <div class="member-card">
+        <div class="member-header">
+          <div class="member-icon" style="background:rgba(224,36,94,0.15)">🌍</div>
+          <div class="member-name">Macro Strategist</div>
+          <span class="badge badge-red">中性偏空</span>
+        </div>
+        <div class="stance">「底部放量更可能是伊朗 Hormuz Hope 驅動的短線反彈，而非俄烏停火敘事。ECB 面臨滯脹困境。」</div>
+        <div class="key-points">
+          <ul>
+            <li>重新定位放量驅動力：伊朗戰爭降級（非俄烏）</li>
+            <li>ECB 滯脹格局：通膨 2.5% + 經濟信心暴跌</li>
+            <li>提出進場三條件框架</li>
+          </ul>
+        </div>
+      </div>
+      <div class="member-card">
+        <div class="member-header">
+          <div class="member-icon" style="background:rgba(255,173,31,0.15)">📈</div>
+          <div class="member-name">Fundamental Analyst</div>
+          <span class="badge badge-orange">謹慎觀望</span>
+        </div>
+        <div class="stance">「估值折價存在但獲利能見度極低，需跌至 P/E 15x 以下才具備安全邊際。」</div>
+        <div class="key-points">
+          <ul>
+            <li>P/E 17.4x 無安全邊際，獲利下修後實質 20x+</li>
+            <li>估值底部：$71-75（P/E 15x）</li>
+            <li>ETF 層級基本面透明度極低</li>
+          </ul>
+        </div>
+      </div>
+      <div class="member-card">
+        <div class="member-header">
+          <div class="member-icon" style="background:rgba(29,161,242,0.15)">📊</div>
+          <div class="member-name">Technical Analyst</div>
+          <span class="badge badge-orange">觀察階段</span>
+        </div>
+        <div class="stance">「放量反彈但未突破 20 日 EMA，目前屬於觀察階段，最佳進場點已過。」</div>
+        <div class="key-points">
+          <ul>
+            <li>均線糾結：EMA20 $82.45、EMA200 $80.66</li>
+            <li>MACD 剛翻正（零軸下）、RSI 45 有空間</li>
+            <li>突破 20 EMA 或回測 200 EMA 才進場</li>
+          </ul>
+        </div>
+      </div>
+      <div class="member-card">
+        <div class="member-header">
+          <div class="member-icon" style="background:rgba(155,89,182,0.15)">🛡️</div>
+          <div class="member-name">Risk Officer</div>
+          <span class="badge badge-orange">條件性看多</span>
+        </div>
+        <div class="stance">「風險過高建議觀望，若非要操作僅採用微型倉位試水溫策略。」</div>
+        <div class="key-points">
+          <ul>
+            <li>止損兩難：緊止損需 46.5% 倉位（危險），寬止損虧損過高</li>
+            <li>基準情境 R/R 1:2.7、10% 倉位為首選</li>
+            <li>建議 Polymarket 機率止損機制</li>
+          </ul>
+        </div>
+      </div>
+      <div class="member-card">
+        <div class="member-header">
+          <div class="member-icon" style="background:rgba(224,36,94,0.15)">🕵️</div>
+          <div class="member-name">Market Intelligence</div>
+          <span class="badge badge-red">偏空</span>
+        </div>
+        <div class="stance">「底部放量信號真實性存疑，更偏向事件驅動的短線反彈而非結構性反轉。」</div>
+        <div class="key-points">
+          <ul>
+            <li>未找到任何機構大舉佈局 VGK 的證據</li>
+            <li>Hormuz Hope 敘事僅維持 24 小時</li>
+            <li>1.93x 放量更可能是 Q1 季末資金輪動</li>
+          </ul>
+        </div>
+      </div>
+      <div class="member-card">
+        <div class="member-header">
+          <div class="member-icon" style="background:rgba(224,36,94,0.15)">🎰</div>
+          <div class="member-name">Prediction Market Analyst</div>
+          <span class="badge badge-red">偏空</span>
+        </div>
+        <div class="stance">「Polymarket 數據強烈不支持戰爭降級敘事，追高風險極高。」</div>
+        <div class="key-points">
+          <ul>
+            <li>俄烏停火 12%（-38.7%）、伊朗核協議 30%（-18.9%）</li>
+            <li>鯨魚幾乎全數虧損，無 Smart Money 共識</li>
+            <li>建議 Polymarket 機率作為動態止損指標</li>
+          </ul>
+        </div>
+      </div>
+      <div class="member-card">
+        <div class="member-header">
+          <div class="member-icon" style="background:rgba(255,173,31,0.15)">🔬</div>
+          <div class="member-name">Backtest</div>
+          <span class="badge badge-orange">條件性可行</span>
+        </div>
+        <div class="stance">「Bollinger Bands 策略 Sharpe 1.87 存在嚴重時間選擇偏誤，實際執行風險被低估。」</div>
+        <div class="key-points">
+          <ul>
+            <li>180天 Sharpe 1.87 但 90天 Sharpe -0.92（過度擬合）</li>
+            <li>僅 2-3 筆交易，統計顯著性不足</li>
+            <li>建議放棄 BB 策略，改採主觀判斷模式</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Debate Rounds -->
+  <div class="section">
+    <h2>🔄 5 輪辯論摘要</h2>
+    <div class="debate-round">
+      <div class="round-title">第 1 輪 — 初步立場與爭議框架</div>
+      <div class="round-content">
+        <strong>Macro Strategist</strong>（中性偏空）：戰爭降級可信度低，ECB 滯脹困境。<br>
+        <strong>Fundamental Analyst</strong>（謹慎觀望）：估值折價但獲利能見度不足，P/E 17.4x 無安全邊際。<br>
+        <strong>Risk Officer</strong>（條件性看多）：ATR 1.76、HV 25.43%，止損 4.5% 在高波動環境過寬。<br>
+        <strong>Market Intelligence</strong>（偏空）：未找到聰明錢佈局證據。<br>
+        <strong>Prediction Market</strong>（偏空）：俄烏停火僅 12%，鯨魚全虧。<br>
+        <strong>Backtest</strong>（條件性）：Bollinger Bands Sharpe 1.87 但時間穩定性差。
+      </div>
+    </div>
+    <div class="debate-round">
+      <div class="round-title">第 2 輪 — 放量驅動力重新定位 + 敘事驗證</div>
+      <div class="round-content">
+        <strong>Macro Strategist</strong>：重新定位！放量催化劑是「伊朗 Hormuz Hope」（3/31），非俄烏停火。但 ECB 面臨滯脹式寬鬆。<br>
+        <strong>Technical Analyst</strong>：均線糾結，MACD 剛翻正但零軸下。3/31 從布林下軌反彈至中軌，最佳進場點已過。<br>
+        <strong>Risk Officer</strong>：止損兩難無解——1.24% 止損需 80% 倉位（危險），3.93% 止損單筆虧損過高。建議 10% 微型倉位。<br>
+        <strong>Market Intelligence</strong>：<strong>關鍵發現</strong>：Hormuz Hope 僅維持 24 小時，1.93x 放量更可能是 Q1 季末輪動 + 空頭回補。<br>
+        <strong>Backtest</strong>：坦承 BB 策略 Sharpe 1.87 存在「時間選擇偏誤」，90天 Sharpe -0.92。過度擬合。
+      </div>
+    </div>
+    <div class="debate-round">
+      <div class="round-title">第 3 輪 — Prediction Market 致命一擊 + 建設性方案</div>
+      <div class="round-content">
+        <strong>Prediction Market</strong>：伊朗核協議僅 30%（-18.9%），31 位鯨魚僅 2 位 Smart Money，其餘全虧（最高 -$360K）。散戶佔主導。<br>
+        <strong>Macro Strategist</strong>：提出「進場三條件」——停火機率 &gt;25%、ECB 鴿派、站穩 200 EMA。目標 $86→$90。<br>
+        <strong>Fundamental Analyst</strong>：若獲利下修 10-15%，估值底部 P/E 15x = $71-75（較現價跌 9-14%）。<br>
+        <strong>Technical Analyst</strong>：兩種進場方案——突破 20 EMA 或回測 200 EMA。目標 $84→$86→$86.16。
+      </div>
+    </div>
+    <div class="debate-round">
+      <div class="round-title">第 4 輪 — CEO 共識整合 + Risk Officer 最終裁決</div>
+      <div class="round-content">
+        <strong>CEO</strong>：多頭論述已被系統性拆解。要求委員提出建設性方案回答用戶 4 個問題。<br>
+        <strong>Risk Officer</strong>：提供三情境完整方案——基準 R/R 1:2.7（10% 倉位）、悲觀 R/R 1:2.2（15% 倉位）、現價追漲 R/R 1:1.9（❌ 不建議）。提出「Polymarket 機率止損」機制。
+      </div>
+    </div>
+    <div class="debate-round">
+      <div class="round-title">第 5 輪（最終）— 共識確認</div>
+      <div class="round-content">
+        <strong>CEO</strong>：提出共識矩陣，7/7 委員高置信度同意「觀望為主，微型試探為輔」。<br>
+        <strong>Prediction Market</strong>：最後確認同意。建議加入第四條件——Polymarket 伊朗核協議 &gt;35%。<br>
+        <strong>人類委員</strong>：同意共識。「不要因為放量就 FOMO，等待才是最好的交易。」
+      </div>
+    </div>
+  </div>
+
+  <!-- Technical Levels -->
+  <div class="section">
+    <h2>📐 關鍵技術位一覽</h2>
+    <table>
+      <thead>
+        <tr><th>技術位</th><th>價格</th><th>意義</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>布林上軌</strong></td><td>$86.16</td><td>第一目標價（反彈極限）</td></tr>
+        <tr><td><strong>20 日高點</strong></td><td>$86.29</td><td>短期阻力</td></tr>
+        <tr><td><strong>50 日 EMA</strong></td><td>$84.00</td><td>中期動能分界線</td></tr>
+        <tr><td style="color:var(--orange)"><strong>20 日 EMA</strong></td><td>$82.45</td><td style="color:var(--orange)">當前壓力位（價格壓在下方）</td></tr>
+        <tr><td style="color:var(--text)"><strong>當前價格</strong></td><td><strong>$82.43</strong></td><td>—</td></tr>
+        <tr><td style="color:var(--orange)"><strong>200 日 EMA</strong></td><td>$80.66</td><td style="color:var(--orange)">關鍵支撐 / 基準進場點</td></tr>
+        <tr><td><strong>近期低點</strong></td><td>$78.70</td><td>止損參考位</td></tr>
+        <tr><td><strong>布林下軌</strong></td><td>$78.49</td><td>3/31 反彈起點</td></tr>
+        <tr><td style="color:var(--red)"><strong>基本面底部</strong></td><td style="color:var(--red)">$71-75</td><td style="color:var(--red)">P/E 15x（若獲利下修 10-15%）</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Disclaimer -->
+  <div class="section">
+    <div style="padding:20px; background:var(--card); border:1px solid var(--border); border-radius:10px;">
+      <h2 style="color:var(--muted); font-size:1em; margin-bottom:8px;">⚠️ 免責聲明</h2>
+      <p style="font-size:0.8em; color:var(--muted); line-height:1.6;">
+        本報告由投資顧問委員會（AI 多代理系統）生成，僅供教育和參考用途，不構成任何投資建議。
+        所有數據來源包括 yfinance、Polymarket、Reuters 等公開資訊，可能存在延遲或錯誤。
+        過往表現不代表未來結果。投資有風險，入市需謹慎。請在做出投資決策前諮詢持牌專業顧問。
+      </p>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>🏛️ 投資顧問委員會 · Generated with Multi-Agent AI System</p>
+    <p>Mode B（互動討論）· 5 Rounds of Debate · 7 Members + Human · 2026-04-01</p>
+  </div>
+
+</div>
+</body>
+</html>

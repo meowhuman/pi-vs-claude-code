@@ -107,3 +107,41 @@ summarize "https://example.com/article"                                 # 文章
 ```
 
 用途：研究特定投資人的估值方法（如 Damodaran）、消化年報電話會議、學習分析框架。
+
+---
+
+### China Data — A 股基本面分析
+
+SFA 工具不支援 A 股（滬深港市場）。當標的為中國 A 股時，使用 china-data 獲取即時報價、財務報表、個股新聞。
+
+```bash
+cd /Users/terivercheung/Documents/AI/pi-vs-claude-code/.claude/skills/china-data
+
+# 即時報價（A/B/H 股）
+uv run scripts/china_data.py stock quote 600519   # 貴州茅台
+uv run scripts/china_data.py stock quote 000858   # 五糧液
+uv run scripts/china_data.py stock quote 300750   # 寧德時代
+
+# 財務報表（營收、毛利率、ROE、EPS 等）
+uv run scripts/china_data.py stock financials 600519
+
+# 個股新聞（最新公告、分析師評級）
+uv run scripts/china_data.py stock news 600519 --count 10
+
+# 市場漲跌榜（判斷市場資金集中板塊）
+uv run scripts/china_data.py stock top
+
+# 行業/政策關鍵字搜尋（跨東方財富 + 財聯社 + 央視）
+uv run scripts/china_data.py news search "新能源"
+uv run scripts/china_data.py news search "消費政策"
+
+# 全球財經快訊（國際環境對 A 股影響）
+uv run scripts/china_data.py news global
+```
+
+**使用時機：**
+- 標的代碼為 6 位數字（A 股）時，優先用此工具代替 SFA
+- 查看 A 股財務報表時，用 `stock financials <代碼>`
+- 獲取個股最新公告與分析師動向，用 `stock news <代碼>`
+- 行業政策催化劑（如「消費補貼」「碳達峰」），用 `news search <關鍵字>`
+- 全球市場事件對 A 股基本面的影響，用 `news global`

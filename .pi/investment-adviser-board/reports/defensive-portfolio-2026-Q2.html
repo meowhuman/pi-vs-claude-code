@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>投資顧問委員會 — 全天候防禦型投資組合配置報告</title>
+<style>
+  :root { --bg:#0f1419; --card:#1a1f2e; --border:#2d3548; --text:#e1e8ed; --muted:#8899a6; --accent:#1da1f2; --green:#17bf63; --red:#e0245e; --orange:#ffad1f; --purple:#9b59b6; --teal:#2dd4bf; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:-apple-system,'SF Pro Text','Noto Sans TC',sans-serif; line-height:1.7; }
+  .container { max-width:1200px; margin:0 auto; padding:20px; }
+  .header { text-align:center; padding:40px 20px; border-bottom:1px solid var(--border); margin-bottom:30px; }
+  .header h1 { font-size:2em; margin-bottom:8px; background:linear-gradient(135deg,var(--teal),var(--accent)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+  .header .subtitle { color:var(--muted); font-size:1.1em; }
+  .header .meta { color:var(--muted); font-size:0.85em; margin-top:12px; }
+  .badge { display:inline-block; padding:2px 10px; border-radius:12px; font-size:0.75em; font-weight:600; }
+  .badge-green { background:rgba(23,191,99,0.15); color:var(--green); }
+  .badge-red { background:rgba(224,36,94,0.15); color:var(--red); }
+  .badge-orange { background:rgba(255,173,31,0.15); color:var(--orange); }
+  .badge-blue { background:rgba(29,161,242,0.15); color:var(--accent); }
+  .badge-purple { background:rgba(155,89,182,0.15); color:var(--purple); }
+  .badge-teal { background:rgba(45,212,191,0.15); color:var(--teal); }
+  .section { margin-bottom:30px; }
+  .section h2 { font-size:1.3em; margin-bottom:16px; padding-left:12px; border-left:3px solid var(--accent); }
+  .verdict-box { background:linear-gradient(135deg,rgba(45,212,191,0.08),rgba(29,161,242,0.08)); border:1px solid rgba(45,212,191,0.3); border-radius:12px; padding:30px; margin-bottom:30px; }
+  .verdict-box h2 { font-size:1.5em; margin-bottom:16px; }
+  .verdict-box .verdict-label { font-size:2em; font-weight:800; color:var(--teal); margin:12px 0; }
+  table { width:100%; border-collapse:collapse; background:var(--card); border-radius:10px; overflow:hidden; }
+  th { background:rgba(29,161,242,0.1); padding:12px 16px; text-align:left; font-size:0.8em; text-transform:uppercase; letter-spacing:1px; color:var(--muted); }
+  td { padding:12px 16px; border-top:1px solid var(--border); font-size:0.9em; }
+  tr:hover { background:rgba(29,161,242,0.03); }
+  .metrics { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:14px; margin-bottom:30px; }
+  .metric-card { background:var(--card); border:1px solid var(--border); border-radius:10px; padding:18px; text-align:center; }
+  .metric-card .label { color:var(--muted); font-size:0.75em; text-transform:uppercase; letter-spacing:1px; }
+  .metric-card .value { font-size:1.6em; font-weight:700; margin:4px 0; }
+  .metric-card .note { color:var(--muted); font-size:0.7em; }
+  .mc-green .value { color:var(--green); }
+  .mc-red .value { color:var(--red); }
+  .mc-orange .value { color:var(--orange); }
+  .mc-blue .value { color:var(--accent); }
+  .mc-teal .value { color:var(--teal); }
+  .card { background:var(--card); border:1px solid var(--border); border-radius:10px; padding:20px; margin-bottom:16px; }
+  .card h3 { margin-bottom:12px; font-size:1.05em; }
+  .grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:30px; }
+  .grid-3 { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:16px; margin-bottom:30px; }
+  .asset-bar { display:flex; align-items:center; margin-bottom:8px; }
+  .asset-bar .name { width:60px; font-size:0.8em; color:var(--muted); }
+  .asset-bar .bar { flex:1; height:24px; background:var(--border); border-radius:4px; overflow:hidden; position:relative; }
+  .asset-bar .bar .fill { height:100%; border-radius:4px; display:flex; align-items:center; padding-left:8px; font-size:0.7em; font-weight:600; color:white; }
+  .trigger-card { background:var(--card); border:1px solid var(--border); border-radius:10px; padding:16px 20px; margin-bottom:12px; display:flex; align-items:center; gap:16px; }
+  .trigger-card .icon { font-size:1.5em; }
+  .trigger-card .detail { flex:1; }
+  .trigger-card .detail .condition { font-weight:600; font-size:0.95em; }
+  .trigger-card .detail .action { font-size:0.8em; color:var(--muted); }
+  .trigger-card .prob { font-size:1.2em; font-weight:700; }
+  .debate-round { background:var(--card); border:1px solid var(--border); border-radius:10px; padding:18px; margin-bottom:14px; }
+  .debate-round .round-title { font-weight:700; color:var(--accent); margin-bottom:10px; }
+  .debate-round .round-content { font-size:0.85em; color:var(--muted); line-height:1.8; }
+  .debate-round .round-content strong { color:var(--text); }
+  .footer { text-align:center; padding:30px; border-top:1px solid var(--border); color:var(--muted); font-size:0.8em; }
+  .vote-result { display:flex; gap:8px; align-items:center; margin:8px 0; }
+  .vote-bar { flex:1; height:8px; background:var(--border); border-radius:4px; overflow:hidden; }
+  .vote-bar .fill { height:100%; border-radius:4px; }
+  @media (max-width:768px) { .grid-2 { grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="header">
+  <h1>🛡️ 全天候防禦型投資組合配置報告</h1>
+  <div class="subtitle">All-Weather Defensive Portfolio · 4 Rounds of Debate · 7 Members + Human · Unanimous Consensus</div>
+  <div class="meta">
+    分析日期：2026-04-01 · 帳戶規模：$100,000 · 投資期限：6-12 個月 · 風險偏好：中等偏低（偏防禦）· 目標回報：8-15% 年化
+  </div>
+</div>
+
+<!-- Executive Verdict -->
+<div class="verdict-box">
+  <h2>執行摘要 — CEO 最終裁決</h2>
+  <div class="verdict-label">🛡️ 全天候防禦型組合 · 一致通過（7/7）</div>
+  <p style="color:var(--muted)">
+    經過 4 輪深度辯論與投票，委員會以 <strong style="color:var(--green)">全票一致</strong> 通過最終配置。<br>
+    核心設計理念：<strong style="color:var(--text)">「供給衝擊型滯脹防禦」</strong>——以 TIPS + 黃金為通膨對沖核心、高現金比例提供流動性緩衝、Polymarket 機率驅動動態再平衡。<br><br>
+    <strong style="color:var(--text)">傳統 60/40 組合在當前環境下面臨全面失效風險：</strong>滯脹導致股債雙殺、地緣風險推升尾部風險、防禦股估值過高失去避險功能。<br>
+    本組合壓力測試結果：五情境平均回撤 <strong style="color:var(--green)">-2.7%</strong>（vs 60/40 的 <strong style="color:var(--red)">-12.2%</strong>），改善幅度 <strong style="color:var(--green)">+9.5 百分點</strong>。
+  </p>
+  <div style="margin-top:16px;">
+    <span class="badge badge-green">7/7 一致通過</span>
+    <span class="badge badge-teal">壓力測試通過</span>
+    <span class="badge badge-blue">Polymarket 觸發機制</span>
+  </div>
+</div>
+
+<!-- Key Metrics -->
+<div class="metrics">
+  <div class="metric-card mc-green">
+    <div class="label">防禦型組合平均回撤</div>
+    <div class="value">-2.7%</div>
+    <div class="note">五情境壓力測試</div>
+  </div>
+  <div class="metric-card mc-red">
+    <div class="label">傳統 60/40 平均回撤</div>
+    <div class="value">-12.2%</div>
+    <div class="note">同樣五情境</div>
+  </div>
+  <div class="metric-card mc-teal">
+    <div class="label">改善幅度</div>
+    <div class="value">+9.5pp</div>
+    <div class="note">防禦 vs 傳統</div>
+  </div>
+  <div class="metric-card mc-blue">
+    <div class="label">組合加權 ATR</div>
+    <div class="value">1.44%</div>
+    <div class="note">中等波動</div>
+  </div>
+  <div class="metric-card mc-orange">
+    <div class="label">現金比例</div>
+    <div class="value">24%</div>
+    <div class="note">流動性緩衝</div>
+  </div>
+  <div class="metric-card mc-green">
+    <div class="label">預期年化回報</div>
+    <div class="value">8-12%</div>
+    <div class="note">目標區間</div>
+  </div>
+</div>
+
+<!-- Final Portfolio Allocation -->
+<div class="section">
+  <h2>📊 最終投資組合配置</h2>
+  <table>
+    <thead>
+      <tr><th>#</th><th>資產類別</th><th>ETF</th><th>權重</th><th>金額</th><th>動能分數</th><th>配置功能</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td colspan="7" style="background:rgba(45,212,191,0.05);font-weight:700;color:var(--teal)">🟢 股票 — 24%（低配）</td>
+      </tr>
+      <tr>
+        <td>1</td><td>新興市場股票</td><td><strong>EEM</strong></td>
+        <td><span class="badge badge-blue">8%</span></td><td>$8,000</td><td style="color:var(--orange)">45</td>
+        <td style="font-size:0.8em;color:var(--muted)">P/E 15.0x 估值折價 + Stochastic 超賣反彈</td>
+      </tr>
+      <tr>
+        <td>2</td><td>歐洲股票</td><td><strong>IEUR</strong></td>
+        <td><span class="badge badge-blue">8%</span></td><td>$8,000</td><td style="color:var(--orange)">53</td>
+        <td style="font-size:0.8em;color:var(--muted)">P/E 17.7x（較 SPY 折價 31%），地緣降級受益</td>
+      </tr>
+      <tr>
+        <td>3</td><td>美國大盤</td><td><strong>SPY</strong></td>
+        <td><span class="badge badge-blue">8%</span></td><td>$8,000</td><td style="color:var(--orange)">50</td>
+        <td style="font-size:0.8em;color:var(--muted)">核心持倉，動能中性，不過度暴露</td>
+      </tr>
+      <tr>
+        <td colspan="7" style="background:rgba(29,161,242,0.05);font-weight:700;color:var(--accent)">🔵 債券 — 25%（通膨保護為主）</td>
+      </tr>
+      <tr>
+        <td>4</td><td>通膨保護債券</td><td><strong>TIP</strong></td>
+        <td><span class="badge badge-green">15%</span></td><td>$15,000</td><td style="color:var(--orange)">47</td>
+        <td style="font-size:0.8em;color:var(--muted)">通膨對沖核心，ATR 0.36% 低波動，股息 3.4%</td>
+      </tr>
+      <tr>
+        <td>5</td><td>長期公債</td><td><strong>TLT</strong></td>
+        <td><span class="badge badge-blue">5%</span></td><td>$5,000</td><td style="color:var(--orange)">49</td>
+        <td style="font-size:0.8em;color:var(--muted)">衰退對沖，JPMorgan 警告衰退風險</td>
+      </tr>
+      <tr>
+        <td>6</td><td>中期公債</td><td><strong>IEF</strong></td>
+        <td><span class="badge badge-blue">5%</span></td><td>$5,000</td><td style="color:var(--orange)">47</td>
+        <td style="font-size:0.8em;color:var(--muted)">收益穩定，波動較低</td>
+      </tr>
+      <tr>
+        <td colspan="7" style="background:rgba(255,173,31,0.05);font-weight:700;color:var(--orange)">🟡 商品 — 24%（供給衝擊對沖）</td>
+      </tr>
+      <tr>
+        <td>7</td><td>黃金</td><td><strong>GLD</strong></td>
+        <td><span class="badge badge-orange">14%</span></td><td>$14,000</td><td style="color:var(--orange)">43</td>
+        <td style="font-size:0.8em;color:var(--muted)">尾部風險保險 + 貨幣避險。回測 Sharpe 1.32，機構逢低買盤</td>
+      </tr>
+      <tr>
+        <td>8</td><td>原油</td><td><strong>USO</strong></td>
+        <td><span class="badge badge-blue">5%</span></td><td>$5,000</td><td style="color:var(--green)">75</td>
+        <td style="font-size:0.8em;color:var(--muted)">供給衝擊順勢（動能 75，回測 Sharpe 2.03）。止損 $95.28</td>
+      </tr>
+      <tr>
+        <td>9</td><td>農產品</td><td><strong>DBA</strong></td>
+        <td><span class="badge badge-blue">5%</span></td><td>$5,000</td><td style="color:var(--green)">72</td>
+        <td style="font-size:0.8em;color:var(--muted)">食品通膨第二波對沖。RSI 73.7 超買，回調再加碼</td>
+      </tr>
+      <tr>
+        <td colspan="7" style="background:rgba(155,89,182,0.05);font-weight:700;color:var(--purple)">🟣 外匯 — 3%（美元避險）</td>
+      </tr>
+      <tr>
+        <td>10</td><td>美元指數</td><td><strong>UUP</strong></td>
+        <td><span class="badge badge-purple">3%</span></td><td>$3,000</td><td style="color:var(--green)">64</td>
+        <td style="font-size:0.8em;color:var(--muted)">匯率風險對沖（EEM+IEUR 16% 外匯暴露）</td>
+      </tr>
+      <tr>
+        <td colspan="7" style="background:rgba(136,153,166,0.05);font-weight:700;color:var(--muted)">⚪ 現金 — 24%（流動性緩衝）</td>
+      </tr>
+      <tr>
+        <td>11</td><td>貨幣市場基金</td><td><strong>BIL/SHV</strong></td>
+        <td><span class="badge" style="background:rgba(136,153,166,0.15);color:var(--muted)">24%</span></td><td>$24,000</td><td>—</td>
+        <td style="font-size:0.8em;color:var(--muted)">流動性緩衝 + 再平衡彈性。取代 VIXY 避險（回測證明更有效）</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Visual Allocation -->
+<div class="section">
+  <h2>📈 配置視覺化</h2>
+  <div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:24px;">
+    <div class="asset-bar"><div class="name">TIP</div><div class="bar"><div class="fill" style="width:15%;background:var(--accent)">15%</div></div></div>
+    <div class="asset-bar"><div class="name">GLD</div><div class="bar"><div class="fill" style="width:14%;background:var(--orange)">14%</div></div></div>
+    <div class="asset-bar"><div class="name">現金</div><div class="bar"><div class="fill" style="width:24%;background:var(--muted)">24%</div></div></div>
+    <div class="asset-bar"><div class="name">EEM</div><div class="bar"><div class="fill" style="width:8%;background:var(--green)">8%</div></div></div>
+    <div class="asset-bar"><div class="name">IEUR</div><div class="bar"><div class="fill" style="width:8%;background:var(--teal)">8%</div></div></div>
+    <div class="asset-bar"><div class="name">SPY</div><div class="bar"><div class="fill" style="width:8%;background:var(--blue)">8%</div></div></div>
+    <div class="asset-bar"><div class="name">USO</div><div class="bar"><div class="fill" style="width:5%;background:var(--red)">5%</div></div></div>
+    <div class="asset-bar"><div class="name">DBA</div><div class="bar"><div class="fill" style="width:5%;background:#a0522d">5%</div></div></div>
+    <div class="asset-bar"><div class="name">TLT</div><div class="bar"><div class="fill" style="width:5%;background:#6366f1">5%</div></div></div>
+    <div class="asset-bar"><div class="name">IEF</div><div class="bar"><div class="fill" style="width:5%;background:#8b5cf6">5%</div></div></div>
+    <div class="asset-bar"><div class="name">UUP</div><div class="bar"><div class="fill" style="width:3%;background:var(--purple)">3%</div></div></div>
+  </div>
+</div>
+
+<!-- Stress Test -->
+<div class="section">
+  <h2>🧪 五情境壓力測試</h2>
+  <table>
+    <thead>
+      <tr><th>情境</th><th>傳統 60/40</th><th>防禦型組合</th><th>改善幅度</th><th>關鍵貢獻資產</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="badge badge-red">🌋 地緣升級</span></td>
+        <td style="color:var(--red);font-weight:700">-18.5%</td>
+        <td style="color:var(--green);font-weight:700">-5.8%</td>
+        <td style="color:var(--green)">+12.7pp ✅</td>
+        <td style="font-size:0.8em;color:var(--muted)">GLD 14%、USO 5%、現金 24%</td>
+      </tr>
+      <tr>
+        <td><span class="badge badge-red">📉 全球衰退</span></td>
+        <td style="color:var(--red);font-weight:700">-22.1%</td>
+        <td style="color:var(--green);font-weight:700">-1.5%</td>
+        <td style="color:var(--green)">+20.6pp ✅</td>
+        <td style="font-size:0.8em;color:var(--muted)">TLT 5%、TIP 15%、現金 24%</td>
+      </tr>
+      <tr>
+        <td><span class="badge badge-orange">🔥 通膨失控</span></td>
+        <td style="color:var(--red);font-weight:700">-12.2%</td>
+        <td style="color:var(--green);font-weight:700">-0.3%</td>
+        <td style="color:var(--green)">+11.9pp ✅</td>
+        <td style="font-size:0.8em;color:var(--muted)">TIP 15%、GLD 14%、DBA 5%</td>
+      </tr>
+      <tr>
+        <td><span class="badge badge-orange">💵 美元強勢</span></td>
+        <td style="color:var(--orange)">-2.2%</td>
+        <td style="color:var(--orange);font-weight:700">-3.1%</td>
+        <td style="color:var(--red)">-0.9pp ⚠️</td>
+        <td style="font-size:0.8em;color:var(--muted)">UUP 3% 部分對沖，但 EEM+IEUR 16% 暴露</td>
+      </tr>
+      <tr>
+        <td><span class="badge badge-red">‍☠️ 黑天鵝</span></td>
+        <td style="color:var(--red);font-weight:700">-10.0%</td>
+        <td style="color:var(--green);font-weight:700">-7.2%</td>
+        <td style="color:var(--green)">+2.8pp ✅</td>
+        <td style="font-size:0.8em;color:var(--muted)">現金 24% > VIXY 避險（回測證明）</td>
+      </tr>
+      <tr style="background:rgba(29,161,242,0.05)">
+        <td><strong>五情境平均</strong></td>
+        <td style="color:var(--red);font-weight:700;font-size:1.1em">-12.2%</td>
+        <td style="color:var(--green);font-weight:700;font-size:1.1em">-2.7%</td>
+        <td style="color:var(--green);font-weight:700;font-size:1.1em">+9.5pp</td>
+        <td><strong style="color:var(--teal)">4/5 情境優於 60/40</strong></td>
+      </tr>
+    </tbody>
+  </table>
+  <div style="margin-top:12px;padding:12px;background:rgba(45,212,191,0.05);border-radius:8px;font-size:0.85em;color:var(--muted)">
+    <strong style="color:var(--teal)">💡 唯一弱點：</strong>美元強勢情境（-3.1% vs 60/40 的 -2.2%），因 EEM+IEUR 16% 匯率暴露 > UUP 3% 對沖覆蓋。此為可接受的代價，因美元強勢情境本身回撤幅度較小。
+  </div>
+</div>
+
+<!-- Polymarket Triggers -->
+<div class="section">
+  <h2>🎰 動態再平衡觸發條件（Polymarket 機率驅動）</h2>
+  <div class="trigger-card">
+    <div class="icon">🕊️</div>
+    <div class="detail">
+      <div class="condition">伊朗核協議機率突破 <strong style="color:var(--green)">45%</strong></div>
+      <div class="action">地緣降級確認 → USO -3%、GLD -2%，現金 +5%</div>
+    </div>
+    <div class="prob" style="color:var(--muted)">當前：30%</div>
+  </div>
+  <div class="trigger-card">
+    <div class="icon">📉</div>
+    <div class="detail">
+      <div class="condition">美國衰退機率突破 <strong style="color:var(--red)">45%</strong></div>
+      <div class="action">衰退確認 → TLT +5%、EEM -3%、IEUR -2%</div>
+    </div>
+    <div class="prob" style="color:var(--muted)">當前：34%</div>
+  </div>
+  <div class="trigger-card">
+    <div class="icon">🏛️</div>
+    <div class="detail">
+      <div class="condition">伊朗政權垮台機率跌破 <strong>10%</strong></div>
+      <div class="action">戰爭持續 → USO -3%（止損保護）、GLD +3%</div>
+    </div>
+    <div class="prob" style="color:var(--muted)">當前：16%</div>
+  </div>
+  <div class="trigger-card">
+    <div class="icon">⚡</div>
+    <div class="detail">
+      <div class="condition">組合回撤達 <strong style="color:var(--red)">-8%</strong></div>
+      <div class="action">風險預算耗盡 → 所有股票減半、現金增至 30%、暫停新增部位</div>
+    </div>
+    <div class="prob" style="color:var(--teal)">持續監控</div>
+  </div>
+  <div class="trigger-card">
+    <div class="icon">🟢</div>
+    <div class="detail">
+      <div class="condition">俄烏停火機率回升至 <strong style="color:var(--green)">25%</strong>+</div>
+      <div class="action">和平進展 → IEUR +3%、EEM +2%，GLD -3%、USO -2%</div>
+    </div>
+    <div class="prob" style="color:var(--muted)">當前：12%</div>
+  </div>
+  <div style="margin-top:12px;padding:12px;background:rgba(29,161,242,0.05);border-radius:8px;font-size:0.85em;color:var(--muted)">
+    <strong style="color:var(--accent)">📋 執行頻率：</strong>建議每週檢視 Polymarket 機率 + 每月完整組合再平衡。觸發條件基於 Prediction Market Analyst 設計，Backtest 建議「機率突破閾值且價格突破均線」雙確認，降低假信號。
+  </div>
+</div>
+
+<!-- Scenario Hedge Logic -->
+<div class="section">
+  <h2>🎭 各資產情境對沖邏輯</h2>
+  <div class="grid-3">
+    <div class="card">
+      <h3 style="color:var(--red)">🌋 地緣升級</h3>
+      <div style="font-size:0.85em;color:var(--muted)">
+        <p><strong style="color:var(--green)">✅ 受益：</strong>GLD（避險需求）、USO（油價飆漲）、DBA（食品供給衝擊）</p>
+        <p><strong style="color:var(--red)">❌ 受損：</strong>SPY、EEM、IEUR（風險拋售）、UUP（美元可能因避險升）</p>
+        <p><strong style="color:var(--text)">淨效果：</strong>組合淨正，商品 + 現金對沖股債下跌</p>
+      </div>
+    </div>
+    <div class="card">
+      <h3 style="color:var(--orange)">🔥 通膨失控</h3>
+      <div style="font-size:0.85em;color:var(--muted)">
+        <p><strong style="color:var(--green)">✅ 受益：</strong>TIP（通膨連動）、GLD（實質資產）、USO（能源通膨）、DBA（食品通膨）</p>
+        <p><strong style="color:var(--red)">❌ 受損：</strong>TLT（名義債券跌）、SPY（估值下修）</p>
+        <p><strong style="color:var(--text)">淨效果：</strong>組合幾乎中性（壓測僅 -0.3%），實質資產 39% 有效對沖</p>
+      </div>
+    </div>
+    <div class="card">
+      <h3 style="color:var(--red)">📉 全球衰退</h3>
+      <div style="font-size:0.85em;color:var(--muted)">
+        <p><strong style="color:var(--green)">✅ 受益：</strong>TLT（避險買盤 + 降息預期）、TIP（實質利率保護）、BIL（現金為王）</p>
+        <p><strong style="color:var(--red)">❌ 受損：</strong>SPY、EEM、IEUR（獲利下修）、USO（需求崩潰）</p>
+        <p><strong style="color:var(--text)">淨效果：</strong>組合僅 -1.5%，債券 + 現金 49% 提供強力緩衝</p>
+      </div>
+    </div>
+    <div class="card">
+      <h3 style="color:var(--green)">🕊️ 戰爭降級/停火</h3>
+      <div style="font-size:0.85em;color:var(--muted)">
+        <p><strong style="color:var(--green)">✅ 受益：</strong>IEUR（歐洲反彈最大）、EEM（新興市場風險偏好回升）、SPY（全球股市反彈）</p>
+        <p><strong style="color:var(--red)">❌ 受損：</strong>GLD（避險需求退潮）、USO（油價回落）</p>
+        <p><strong style="color:var(--text)">淨效果：</strong>股票 24% 反彈 > 商品 24% 回調，且觸發再平衡加碼股票</p>
+      </div>
+    </div>
+    <div class="card">
+      <h3 style="color:var(--purple)">💵 美元強勢</h3>
+      <div style="font-size:0.85em;color:var(--muted)">
+        <p><strong style="color:var(--green)">✅ 受益：</strong>UUP（直接做多）、BIL（美元現金）</p>
+        <p><strong style="color:var(--red)">❌ 受損：</strong>EEM、IEUR（匯率損失）、GLD（美元計價壓力）、DBA（商品壓力）</p>
+        <p><strong style="color:var(--text)">淨效果：</strong>唯一弱點（-3.1%），但本身回撤小且觸發再平衡</p>
+      </div>
+    </div>
+    <div class="card">
+      <h3 style="color:var(--red)">‍☠️ 黑天鵝</h3>
+      <div style="font-size:0.85em;color:var(--muted)">
+        <p><strong style="color:var(--green)">✅ 緩衝：</strong>現金 24%（最大防禦，取代 VIXY 回測證明更有效）、GLD 14%（實質資產保護）、TIP 15%（通膨保險）</p>
+        <p><strong style="color:var(--text)">淨效果：</strong>回測驗證現金 > VIXY（VIXY MaxDD -44%，現金 0%），黑天鵝回撤 -7.2% 遠優於 60/40 的 -10%</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Key Decisions -->
+<div class="section">
+  <h2>⚖️ 委員會關鍵決策與投票</h2>
+  <table>
+    <thead>
+      <tr><th>決策</th><th>選項</th><th>投票結果</th><th>裁決</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>VIXY 是否納入？</strong></td>
+        <td>A: 保留 4% / B: 移除</td>
+        <td><span class="badge badge-green">移除 7/7</span></td>
+        <td>回測 Sharpe -0.22、MaxDD -44%，現金取代更有效</td>
+      </tr>
+      <tr>
+        <td><strong>USO 權重？</strong></td>
+        <td>A: 8% / B: 5%</td>
+        <td><span class="badge badge-green">5% 全票通過</span></td>
+        <td>動能 75 但 ATR 5.30% 極高 + Polymarket 機率背離</td>
+      </tr>
+      <tr>
+        <td><strong>GLD vs TIP 增配？</strong></td>
+        <td>B: GLD +2% / C: TIP +2%</td>
+        <td><span class="badge badge-green">B: GLD 5/7</span></td>
+        <td>GLD 回測 Sharpe 1.32 vs TIP -0.14；美軍進入伊朗 74% 尾部風險</td>
+      </tr>
+      <tr>
+        <td><strong>防禦股（XLV）？</strong></td>
+        <td>A: 保留 / B: 移除</td>
+        <td><span class="badge badge-green">移除 全票</span></td>
+        <td>P/E 26x 與 SPY 持平，不具安全邊際</td>
+      </tr>
+      <tr>
+        <td><strong>BTC/ETH 納入？</strong></td>
+        <td>A: 納入 / B: 不納入</td>
+        <td><span class="badge badge-green">不納入 全票</span></td>
+        <td>與 SPY 相關性高、無避險效果、無 Polymarket 觸發條件</td>
+      </tr>
+      <tr>
+        <td><strong>美元避險？</strong></td>
+        <td>A: UUP 3% / B: 無</td>
+        <td><span class="badge badge-green">UUP 3% 全票</span></td>
+        <td>壓測美元強勢情境從 -6.7% 改善至 -3.1%</td>
+      </tr>
+      <tr>
+        <td><strong>TLT 是否納入？</strong></td>
+        <td>A: 納入 5% / B: 不納入</td>
+        <td><span class="badge badge-green">納入 全票</span></td>
+        <td>JPMorgan 警告衰退風險，長債提供資本利得緩衝</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Debate Rounds -->
+<div class="section">
+  <h2>🔄 4 輪辯論摘要</h2>
+  <div class="debate-round">
+    <div class="round-title">第 1 輪 — 初步配置提案與數據收集</div>
+    <div class="round-content">
+      <strong>Macro Strategist</strong>：定位「供給衝擊型滯脹」，提議 70% 防禦核心 + 30% 戰術。黃金動量 35 異常、農產品悄然走強（DBA 68）。<br>
+      <strong>Fundamental Analyst</strong>：SPY P/E 25.8x 高估 29%、XLP/XLV P/E 26x 不防禦。建議 EEM + IEUR 估值折價配置。TIP 取代 TLT。<br>
+      <strong>Technical Analyst</strong>：提供完整動量矩陣（11 個資產）。USO 75、DBA 72 順勢強勁。GLD 43 整理待變（非崩盤）。<br>
+      <strong>Risk Officer</strong>：壓力測試初版 — 防禦型 -7.7% vs 60/40 -12.2%。揭露美元強勢弱點（-6.7%）。<br>
+      <strong>Market Intelligence</strong>：黃金逢低買盤正在湧入、JPMorgan/Pimco 警告衰退、XLP 週流入 $1B 資金擁擠。<br>
+      <strong>Prediction Market</strong>：伊朗核協議 30%、美軍進入伊朗 74%、美國衰退 34%。設計觸發閾值框架。<br>
+      <strong>Backtest</strong>：USO Sharpe 2.03 但過度擬合、VIXY 全線虧損（Sharpe -0.22）、TIP Sharpe -0.14 無效。
+    </div>
+  </div>
+  <div class="debate-round">
+    <div class="round-title">第 2 輪 — 分歧裁決</div>
+    <div class="round-content">
+      <strong>CEO</strong>：提出 4 個核心分歧（VIXY、USO 權重、美元風險、債券配置）交由委員裁決。<br>
+      <strong>Macro Strategist 裁決</strong>：VIXY 移除（GLD 取代）、USO 5%、UUP 3% 對沖美元、TLT 5% 衰退對沖。修訂配置 100%。<br>
+      <strong>Risk Officer</strong>：修訂壓測 — 五情境平均 -2.7%、美元強勢 -3.1%（大幅改善）、黑天鵝 -7.2%。通過！
+    </div>
+  </div>
+  <div class="debate-round">
+    <div class="round-title">第 3 輪 — 投票收斂（IEUR 降權 + 釋出 4%）</div>
+    <div class="round-content">
+      <strong>CEO</strong>：Risk Officer 建議 IEUR 10%→8%、XLV 移除。釋出 4% 如何分配？選項 B（GLD +2%）vs C（TIP +2%）。<br>
+      <strong>投票結果</strong>：B（GLD +2%）5 票 vs C（TIP +2%）1 票。雙方都同意現金 +2%。<br>
+      <strong>最終配置確定</strong>：GLD 14%、TIP 15%、現金 24%。全員一致確認。
+    </div>
+  </div>
+  <div class="debate-round">
+    <div class="round-title">第 4 輪（最終）— CEO 整合裁決</div>
+    <div class="round-content">
+      <strong>CEO</strong>：整合完整配置表 + 壓力測試結果 + Polymarket 動態再平衡觸發條件。全部 7 位委員 + 人類委員一致通過。<br>
+      <strong>人類委員</strong>：認同「VIXY 移除 + 現金取代」最聰明、GLD 14% 尾部風險保險合理、Polymarket 量化觸發避免情緒操作。建議加入每月檢視提醒。
+    </div>
+  </div>
+</div>
+
+<!-- What Was Excluded -->
+<div class="section">
+  <h2>🚫 明確排除的資產</h2>
+  <div class="grid-2">
+    <div class="card">
+      <h3 style="color:var(--red)">VIXY（波動率 ETF）</h3>
+      <div style="font-size:0.85em;color:var(--muted)">
+        <p><strong>回測數據：</strong>Sharpe -0.22、MaxDD -44.2%</p>
+        <p><strong>排除理由：</strong>避險成本侵蝕本金，滾動損耗嚴重。現金 24% 在黑天鵝情境下更有效。</p>
+      </div>
+    </div>
+    <div class="card">
+      <h3 style="color:var(--red)">BTC/ETH（加密貨幣）</h3>
+      <div style="font-size:0.85em;color:var(--muted)">
+        <p><strong>排除理由：</strong>與 SPY 相關性高（同處中性偏弱動能）、波動率過高、無獨立避險功能、無對應 Polymarket 觸發條件。</p>
+        <p><strong>委員一致：</strong>7/7 全票排除。</p>
+      </div>
+    </div>
+    <div class="card">
+      <h3 style="color:var(--red)">XLP/XLV（防禦股 ETF）</h3>
+      <div style="font-size:0.85em;color:var(--muted)">
+        <p><strong>排除理由：</strong>P/E 26x 與 SPY 持平，已無估值安全邊際。XLP 週流入 $1B 顯示資金擁擠。</p>
+        <p><strong>替代方案：</strong>以 EEM/IEUR 估值折價 + TIP/GLD 實質資產作為真正防禦。</p>
+      </div>
+    </div>
+    <div class="card">
+      <h3 style="color:var(--red)">LQD/HYG（投資級/高收益公司債）</h3>
+      <div style="font-size:0.85em;color:var(--muted)">
+        <p><strong>排除理由：</strong>信用利差處歷史低位，衰退情境下違約風險被低估。HYG P/E 10.9x 看似便宜但含隱性風險。</p>
+        <p><strong>替代方案：</strong>TIP（通膨保護）+ TLT（公債避險）取代公司債。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Execution Checklist -->
+<div class="section">
+  <h2>✅ 執行清單</h2>
+  <div class="card">
+    <h3>立即執行（建倉）</h3>
+    <div style="font-size:0.9em;color:var(--muted);line-height:2">
+      ☐ 買入 GLD × 32 股（$14,000 @ $430）— 止損 $403.61<br>
+      ☐ 買入 TIP × 209 股（$15,000 @ $71.77）— ATR 0.36% 低波動，無需嚴格止損<br>
+      ☐ 買入 EEM × 140 股（$8,000 @ $57.14）— Stochastic 超賣反彈<br>
+      ☐ 買入 IEUR × 95 股（$8,000 @ $84.21）— 估值折價入場<br>
+      ☐ 買入 SPY × 12 股（$8,000 @ $650）— 核心持倉<br>
+      ☐ 買入 TLT × 36 股（$5,000 @ $138.89）— 衰退對沖<br>
+      ☐ 買入 IEF × 55 股（$5,000 @ $90.91）— 收益穩定<br>
+      ☐ 買入 USO × 39 股（$5,000 @ $127.25）— 止損 $95.28<br>
+      ☐ 買入 DBA × 186 股（$5,000 @ $26.88）— 回調至 $26.79 可加碼<br>
+      ☐ 買入 UUP × 55 股（$3,000 @ $54.55）— 美元避險<br>
+      ☐ 轉入 BIL/SHV $24,000 — 貨幣市場現金
+    </div>
+  </div>
+  <div class="card">
+    <h3>每週維護</h3>
+    <div style="font-size:0.9em;color:var(--muted);line-height:2">
+      ☐ 檢視 <a href="https://polymarket.com" style="color:var(--accent)">Polymarket</a> 伊朗核協議機率（閾值 45%）<br>
+      ☐ 檢視 Polymarket 美國衰退機率（閾值 45%）<br>
+      ☐ 檢視 Polymarket 俄烏停火機率（閾值 25%）<br>
+      ☐ 檢視 Polymarket 伊朗政權穩定機率（閾值 10%）<br>
+      ☐ 確認組合回撤未觸及 -8% 止損線
+    </div>
+  </div>
+  <div class="card">
+    <h3>每月再平衡</h3>
+    <div style="font-size:0.9em;color:var(--muted);line-height:2">
+      ☐ 計算各資產實際權重 vs 目標權重<br>
+      ☐ 若偏差 >2%，進行再平衡（賣出超配、買入低配）<br>
+      ☐ 檢視止損位是否需要調整<br>
+      ☐ 檢視 Polymarket 觸發條件是否被觸發
+    </div>
+  </div>
+</div>
+
+<!-- Disclaimer -->
+<div class="section">
+  <div style="padding:20px;background:var(--card);border:1px solid var(--border);border-radius:10px;">
+    <h2 style="color:var(--muted);font-size:1em;margin-bottom:8px">⚠️ 免責聲明</h2>
+    <p style="font-size:0.8em;color:var(--muted);line-height:1.6">
+      本報告由投資顧問委員會（AI 多代理系統）生成，僅供教育和參考用途，不構成任何投資建議。
+      所有數據來源包括 yfinance、Polymarket、FRED、Reuters 等公開資訊，可能存在延遲或錯誤。
+      過往表現（含回測數據）不代表未來結果。投資有風險，入市需謹慎。壓力測試基於假設情境，實際回撤可能超出預估。
+      請在做出投資決策前諮詢持牌專業顧問。
+    </p>
+  </div>
+</div>
+
+<div class="footer">
+  <p>🏛️ 投資顧問委員會 · All-Weather Defensive Portfolio Report</p>
+  <p>Mode B（互動討論）· 4 Rounds of Debate · 7 Members + Human · Unanimous Consensus · 2026-04-01</p>
+</div>
+
+</div>
+</body>
+</html>

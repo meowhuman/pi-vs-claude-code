@@ -44,6 +44,14 @@ export const THEME_MAP: Record<string, string> = {
 	"daily-log":                  "everforest", // calm, focused journaling
 	"ai-tools-board":             "tokyo-night", // tech research, sharp focus
 	"ai-tools-board-member-session": "tokyo-night", // 1-on-1 member session
+	"meta-orchestrator":          "dracula",    // strategic authority, cross-domain
+	"intel-board":                "dracula",    // strategic intelligence, authoritative
+	"meta-expert-session":        "dracula",    // 1-on-1 shared expert session
+	"music-study":                "catppuccin-mocha", // warm, relaxed music research
+	"execution-desk":             "cyberpunk",  // trade execution terminal
+	"execution-desk-member-session": "cyberpunk", // 1-on-1 execution agent session
+	"football-betting-board":     "cyberpunk",  // football betting intelligence terminal
+	"fb-board-member-session":    "cyberpunk",  // 1-on-1 betting agent session
 };
 
 // ── Helpers ───────────────────────────────────────────────────────────────

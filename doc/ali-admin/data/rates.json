@@ -1,0 +1,22 @@
+{
+  "_comment": "ARTLIKE HK 標準費率 — 修改此檔案即可影響所有巡迴計算",
+  "last_updated": "2026-04-03",
+  "choreographer": {
+    "standard": 45000,
+    "double_show": 55000,
+    "note": "雙場演出用 double_show 費率"
+  },
+  "admin_fee": 5000,
+  "dancer": {
+    "show_fee_standard": 5500,
+    "show_fee_puppet": 3000,
+    "reh_fee_per_hour": 120,
+    "full_run_standard": 2500,
+    "full_run_puppet": 1500
+  },
+  "studio_per_hour": 350,
+  "payment_terms": {
+    "client_to_ali_days": 14,
+    "ali_to_dancers_days": 7
+  }
+}

@@ -192,8 +192,8 @@ def get_stock_data_yfinance(ticker: str, time_period: str = "365d") -> pd.DataFr
     else:
         df.index = df.index.tz_convert('UTC')
 
-    if len(df) < 20:
-        raise ValueError(f"yfinance 獲取的 {actual_ticker} 數據不足20行 ({len(df)}行)")
+    if df.empty:
+        raise ValueError(f"yfinance 獲取的 {actual_ticker} 數據為空")
 
     print(f"yfinance 成功獲取 {actual_ticker} 數據，共 {len(df)} 行")
     return df
@@ -348,6 +348,35 @@ def get_stock_data_tiingo(ticker: str, time_period: str = "365d") -> pd.DataFram
         error_msg = str(e)
         print(f"獲取股票數據時發生未預期錯誤: {error_msg}")
         raise ValueError(f"獲取 {ticker} 的股票數據時 (Tiingo API) 發生未預期錯誤: {error_msg}")
+
+
+def get_stock_data(ticker: str, time_period: str = "365d") -> pd.DataFrame:
+    """
+    獲取股票或外匯數據，路由策略：
+    - 外匯 → Tiingo FX API
+    - 日內頻率 → Tiingo IEX API
+    - 股票日線 → yfinance（優先）→ Tiingo（fallback）
+
+    Args:
+        ticker: 股票代碼或外匯對（如 EURUSD）
+        time_period: 時間週期
+
+    Returns:
+        包含市場數據的 DataFrame
+    """
+    if is_forex_ticker(ticker):
+        return get_forex_data(ticker, time_period)
+
+    if is_intraday_frequency(time_period):
+        return get_stock_data_tiingo(ticker, time_period)
+
+    # 股票日線：yfinance 優先，Tiingo 備份
+    try:
+        return get_stock_data_yfinance(ticker, time_period)
+    except Exception as e:
+        print(f"yfinance 失敗 ({e})，回退到 Tiingo...")
+        return get_stock_data_tiingo(ticker, time_period)
+
 
 # === TA-Lib 技術指標計算函數 ===
 

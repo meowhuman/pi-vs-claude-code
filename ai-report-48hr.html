@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 開發動態報告 — 2026-04-02</title>
+<style>
+  :root {
+    --bg: #0f0f13;
+    --card: #1a1a24;
+    --text: #e4e4e7;
+    --accent: #818cf8;
+    --accent2: #f472b6;
+    --border: #2a2a3a;
+    --muted: #71717a;
+    --success: #34d399;
+    --warning: #fbbf24;
+    --danger: #f87171;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans TC", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    padding: 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  h1 {
+    font-size: 2rem;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 0.5rem;
+  }
+  h2 {
+    font-size: 1.3rem;
+    color: var(--accent);
+    margin-top: 2.5rem;
+    margin-bottom: 0.8rem;
+    padding-bottom: 0.3rem;
+    border-bottom: 1px solid var(--border);
+  }
+  h3 {
+    font-size: 1.1rem;
+    color: var(--text);
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+  blockquote {
+    border-left: 3px solid var(--accent);
+    padding: 0.8rem 1rem;
+    margin: 1rem 0;
+    background: var(--card);
+    border-radius: 0 8px 8px 0;
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+  p { margin: 0.5rem 0; }
+  li { margin: 0.3rem 0 0.3rem 1.5rem; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  code.inline {
+    background: var(--card);
+    padding: 0.15rem 0.4rem;
+    border-radius: 4px;
+    font-size: 0.9em;
+    color: var(--accent2);
+  }
+  pre.code-block {
+    background: var(--card);
+    padding: 1rem;
+    border-radius: 8px;
+    overflow-x: auto;
+    border: 1px solid var(--border);
+  }
+  pre.code-block code {
+    font-family: "JetBrains Mono", "Fira Code", monospace;
+    font-size: 0.85rem;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    background: var(--card);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  th {
+    background: #252535;
+    padding: 0.6rem 1rem;
+    text-align: left;
+    font-weight: 600;
+    color: var(--accent);
+    border-bottom: 1px solid var(--border);
+  }
+  td {
+    padding: 0.5rem 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+  tr:last-child td { border-bottom: none; }
+  strong { color: #fff; }
+  .footer {
+    margin-top: 3rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 0.8rem;
+    text-align: center;
+  }
+  hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 2rem 0;
+  }
+</style>
+</head>
+<body>
+<h1>🤖 AI 開發動態報告 — 2026 年 3 月 31 日至 4 月 2 日（過去 48 小時）</h1>
+<br>
+<blockquote>資料來源：The Decoder、Hacker News、VentureBeat 等主流科技媒體  </blockquote>
+<blockquote>報告時間：2026-04-02 10:24 CST</blockquote>
+<br>
+<p>---</p>
+<br>
+<h2>🔥 重大頭條</h2>
+<br>
+<h3>1. Anthropic Claude Code 原始碼外洩事件（持續發酵）</h3>
+<li>**3/31** Anthropic 意外公開了 Claude Code 的原始碼，任何人皆可取得</li>
+<li>**4/1** 儘管 Anthropic 發出大量 DMCA 下架要求，GitHub 上仍出現超過 **8,000 個** Claude Code 的 fork/clone</li>
+<li>**影響**：此事件可能對 Anthropic 的智慧財產造成重大損害，開源社群反應兩極</li>
+<br>
+<h3>2. OpenAI 完成超級融資輪，推出 ChatGPT Super App</h3>
+<li>**4/1** OpenAI 正式確認完成 **$1,220 億美元**融資，估值達 **$8,520 億美元**</li>
+<li>同時正式推出 **ChatGPT Super App**，標誌著 OpenAI 從研究公司轉向全面企業化</li>
+<li>被解讀為 OpenAI 對企業市場的「硬轉彎」</li>
+<br>
+<h3>3. Google DeepMind 揭露 AI Agent 六大安全陷阱</h3>
+<li>**4/1** Google DeepMind 發表首個系統性研究，揭露網站、文件和 API 如何被武器化來劫持自主 AI Agent</li>
+<li>隨著 AI Agent 被期望獨立瀏覽網頁、處理郵件和執行交易，其運作環境的安全性成為關鍵議題</li>
+<br>
+<p>---</p>
+<br>
+<h2>📦 模型與產品更新</h2>
+<br>
+<h3>Google Veo 3.1 Lite — 視訊生成成本大砍</h3>
+<li>**3/31** Google 推出 Veo 3.1 Lite，視訊生成成本比最便宜的前代模型降低 **超過 50%**</li>
+<li>速度維持不變，大幅降低 AI 視訊生成門檻</li>
+<br>
+<h3>Qwen3.5-Omni — 阿里巴巴全模態新星</h3>
+<li>**3/31** 阿里巴巴發布 Qwen3.5-Omni，支援文字、圖片、音訊和視訊的統一處理</li>
+<li>聲稱在音訊任務上擊敗 Gemini 3.1 Pro</li>
+<li>**意外能力**：模型自行學會了從語音指令和影片輸入中撰寫程式碼，這並非訓練目標</li>
+<br>
+<h3>StepFun 3.5 Flash — 性價比冠軍</h3>
+<li>**4/1** 在 OpenClaw 平台的 300 場對戰中，StepFun 3.5 Flash 榮獲最高性價比模型第一名</li>
+<br>
+<p>---</p>
+<br>
+<h2>⚖️ 法規與政策</h2>
+<br>
+<h3>歐盟禁止 AI 生成內容用於官方通訊</h3>
+<li>**4/1** 據 Politico 報導，歐盟委員會、議會和理事會已禁止其公關團隊使用完全 AI 生成的內容</li>
+<li>專家認為這是一個「錯失的機會」，未能建立更務實的 AI 使用指引</li>
+<br>
+<h3>Perplexity AI 遭集體訴訟</h3>
+<li>**4/1** Perplexity AI 被指控將用戶對話中的個人資料分享給 Meta 和 Google</li>
+<li>據 Bloomberg 報導，已引發集體訴訟</li>
+<br>
+<p>---</p>
+<br>
+<h2>💼 企業與產業動態</h2>
+<br>
+<h3>Oracle 大裁員撥注 AI 基礎設施</h3>
+<li>**3/31** Oracle 報導裁員數千人，將資金轉向 AI 資料中心建設</li>
+<li>股價下跌 25%，債務攀升</li>
+<li>公司寄望 OpenAI 的 $4,550 億訂單等保證收入，但資金是否到位仍存疑</li>
+<br>
+<h3>Meta 投資 AI 美國製造水泥與混凝土</h3>
+<li>**4/1** Meta 透過工程博客宣布將 AI 應用於美國本土生產的水泥和混凝土製造</li>
+<li>呼應美國基礎設施現代化與 AI 應用雙重趨勢</li>
+<br>
+<p>---</p>
+<br>
+<h2>📊 前沿分析</h2>
+<br>
+<h3>AI 生產力的「基準與資產負債表」鴻溝</h3>
+<li>**3/31** The Decoder 發表 Frontier Radar #2 專欄</li>
+<li>核心論點：生成式 AI 在許多任務上帶來可衡量的時間節省，但從「更快的任務完成」到「可衡量的經濟影響」之間仍存在差距</li>
+<li>**三大障礙**：驗證成本、有限的衡量指標、組織慣性</li>
+<br>
+<p>---</p>
+<br>
+<h2>📈 本期關鍵數字</h2>
+<br>
+<table><thead><tr>
+<th>指標</th>
+<th>數值</th>
+</tr></thead><tbody>
+<tr>
+<td>OpenAI 融資規模</td>
+<td>$1,220 億</td>
+</tr>
+<tr>
+<td>OpenAI 估值</td>
+<td>$8,520 億</td>
+</tr>
+<tr>
+<td>Claude Code GitHub fork 數</td>
+<td>8,000+</td>
+</tr>
+<tr>
+<td>Google Veo 3.1 Lite 成本降幅</td>
+<td>>50%</td>
+</tr>
+<tr>
+<td>Oracle AI 資料中心訂單（OpenAI）</td>
+<td>$4,550 億</td>
+</tr>
+</tbody></table>
+<br>
+<p>---</p>
+<br>
+<h2>🔮 趨勢觀察</h2>
+<br>
+<li>**AI Agent 安全性成為焦點** — Google DeepMind 的研究顯示，隨著 Agent 走向自主化，其運作環境的安全威脅正在被系統性地揭示</li>
+<li>**開源 vs. 封閉的張力加劇** — Claude Code 外洩事件凸顯了封閉原始碼策略的脆弱性</li>
+<li>**AI 融資進入「超級輪次」時代** — OpenAI 千億級融資刷新紀錄，反映市場對 AI 基礎設施的龐大需求</li>
+<li>**監管開始落地** — 歐盟禁止官方通訊使用 AI 生成內容、Perplexity 訴訟案顯示全球 AI 監管正加速成形</li>
+<li>**全模態模型競速** — Qwen3.5-Omni 展現了跨模態理解的意外能力，暗示通用模型的潛力尚未被完全挖掘</li>
+<br>
+<p>---</p>
+<br>
+<p><em>本報告由 Pi Coding Agent 自動蒐集整理。資料截至 2026-04-02 10:24 CST。</em></p>
+<br>
+<div class="footer">本報告由 Pi Coding Agent 自動蒐集整理 · 2026-04-02</div>
+</body>
+</html>

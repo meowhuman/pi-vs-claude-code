@@ -169,3 +169,39 @@ summarize "https://example.com/article"                                 # 文章
 ```
 
 用途：研究技術分析師與交易策略（如 TradingView 頻道、Mark Minervini、Michael Burry）、學習形態識別與反轉交易方法。
+
+---
+
+### China Data — A 股歷史價格（技術分析）
+
+**STA-V2 不支援 A 股代碼。** 當標的為中國 A 股時，使用 china-data 獲取歷史 OHLCV 數據，再進行技術判斷。
+
+```bash
+cd /Users/terivercheung/Documents/AI/pi-vs-claude-code/.claude/skills/china-data
+
+# 歷史 K 線數據（默認 90 天）
+uv run scripts/china_data.py stock hist 600519
+
+# 延長回溯期（用於識別長期趨勢）
+uv run scripts/china_data.py stock hist 000001 --days 365
+
+# 輸出 CSV（方便批量分析多個時間窗口）
+uv run scripts/china_data.py stock hist 300750 --days 180 --csv
+
+# 市場漲跌榜（快速判斷強勢板塊輪動）
+uv run scripts/china_data.py stock top
+
+# 全球財經快訊（美股/歐股動態影響 A 股開盤）
+uv run scripts/china_data.py news global
+
+# 跨源關鍵字搜尋（政策衝擊、板塊事件）
+uv run scripts/china_data.py news search "註冊制"
+uv run scripts/china_data.py news search "量化交易"
+```
+
+**使用時機：**
+- 標的代碼為 6 位數字（A 股）時，改用 china-data 而非 STA-V2
+- 獲取歷史 OHLCV 後，手動計算或描述 EMA 排列、支撐阻力位
+- `stock top` 識別當日強勢板塊，判斷資金輪動方向
+- 盤前研判隔夜美股/歐股對 A 股開盤的影響，用 `news global`
+- 政策衝擊（如「註冊制改革」「量化監管」），用 `news search <關鍵字>`

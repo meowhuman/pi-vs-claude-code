@@ -1,0 +1,48 @@
+meeting:
+  discussion_time_minutes: 15
+
+damage_control:
+  rules_path: .pi/damage-control-rules.yaml
+  enabled: true
+
+orchestrator:
+  name: orchestrator
+  path: .pi/meta-orchestrator/agents/orchestrator/orchestrator.md
+  model: openai-codex/gpt-5.2-codex
+
+shared_experts:
+  - name: geopolitics-analyst
+    path: .pi/meta-orchestrator/agents/geopolitics-analyst/geopolitics-analyst.md
+    active: true
+  - name: global-markets-expert
+    path: .pi/meta-orchestrator/agents/global-markets-expert/global-markets-expert.md
+    active: true
+  - name: military-expert
+    path: .pi/meta-orchestrator/agents/military-expert/military-expert.md
+    active: true
+
+boards:
+  - name: investment-adviser-board
+    label: 投資顧問委員會
+    description: 投資分析、資產配置、宏觀市場趨勢、交易策略
+    ceo_path: .pi/investment-adviser-board/agents/ceo/ceo.md
+    knowledge_base_path: .pi/investment-adviser-board/knowledge-base.md
+    active: true
+  - name: drip-board
+    label: Drip 音樂策略委員會
+    description: 創意決策、音樂產業趨勢、國際市場擴張、品牌策略
+    ceo_path: .pi/drip-board/agents/brand.md
+    active: true
+  - name: ai-tools-board
+    label: AI 工具研究委員會
+    description: AI工具評估、技術趨勢、AI監管與政策、GitHub生態
+    ceo_path: .pi/ai-tools-board/agents/director/director.md
+    active: true
+
+presets:
+  full: [investment-adviser-board, drip-board, ai-tools-board]
+  investment-geo: [investment-adviser-board]
+  strategic: [investment-adviser-board, drip-board]
+  tech-policy: [ai-tools-board, investment-adviser-board]
+  creative: [drip-board]
+  tech-creative: [drip-board, ai-tools-board]

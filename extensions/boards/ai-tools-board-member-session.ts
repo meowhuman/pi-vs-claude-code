@@ -313,7 +313,7 @@ export default function (pi: ExtensionAPI) {
         if (member) {
           activeMember = member;
           ensureKnowledgeFile(member);
-          pi.setActiveTools(["read", "write", "edit", "bash", "grep", "glob"]);
+          pi.setActiveTools(["read", "write", "edit", "bash", "grep", "find"]);
           ctx.ui.setStatus("member-session", `成員：${displayName(member.name)}`);
           showRosterWidget(ctx);
           ctx.ui.notify(`已自動載入成員：${displayName(member.name)}`, "success");
@@ -377,7 +377,7 @@ ${knowledgeContent}
           if (member) {
             activeMember = member;
             ensureKnowledgeFile(member);
-            pi.setActiveTools(["read", "write", "edit", "bash", "grep", "glob"]);
+            pi.setActiveTools(["read", "write", "edit", "bash", "grep", "find"]);
             ctx.ui.setStatus("member-session", `成員：${displayName(member.name)}`);
             ctx.ui.notify(`已切換至：${displayName(member.name)}\n知識庫：${member.knowledgePath}`, "success");
             return;
@@ -414,7 +414,7 @@ ${knowledgeContent}
 
       activeMember = member;
       ensureKnowledgeFile(member);
-      pi.setActiveTools(["read", "write", "edit", "bash", "grep", "glob"]);
+      pi.setActiveTools(["read", "write", "edit", "bash", "grep", "find"]);
       ctx.ui.setStatus("member-session", `成員：${displayName(member.name)}`);
       ctx.ui.notify(`已切換至：${displayName(member.name)}\n知識庫：${member.knowledgePath}`, "success");
     },

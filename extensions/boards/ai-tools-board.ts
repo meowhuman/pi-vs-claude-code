@@ -149,7 +149,7 @@ function parseMemberFile(filePath: string): MemberDef | null {
       }
       const name = fm["name"] || filePath;
       const knowledgePath = join(dirname(filePath), `${name}-knowledge.md`);
-      return { name, systemPrompt: match[2].trim(), model: fm["model"] || "anthropic/claude-sonnet-4-6", tools: fm["tools"] || "bash,read", knowledgePath };
+      return { name, systemPrompt: match[2].trim(), model: fm["model"] || "glm/glm-5-turbo", tools: fm["tools"] || "bash,read", knowledgePath };
     }
     return null;
   } catch { return null; }
@@ -192,7 +192,7 @@ interface RunResult { output: string; exitCode: number; elapsed: number; }
 function runSubagent(
   systemPrompt: string,
   prompt: string,
-  model: string = "anthropic/claude-sonnet-4-6",
+  model: string = "glm/glm-5-turbo",
   tools: string = "bash,read",
   onChunk?: (text: string) => void,
 ): Promise<RunResult> {
@@ -564,8 +564,8 @@ export default function (pi: ExtensionAPI) {
       // 步驟 1：主席框架
       const directorConfig = activeMembers.find(m => m.name === "director");
       const directorDef = directorConfig ? parseMemberFile(resolve(cwd, directorConfig.path)) : null;
-      const directorModel = directorDef?.model || "anthropic/claude-opus-4-6";
-      const directorSystem = (directorDef?.systemPrompt || "你是 AI Tools Board 的主席。") + loadMemberKnowledge(directorDef!);
+      const directorModel = directorDef?.model || "glm/glm-5-turbo";
+      const directorSystem = (directorDef?.systemPrompt || "你是 AI Tools Board 的主席。") + (directorDef ? loadMemberKnowledge(directorDef) : "");
 
       if (onUpdate) onUpdate({ content: [{ type: "text", text: `🎯 主席框架研究議題中...` }], details: { status: "running", phase: "framing" } });
 
@@ -681,8 +681,8 @@ export default function (pi: ExtensionAPI) {
       }
 
       const directorDef = memberDefs.get("director");
-      const directorModel = directorDef?.model || "anthropic/claude-opus-4-6";
-      const directorSystem = (directorDef?.systemPrompt || "你是 AI Tools Board 的主席。") + loadMemberKnowledge(directorDef!);
+      const directorModel = directorDef?.model || "glm/glm-5-turbo";
+      const directorSystem = (directorDef?.systemPrompt || "你是 AI Tools Board 的主席。") + (directorDef ? loadMemberKnowledge(directorDef) : "");
 
       boardPhase = "framing";
       memberStates = [];
@@ -823,7 +823,7 @@ export default function (pi: ExtensionAPI) {
       updateWidget();
 
       const directorDef = sess.memberDefs.get("director");
-      const directorSystem = (directorDef?.systemPrompt || "你是 AI Tools Board 的主席。") + loadMemberKnowledge(directorDef!);
+      const directorSystem = (directorDef?.systemPrompt || "你是 AI Tools Board 的主席。") + (directorDef ? loadMemberKnowledge(directorDef) : "");
       const historyText = formatHistory(sess.history);
 
       const synthPrompt = `你是 AI Tools Board 主席，整合以下互動討論生成最終研究報告。\n\n研究主題：${sess.brief}\n\n討論記錄：\n${historyText}\n\n請生成整合報告（用 ## 標記章節）：\n## 本週關鍵信號\n## 整體觀察\n## 分歧\n## 下一步行動\n\n繁體中文，600字以內。`;

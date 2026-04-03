@@ -1,6 +1,10 @@
 meeting:
   discussion_time_minutes: 10
 
+damage_control:
+  rules_path: .pi/damage-control-rules.yaml
+  enabled: true
+
 board:
   - name: ceo
     path: .pi/investment-adviser-board/agents/ceo/ceo.md

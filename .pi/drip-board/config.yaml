@@ -1,6 +1,10 @@
 meeting:
   discussion_time_minutes: 5
 
+damage_control:
+  rules_path: .pi/damage-control-rules.yaml
+  enabled: true
+
 board:
   - name: brand
     path: .pi/drip-board/agents/brand.md

@@ -152,3 +152,55 @@ summarize "https://example.com/article"                                 # 文章
 ```
 
 用途：消化宏觀投資人演講（如 Ray Dalio、Stanley Druckenmiller）、研讀央行會議紀錄、吸收地緣政治分析長文。
+
+---
+
+### China Data — 中國宏觀指標（PBoC 政策 + 經濟週期）
+
+補充 FRED 的缺口：人民銀行政策、中國通脹週期、貨幣供應、GDP 增長。這些是判斷 PBoC 政策立場與中國經濟週期定位的核心數據源。
+
+```bash
+cd /Users/terivercheung/Documents/AI/pi-vs-claude-code/.claude/skills/china-data
+
+# PBoC 利率（LPR 1Y/5Y + SHIBOR）— 判斷寬鬆/收緊週期
+uv run scripts/china_data.py macro rates
+
+# 中國 CPI / PPI — 通脹壓力 vs. 工業通縮
+uv run scripts/china_data.py macro cpi
+uv run scripts/china_data.py macro ppi
+
+# PMI（製造業 + 服務業 + 財新）— 實時景氣判斷
+uv run scripts/china_data.py macro pmi
+
+# GDP（季度）— 中國增長動能
+uv run scripts/china_data.py macro gdp
+
+# M2 貨幣供應 — 流動性環境
+uv run scripts/china_data.py macro m2
+
+# 外匯儲備 + 人民幣匯率 — 資本流動信號
+uv run scripts/china_data.py macro fx
+
+# 中國財經市場快訊
+uv run scripts/china_data.py news market
+uv run scripts/china_data.py news flash
+
+# 央視新聞聯播（政策方向、政治/社會動態）
+uv run scripts/china_data.py news cctv
+
+# 全球財經快訊（財聯社 + 東方財富 + 新浪，美股/歐股動態）
+uv run scripts/china_data.py news global
+
+# 跨源關鍵字搜尋（東方財富 + 財聯社 + 央視 + 重大公告）
+uv run scripts/china_data.py news search "降息"
+uv run scripts/china_data.py news search "刺激政策"
+```
+
+**使用時機：**
+- 分析 Fed vs. PBoC 政策背離時，用 `macro rates` 對比
+- 判斷中國通脹週期時，用 `macro cpi` + `macro ppi` 組合
+- 評估中國經濟刺激力度時，用 `macro m2` + `macro gdp`
+- 外匯風險評估時，用 `macro fx` 確認人民幣走向
+- 中國政策方向判斷，用 `news cctv` 看央視官方定調
+- 全球市場連動分析，用 `news global` 追蹤美股/歐股對中國市場的影響
+- 特定宏觀事件搜尋，用 `news search <關鍵字>`

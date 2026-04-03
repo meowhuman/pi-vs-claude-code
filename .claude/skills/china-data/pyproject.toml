@@ -1,0 +1,16 @@
+[project]
+name = "china-data"
+version = "1.0.0"
+description = "Unified Chinese market data CLI — A股、宏觀、新聞、情緒"
+requires-python = ">=3.12"
+dependencies = [
+    "akshare>=1.14.0",
+    "baostock>=0.8.9",
+    "pandas>=2.0.0",
+    "requests>=2.32.0",
+    "python-dotenv>=1.0.0",
+    "rich>=13.0.0",
+]
+
+[tool.uv]
+required-version = ">=0.4"

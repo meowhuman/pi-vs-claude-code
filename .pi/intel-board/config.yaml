@@ -1,0 +1,23 @@
+meeting:
+  discussion_time_minutes: 10
+
+damage_control:
+  rules_path: .pi/damage-control-rules.yaml
+  enabled: true
+
+board:
+  - name: geopolitics-analyst
+    path: .pi/meta-orchestrator/agents/geopolitics-analyst/geopolitics-analyst.md
+    active: true
+  - name: global-markets-expert
+    path: .pi/meta-orchestrator/agents/global-markets-expert/global-markets-expert.md
+    active: true
+  - name: military-expert
+    path: .pi/meta-orchestrator/agents/military-expert/military-expert.md
+    active: true
+
+presets:
+  full: [geopolitics-analyst, global-markets-expert, military-expert]
+  geo-markets: [geopolitics-analyst, global-markets-expert]
+  geo-military: [geopolitics-analyst, military-expert]
+  markets-military: [global-markets-expert, military-expert]

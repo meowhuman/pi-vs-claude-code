@@ -90,6 +90,50 @@ summarize "https://example.com/article"
 
 當搜尋返回重要但長篇的文章 URL，使用 summarize 工具提取核心要點。
 
+---
+
+### China Data — 中國市場情緒 + 快訊
+
+雪球、微博等中文平台反映 A 股散戶情緒，是西方工具（StockTwits/Reddit）無法覆蓋的信息源。
+
+```bash
+cd /Users/terivercheung/Documents/AI/pi-vs-claude-code/.claude/skills/china-data
+
+# 雪球熱門股票（散戶追捧 + 討論熱度）
+uv run scripts/china_data.py sentiment xueqiu
+
+# 微博財經熱搜（散戶 FOMO / 恐慌情緒）
+uv run scripts/china_data.py sentiment weibo
+
+# 市場整體情緒指數（漲跌家數、外資淨流入/流出、北向資金）
+uv run scripts/china_data.py sentiment index
+
+# 財經市場新聞（東方財富 + 新浪財經）
+uv run scripts/china_data.py news market
+
+# 即時快訊（短線催化劑）
+uv run scripts/china_data.py news flash
+
+# 央視新聞聯播（政策方向、政治/社會動態 — 非純財經）
+uv run scripts/china_data.py news cctv
+
+# 全球財經快訊（財聯社 + 東方財富 + 新浪）
+uv run scripts/china_data.py news global
+
+# 跨源關鍵字搜尋（東方財富 + 財聯社 + 央視 + 重大公告）
+uv run scripts/china_data.py news search "新能源"
+uv run scripts/china_data.py news search "人工智能"
+uv run scripts/china_data.py news search "地產政策"
+uv run scripts/china_data.py news search "降準降息"
+```
+
+**使用時機：**
+- 評估中國市場短線情緒時，用 `sentiment xueqiu` + `sentiment weibo` 組合
+- 北向資金（外資）動向作為機構行為信號，用 `sentiment index`
+- 中國政策/行業催化劑搜尋，用 `news search <關鍵字>`
+- 中國政策方向判斷，用 `news cctv` 看央視官方定調
+- 全球市場風險蔓延（美股暴跌、歐債危機），用 `news global`
+
 ## 輸出格式
 
 ```

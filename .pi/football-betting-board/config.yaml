@@ -1,0 +1,41 @@
+meeting:
+  discussion_time_minutes: 10
+
+damage_control:
+  rules_path: .pi/damage-control-rules.yaml
+  enabled: true
+
+board:
+  - name: director
+    path: .pi/football-betting-board/agents/director/director.md
+    active: true
+  - name: data-scout
+    path: .pi/football-betting-board/agents/data-scout/data-scout.md
+    active: true
+  - name: form-analyst
+    path: .pi/football-betting-board/agents/form-analyst/form-analyst.md
+    active: true
+  - name: stats-modeler
+    path: .pi/football-betting-board/agents/stats-modeler/stats-modeler.md
+    active: true
+  - name: odds-tracker
+    path: .pi/football-betting-board/agents/odds-tracker/odds-tracker.md
+    active: true
+  - name: market-intel
+    path: .pi/football-betting-board/agents/market-intel/market-intel.md
+    active: true
+  - name: value-hunter
+    path: .pi/football-betting-board/agents/value-hunter/value-hunter.md
+    active: true
+  - name: risk-manager
+    path: .pi/football-betting-board/agents/risk-manager/risk-manager.md
+    active: true
+
+presets:
+  full: [director, data-scout, form-analyst, stats-modeler, odds-tracker, market-intel, value-hunter, risk-manager]
+  pre-match: [director, data-scout, form-analyst, stats-modeler, risk-manager]
+  live: [director, odds-tracker, market-intel, value-hunter]
+  value-scan: [director, value-hunter, odds-tracker, risk-manager]
+  quick: [director, stats-modeler, risk-manager]
+  risk-review: [director, risk-manager, value-hunter]
+  deep-analysis: [director, data-scout, form-analyst, stats-modeler, value-hunter, risk-manager]
