@@ -34,6 +34,19 @@ curl -s -I "https://api.the-odds-api.com/v4/sports/soccer_epl/odds/?apiKey=7cb32
 # Pinnacle 向左移動 = 大額資金押注該方向
 ```
 
+### Cloudbet（加密平台賠率 — 無限次）
+```bash
+# Cloudbet 是加密平台 sharp book，賠率接近 Pinnacle
+# The Odds API 不含 Cloudbet，需獨立查詢
+
+# 獲取 Cloudbet 賠率（與 Pinnacle 對比）
+python3 /Users/terivercheung/Documents/AI/pi-vs-claude-code/.claude/skills/soccer-betting-system/scripts/fetch_cloudbet_odds.py compare --league epl
+
+# 加密平台市場信號：
+# - Cloudbet 賠率顯著低於 Pinnacle = 加密資金流入該方向
+# - 因加密用戶群體與傳統博彩用戶不同，可能出現分歧
+```
+
 ### Pinnacle 賠率解讀規則
 ```
 Pinnacle 是 sharp book（接受大額、不限制贏家）

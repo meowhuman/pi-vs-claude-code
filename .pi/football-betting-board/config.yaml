@@ -30,12 +30,16 @@ board:
   - name: risk-manager
     path: .pi/football-betting-board/agents/risk-manager/risk-manager.md
     active: true
+  - name: cloudbet-trader
+    path: .pi/football-betting-board/agents/cloudbet-trader/cloudbet-trader.md
+    active: true
 
 presets:
-  full: [director, data-scout, form-analyst, stats-modeler, odds-tracker, market-intel, value-hunter, risk-manager]
-  pre-match: [director, data-scout, form-analyst, stats-modeler, risk-manager]
-  live: [director, odds-tracker, market-intel, value-hunter]
-  value-scan: [director, value-hunter, odds-tracker, risk-manager]
-  quick: [director, stats-modeler, risk-manager]
-  risk-review: [director, risk-manager, value-hunter]
-  deep-analysis: [director, data-scout, form-analyst, stats-modeler, value-hunter, risk-manager]
+  full: [director, data-scout, form-analyst, stats-modeler, odds-tracker, market-intel, value-hunter, risk-manager, cloudbet-trader]
+  pre-match: [director, data-scout, form-analyst, stats-modeler, risk-manager, cloudbet-trader]
+  live: [director, odds-tracker, market-intel, value-hunter, cloudbet-trader]
+  value-scan: [director, value-hunter, odds-tracker, risk-manager, cloudbet-trader]
+  quick: [director, stats-modeler, risk-manager, cloudbet-trader]
+  risk-review: [director, risk-manager, value-hunter, cloudbet-trader]
+  deep-analysis: [director, data-scout, form-analyst, stats-modeler, value-hunter, risk-manager, cloudbet-trader]
+  cloudbet-ready: [director, odds-tracker, value-hunter, risk-manager, cloudbet-trader]

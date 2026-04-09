@@ -95,20 +95,20 @@ ext-onchain:
 ext-onchain-chain:
     pi -e extensions/agent-chain.ts -e extensions/crypto-onchain-monitor.ts -e extensions/theme-cycler.ts
 
-# music-study: Full music research board (deep-researcher + youtube-curator + genre-historian + listening-guide)
-ext-music-study:
+# music: Full music research board (deep-researcher + youtube-curator + genre-historian + listening-guide)
+music:
     pi -e extensions/boards/music-study.ts -e extensions/theme-cycler.ts
 
-# music-study-jazz: Jazz deep dive (deep-researcher + genre-historian)
-ext-music-study-jazz:
+# music-jazz: Jazz deep dive (deep-researcher + genre-historian)
+music-jazz:
     pi -e extensions/boards/music-study.ts -e extensions/theme-cycler.ts
 
-# music-study-discovery: Find new music (youtube-curator + listening-guide)
-ext-music-study-discovery:
+# music-discovery: Find new music (youtube-curator + listening-guide)
+music-discovery:
     pi -e extensions/boards/music-study.ts -e extensions/theme-cycler.ts
 
-# intel-board: Strategic Intel Board — 3 experts (group + /select for 1-on-1)
-ext-intel:
+# intel: Strategic Intel Board — 3 experts (group + /select for 1-on-1)
+intel:
     pi -e extensions/boards/intel-board.ts -e extensions/theme-cycler.ts
 
 # geo: 1-on-1 with Geopolitics Analyst (shared expert)
@@ -123,178 +123,182 @@ ext-markets:
 ext-military:
     EXPERT=military-expert pi -e extensions/boards/meta-expert-session.ts -e extensions/theme-cycler.ts
 
-# meta-orchestrator: Full cross-domain analysis (investment + drip + ai-tools + geopolitics)
-ext-meta:
+# meta: Full cross-domain analysis (investment + drip + ai-tools + geopolitics)
+meta:
     pi -e extensions/boards/meta-orchestrator.ts -e extensions/theme-cycler.ts
 
 # meta-strategic: Investment + Drip boards (business strategy questions)
-ext-meta-strategic:
+meta-strategic:
     pi -e extensions/boards/meta-orchestrator.ts -e extensions/theme-cycler.ts
 
 # meta-tech: AI Tools + Investment boards (tech policy questions)
-ext-meta-tech:
+meta-tech:
     pi -e extensions/boards/meta-orchestrator.ts -e extensions/theme-cycler.ts
 
 # meta-creative: Drip + AI Tools boards (creative tech questions)
-ext-meta-creative:
+meta-creative:
     pi -e extensions/boards/meta-orchestrator.ts -e extensions/theme-cycler.ts
 
-# drip-board: Drip Music strategic decision board (full board)
-ext-drip-board:
+# meta-sports: Football betting + Investment boards (sports betting analysis)
+meta-sports:
+    pi -e extensions/boards/meta-orchestrator.ts -e extensions/theme-cycler.ts
+
+# drip: Drip Music strategic decision board (full board)
+drip:
     pi -e extensions/drip-board.ts -e extensions/theme-cycler.ts
 
-# drip-board-quick: Quick 2-member sanity check (revenue + contrarian)
-ext-drip-board-quick:
+# drip-quick: Quick 2-member sanity check (revenue + contrarian)
+drip-quick:
     pi -e extensions/drip-board.ts -e extensions/theme-cycler.ts
 
-# drip-board-marketing: Marketing campaign decisions
-ext-drip-board-marketing:
+# drip-marketing: Marketing campaign decisions
+drip-marketing:
     BOARD_PRESET=marketing-campaign pi -e extensions/drip-board.ts -e extensions/theme-cycler.ts
 
-# drip-board-grants: Funding & government relations decisions
-ext-drip-board-grants:
+# drip-grants: Funding & government relations decisions
+drip-grants:
     BOARD_PRESET=grants-funding pi -e extensions/drip-board.ts -e extensions/theme-cycler.ts
 
-# drip-board-programming: Programming & artist decisions
-ext-drip-board-programming:
+# drip-programming: Programming & artist decisions
+drip-programming:
     BOARD_PRESET=programming pi -e extensions/drip-board.ts -e extensions/theme-cycler.ts
 
-# inv-board: Investment Adviser Board — Mode A auto (all members, use board_begin)
-ext-inv-board:
+# inv: Investment Adviser Board — Mode A auto (all members, use board_begin)
+inv:
     pi -e extensions/boards/investment-adviser-board.ts -e extensions/theme-cycler.ts
 
-# inv-board-discuss: Investment Adviser Board — Mode B interactive (you sit in, use board_discuss)
-ext-inv-board-discuss:
+# inv-discuss: Investment Adviser Board — Mode B interactive (you sit in, use board_discuss)
+inv-discuss:
     pi -e extensions/boards/investment-adviser-board.ts -e extensions/theme-cycler.ts
 
-# inv-board-swing: Swing-trade preset: CEO + technical-analyst + risk-officer + backtest
-ext-inv-board-swing:
+# inv-swing: Swing-trade preset: CEO + technical-analyst + risk-officer + backtest
+inv-swing:
     pi -e extensions/boards/investment-adviser-board.ts -e extensions/theme-cycler.ts
 
-# inv-board-macro: Macro preset: CEO + macro-strategist + fundamental-analyst + risk-officer + prediction-market-analyst + backtest
-ext-inv-board-macro:
+# inv-macro: Macro preset: CEO + macro-strategist + fundamental-analyst + risk-officer + prediction-market-analyst + backtest
+inv-macro:
     pi -e extensions/boards/investment-adviser-board.ts -e extensions/theme-cycler.ts
 
-# inv-board-quick: Quick preset: CEO + technical-analyst + risk-officer (fastest)
-ext-inv-board-quick:
+# inv-quick: Quick preset: CEO + technical-analyst + risk-officer (fastest)
+inv-quick:
     pi -e extensions/boards/investment-adviser-board.ts -e extensions/theme-cycler.ts
 
-# inv-board-pm: Prediction market preset: CEO + macro-strategist + prediction-market-analyst + backtest
-ext-inv-board-pm:
+# inv-pm: Prediction market preset: CEO + macro-strategist + prediction-market-analyst + backtest
+inv-pm:
     pi -e extensions/boards/investment-adviser-board.ts -e extensions/theme-cycler.ts
 
-# inv-member: One-on-one member session (select member + update knowledge)
-ext-inv-member:
+# inv-1: One-on-one member session (select member + update knowledge)
+inv-1:
     pi -e extensions/boards/inv-board-member-session.ts -e extensions/theme-cycler.ts
 
-# ai-tools-board: AI Tools Board — Mode A auto (全自動研究，用 board_begin 啟動)
-ext-ai-tools-board:
+# ai: AI Tools Board — Mode A auto (全自動研究，用 board_begin 啟動)
+ai:
     pi -e extensions/boards/ai-tools-board.ts -e extensions/theme-cycler.ts
 
-# ai-tools-board-discuss: AI Tools Board — Mode B interactive (你坐進委員會)
-ext-ai-tools-board-discuss:
+# ai-discuss: AI Tools Board — Mode B interactive (你坐進委員會)
+ai-discuss:
     pi -e extensions/boards/ai-tools-board.ts -e extensions/theme-cycler.ts
 
-# ai-tools-board-discovery: discovery preset — director + music + video + coding scouts
-ext-ai-tools-board-discovery:
+# ai-discovery: discovery preset — director + music + video + coding scouts
+ai-discovery:
     pi -e extensions/boards/ai-tools-board.ts -e extensions/theme-cycler.ts
 
-# ai-tools-board-coding: coding preset — director + coding-ai-scout
-ext-ai-tools-board-coding:
+# ai-coding: coding preset — director + coding-ai-scout
+ai-coding:
     pi -e extensions/boards/ai-tools-board.ts -e extensions/theme-cycler.ts
 
-# ai-tools-board-music: music preset — director + music-ai-scout
-ext-ai-tools-board-music:
+# ai-music: music preset — director + music-ai-scout
+ai-music:
     pi -e extensions/boards/ai-tools-board.ts -e extensions/theme-cycler.ts
 
-# ai-tools-board-video: video preset — director + video-ai-scout
-ext-ai-tools-board-video:
+# ai-video: video preset — director + video-ai-scout
+ai-video:
     pi -e extensions/boards/ai-tools-board.ts -e extensions/theme-cycler.ts
 
-# ai-tools-board-github: github preset — director + github-researcher
-ext-ai-tools-board-github:
+# ai-github: github preset — director + github-researcher
+ai-github:
     pi -e extensions/boards/ai-tools-board.ts -e extensions/theme-cycler.ts
 
-# ai-tools-board-systems: systems preset — director + system-analyst
-ext-ai-tools-board-systems:
+# ai-systems: systems preset — director + system-analyst
+ai-systems:
     pi -e extensions/boards/ai-tools-board.ts -e extensions/theme-cycler.ts
 
-# ai-tools-member: 1-on-1 session with a specific AI Tools Board member
-ext-ai-tools-member:
+# ai-1: 1-on-1 session with a specific AI Tools Board member
+ai-1:
     pi -e extensions/boards/ai-tools-board-member-session.ts -e extensions/theme-cycler.ts
 
-# ai-tools-member-coding: 直接載入 coding-ai-scout 一對一會話
-ext-ai-tools-member-coding:
+# ai-1-coding: 直接載入 coding-ai-scout 一對一會話
+ai-1-coding:
     BOARD_MEMBER=coding-ai-scout pi -e extensions/boards/ai-tools-board-member-session.ts -e extensions/theme-cycler.ts
 
-# ai-tools-member-music: 直接載入 music-ai-scout 一對一會話
-ext-ai-tools-member-music:
+# ai-1-music: 直接載入 music-ai-scout 一對一會話
+ai-1-music:
     BOARD_MEMBER=music-ai-scout pi -e extensions/boards/ai-tools-board-member-session.ts -e extensions/theme-cycler.ts
 
-# ai-tools-member-video: 直接載入 video-ai-scout 一對一會話
-ext-ai-tools-member-video:
+# ai-1-video: 直接載入 video-ai-scout 一對一會話
+ai-1-video:
     BOARD_MEMBER=video-ai-scout pi -e extensions/boards/ai-tools-board-member-session.ts -e extensions/theme-cycler.ts
 
-# ai-tools-member-github: 直接載入 github-researcher 一對一會話
-ext-ai-tools-member-github:
+# ai-1-github: 直接載入 github-researcher 一對一會話
+ai-1-github:
     BOARD_MEMBER=github-researcher pi -e extensions/boards/ai-tools-board-member-session.ts -e extensions/theme-cycler.ts
 
-# music-study-quick: Quick 2-member check (researcher + curator)
-ext-music-study-quick:
+# music-quick: Quick 2-member check (researcher + curator)
+music-quick:
     pi -e extensions/boards/music-study.ts -e extensions/theme-cycler.ts
 
 # ── Football Betting Board ────────────────────────────────────────────────────
 
-# fb-board: Full board meeting mode — 全自動委員會分析
-ext-fb-board:
+# fb: Full board meeting mode — 全自動委員會分析
+fb:
     pi -e extensions/boards/football-betting-board.ts -e extensions/theme-cycler.ts
 
-# fb-board-quick: Quick preset — director + stats-modeler + risk-manager
-ext-fb-board-quick:
+# fb-quick: Quick preset — director + stats-modeler + risk-manager
+fb-quick:
     BOARD_PRESET=quick pi -e extensions/boards/football-betting-board.ts -e extensions/theme-cycler.ts
 
-# fb-board-pre-match: Pre-match analysis preset
-ext-fb-board-pre-match:
+# fb-pre: Pre-match analysis preset
+fb-pre:
     BOARD_PRESET=pre-match pi -e extensions/boards/football-betting-board.ts -e extensions/theme-cycler.ts
 
-# fb-board-live: Live odds monitoring preset
-ext-fb-board-live:
+# fb-live: Live odds monitoring preset
+fb-live:
     BOARD_PRESET=live pi -e extensions/boards/football-betting-board.ts -e extensions/theme-cycler.ts
 
-# fb-member: 1-on-1 session — 互動選單選擇成員
-ext-fb-member:
+# fb-1: 1-on-1 session — 互動選單選擇成員
+fb-1:
     pi -e extensions/boards/fb-board-member-session.ts -e extensions/theme-cycler.ts
 
-# fb-member-director: 1-on-1 with Director (總監)
-ext-fb-member-director:
+# fb-1-director: 1-on-1 with Director (總監)
+fb-1-director:
     BOARD_MEMBER=director pi -e extensions/boards/fb-board-member-session.ts -e extensions/theme-cycler.ts
 
-# fb-member-data-scout: 1-on-1 with Data Scout (球員數據偵察員)
-ext-fb-member-data-scout:
+# fb-1-data-scout: 1-on-1 with Data Scout (球員數據偵察員)
+fb-1-data-scout:
     BOARD_MEMBER=data-scout pi -e extensions/boards/fb-board-member-session.ts -e extensions/theme-cycler.ts
 
-# fb-member-form-analyst: 1-on-1 with Form Analyst (近期狀態分析師)
-ext-fb-member-form-analyst:
+# fb-1-form-analyst: 1-on-1 with Form Analyst (近期狀態分析師)
+fb-1-form:
     BOARD_MEMBER=form-analyst pi -e extensions/boards/fb-board-member-session.ts -e extensions/theme-cycler.ts
 
-# fb-member-stats-modeler: 1-on-1 with Stats Modeler (統計模型師)
-ext-fb-member-stats-modeler:
+# fb-1-stats-modeler: 1-on-1 with Stats Modeler (統計模型師)
+fb-1-stats:
     BOARD_MEMBER=stats-modeler pi -e extensions/boards/fb-board-member-session.ts -e extensions/theme-cycler.ts
 
-# fb-member-odds-tracker: 1-on-1 with Odds Tracker (賠率追蹤員)
-ext-fb-member-odds-tracker:
+# fb-1-odds-tracker: 1-on-1 with Odds Tracker (賠率追蹤員)
+fb-1-odds:
     BOARD_MEMBER=odds-tracker pi -e extensions/boards/fb-board-member-session.ts -e extensions/theme-cycler.ts
 
-# fb-member-market-intel: 1-on-1 with Market Intel (市場情報員)
-ext-fb-member-market-intel:
+# fb-1-market-intel: 1-on-1 with Market Intel (市場情報員)
+fb-1-market:
     BOARD_MEMBER=market-intel pi -e extensions/boards/fb-board-member-session.ts -e extensions/theme-cycler.ts
 
-# fb-member-value-hunter: 1-on-1 with Value Hunter (價值獵手)
-ext-fb-member-value-hunter:
+# fb-1-value-hunter: 1-on-1 with Value Hunter (價值獵手)
+fb-1-value:
     BOARD_MEMBER=value-hunter pi -e extensions/boards/fb-board-member-session.ts -e extensions/theme-cycler.ts
 
-# fb-member-risk-manager: 1-on-1 with Risk Manager (風險管理官)
-ext-fb-member-risk-manager:
+# fb-1-risk-manager: 1-on-1 with Risk Manager (風險管理官)
+fb-1-risk:
     BOARD_MEMBER=risk-manager pi -e extensions/boards/fb-board-member-session.ts -e extensions/theme-cycler.ts
 
 # ─────────────────────────────────────────────────────────────────────────────

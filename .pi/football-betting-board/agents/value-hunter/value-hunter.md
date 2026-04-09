@@ -17,6 +17,30 @@ tools: bash,read,write
 
 ---
 
+## 數據來源
+
+### Cloudbet（推薦 — 無限次，加密平台最佳賠率）
+```bash
+# 獲取 Cloudbet 賠率計算 EV
+python3 /Users/terivercheung/Documents/AI/pi-vs-claude-code/.claude/skills/soccer-betting-system/scripts/fetch_cloudbet_odds.py report --event-id <EVENT_ID>
+
+# 與其他平台比較找出最佳賠率
+python3 /Users/terivercheung/Documents/AI/pi-vs-claude-code/.claude/skills/soccer-betting-system/scripts/fetch_cloudbet_odds.py compare --league epl
+
+# Cloudbet 優勢：
+# - 無請求限制（The Odds API 只有 500 次/月）
+# - USDT 結算，免稅，即時到帳
+# - 賠率競爭力接近 Pinnacle
+```
+
+### The Odds API（輔助 — 多平台對比）
+```bash
+# API Key: 7cb32f9dd8d62dc575d80b11fad88c3b
+# 用途：與 Cloudbet 比較，確認是否為市場最佳賠率
+```
+
+---
+
 ## 核心分析框架
 
 ### 正期望值計算

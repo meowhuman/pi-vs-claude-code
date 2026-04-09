@@ -22,6 +22,31 @@ import { join, dirname } from "path";
 import { homedir } from "os";
 import { applyExtensionDefaults } from "../themeMap.ts";
 
+// ── .env Loader ───────────────────────────────────────────────────────────────
+
+function loadEnvFile(envPath: string): Record<string, string> {
+  if (!existsSync(envPath)) return {};
+  const loaded: Record<string, string> = {};
+  for (const line of readFileSync(envPath, "utf-8").split("\n")) {
+    const trimmed = line.trim();
+    if (!trimmed || trimmed.startsWith("#")) continue;
+    const idx = trimmed.indexOf("=");
+    if (idx < 1) continue;
+    const key = trimmed.slice(0, idx).trim();
+    const val = trimmed.slice(idx + 1).trim().replace(/^["']|["']$/g, "");
+    if (key && val) {
+      loaded[key] = val;
+      process.env[key] = val;
+    }
+  }
+  return loaded;
+}
+
+function isCloudbetConfigured(): boolean {
+  const token = process.env.CLOUDBET_API_TOKEN;
+  return !!(token && token !== "your_cloudbet_api_token_here" && token.length > 10);
+}
+
 // ── Types ─────────────────────────────────────────────────────────────────────
 
 interface BoardMemberConfig {
@@ -233,6 +258,7 @@ let activeMember: MemberDef | null = null;
 let boardConfig: BoardConfig | null = null;
 let defaultTools: string[] = [];
 let cwdRef = "";
+let baseSystemPrompt: string | null = null; // Store original system prompt to avoid accumulation
 
 // ── Extension ─────────────────────────────────────────────────────────────────
 
@@ -251,12 +277,16 @@ export default function (pi: ExtensionAPI) {
         for (const m of boardConfig!.board) {
           const def = parseMemberFile(join(cwdRef, m.path));
           const isActive = activeMember?.name === m.name;
+          const isCloudbet = m.name === "cloudbet-trader";
+          const cloudbetMark = isCloudbet
+            ? (isCloudbetConfigured() ? theme.fg("success", "🔑") : theme.fg("warning", "⚠️"))
+            : "";
           const kbMark = def && existsSync(def.knowledgePath) ? theme.fg("success", "📚") : theme.fg("muted", " ○");
           const nameStr = isActive
             ? theme.fg("accent", theme.bold(`  ${m.name}`))
             : theme.fg("dim", `  ${m.name}`);
           const desc = def?.description ? theme.fg("muted", `  —  ${def.description.split("—")[1]?.trim() ?? def.description.split("—")[0]?.trim()}`) : "";
-          lines.push(`  ${kbMark} ${nameStr}${desc}`);
+          lines.push(`  ${kbMark} ${nameStr}${desc}${cloudbetMark}`);
         }
         lines.push(theme.fg("dim", "  " + "─".repeat(50)));
         lines.push(theme.fg("muted", "  /member-select  ·  /member-equip <skill>  ·  /member-learn <url>"));
@@ -295,6 +325,19 @@ export default function (pi: ExtensionAPI) {
     cwdRef = ctx.cwd;
     defaultTools = pi.getActiveTools();
 
+    // Load .env from project root
+    const envPath = join(ctx.cwd, ".env");
+    const loaded = loadEnvFile(envPath);
+    if (Object.keys(loaded).length > 0) {
+      const cloudbetOk = isCloudbetConfigured();
+      ctx.ui.notify(
+        cloudbetOk
+          ? `已載入 .env — Cloudbet API Token ✓ (${process.env.CLOUDBET_ENV ?? "live"} / ${process.env.CLOUDBET_CURRENCY ?? "USDT"})`
+          : "已載入 .env — ⚠️ CLOUDBET_API_TOKEN 未設定或仍為預設值",
+        cloudbetOk ? "success" : "warning"
+      );
+    }
+
     const configPath = join(ctx.cwd, ".pi/football-betting-board/config.yaml");
     if (existsSync(configPath)) {
       boardConfig = parseBoardConfigYaml(readFileSync(configPath, "utf-8"));
@@ -332,9 +375,46 @@ export default function (pi: ExtensionAPI) {
   pi.on("before_agent_start", async (event, _ctx) => {
     if (!activeMember) return;
 
+    // Store base system prompt on first call to avoid accumulation when switching members
+    if (baseSystemPrompt === null) {
+      baseSystemPrompt = event.systemPrompt;
+    }
+
     const knowledgeContent = existsSync(activeMember.knowledgePath)
       ? readFileSync(activeMember.knowledgePath, "utf-8")
       : "（尚未建立）";
+
+    // Cloudbet-specific API config injection
+    let cloudbetSection = "";
+    if (activeMember.name === "cloudbet-trader") {
+      const token = process.env.CLOUDBET_API_TOKEN ?? "";
+      const env = process.env.CLOUDBET_ENV ?? "live";
+      const currency = process.env.CLOUDBET_CURRENCY ?? "USDT";
+      const configured = isCloudbetConfigured();
+      const envFilePath = join(cwdRef, ".env");
+
+      cloudbetSection = `
+
+---
+
+## Cloudbet API 配置狀態
+
+| 項目 | 值 |
+|------|-----|
+| .env 路徑 | \`${envFilePath}\` |
+| Token 狀態 | ${configured ? `✅ 已設定（前 8 碼：\`${token.slice(0, 8)}...\`）` : "❌ 未設定或為預設值"} |
+| 環境 | \`${env}\` |
+| 幣種 | \`${currency}\` |
+
+**載入環境變數的指令（每次 bash session 開始時執行）：**
+\`\`\`bash
+export $(grep -v '^#' ${envFilePath} | grep -v '^$' | xargs)
+echo "Token: \${CLOUDBET_API_TOKEN:0:8}... | Env: \$CLOUDBET_ENV | Currency: \$CLOUDBET_CURRENCY"
+\`\`\`
+
+${configured ? "Token 已就緒，可直接執行 API 查詢。" : "⚠️ 請先在 .env 中填入真實的 CLOUDBET_API_TOKEN。"}
+`;
+    }
 
     const knowledgeSection = `
 
@@ -358,8 +438,9 @@ ${knowledgeContent}
 每次對話結束時，主動問用戶是否有新的博彩洞見值得寫入知識庫。
 `;
 
+    // Use baseSystemPrompt instead of event.systemPrompt to avoid accumulation
     return {
-      systemPrompt: activeMember.systemPrompt + knowledgeSection + "\n\n" + event.systemPrompt,
+      systemPrompt: activeMember.systemPrompt + cloudbetSection + knowledgeSection + "\n\n" + baseSystemPrompt,
     };
   });
 
@@ -402,6 +483,7 @@ ${knowledgeContent}
 
       if (choice === options[0]) {
         activeMember = null;
+        baseSystemPrompt = null; // Reset to allow fresh start next time
         pi.setActiveTools(defaultTools);
         ctx.ui.setStatus("member-session", "成員：未選擇");
         ctx.ui.notify("已清除成員，回到預設模式", "info");
@@ -518,14 +600,25 @@ ${knowledgeContent}
       );
     },
   });
-
   // ── /member-meeting ─────────────────────────────────────────────────────────
 
   pi.registerCommand("member-meeting", {
     description: "召開足球博彩情報中心董事會（/member-meeting [preset]）",
     handler: async (args, ctx) => {
-      if (!activeMember) { ctx.ui.notify("請先用 /member-select 選擇成員", "warning"); return; }
       if (!boardConfig) { ctx.ui.notify("博彩板設定未載入", "error"); return; }
+
+      // Auto-select Director if no member active
+      if (!activeMember) {
+        const directorConfig = boardConfig.board.find(m => m.name === "director");
+        if (directorConfig) {
+          const director = parseMemberFile(join(cwdRef, directorConfig.path));
+          if (director) activeMember = director;
+        }
+        if (!activeMember) {
+          ctx.ui.notify("請先用 /member-select 選擇成員", "warning");
+          return;
+        }
+      }
 
       const presetName = args?.trim() || "full";
       const memberNames = boardConfig.presets[presetName] || boardConfig.presets["full"];
@@ -549,7 +642,34 @@ ${knowledgeContent}
         return;
       }
 
-      // Build meeting prompt
+      const dataCollectionScript = [
+        `# 足球博彩情報中心 — 會前數據收集`,
+        `export $(grep -v '^#' "${join(cwdRef, '.env')}" | grep -v '^$' | xargs)`,
+        ``,
+        `# 1. 即將賽事（football-data.org）`,
+        `curl -s "https://api.football-data.org/v4/competitions/PL/matches?status=SCHEDULED&next=10" \\
+  -H "X-Auth-Token: $FOOTBALL_DATA_KEY" | python3 -c "
+import sys, json; d=json.load(sys.stdin)
+for m in d.get('matches',[]):
+    print(f\"{m['homeTeam']['shortName']} vs {m['awayTeam']['shortName']} | {m['utcDate'][:10]} | ID:{m['id']}\")
+"`,
+        ``,
+        `# 2. Cloudbet 本週賽事列表`,
+        `python3 "${join(cwdRef, '.claude/skills/soccer-betting-system/scripts/fetch_cloudbet_odds.py')}" list --league epl`,
+        ``,
+        `# 3. The Odds API 多平台賠率`,
+        `curl -s "https://api.the-odds-api.com/v4/sports/soccer_epl/odds/?apiKey=$ODDS_API_KEY&regions=eu&markets=h2h,totals&oddsFormat=decimal" | python3 -c "
+import sys, json; d=json.load(sys.stdin)
+for m in d[:8]:
+    home=m.get('home_team',''); away=m.get('away_team','')
+    print(f'{home} vs {away} | {m[\"commence_time\"][:10]}')
+"`,
+        ``,
+        `# 4. FC26 積分榜/球隊對比（範例：Arsenal vs Liverpool，可換隊）`,
+        `python3 "${join(cwdRef, '.claude/skills/football-data/fc26q.py')}" team Arsenal`,
+        `python3 "${join(cwdRef, '.claude/skills/football-data/fc26q.py')}" compare Arsenal vs Liverpool`,
+      ].join("\n");
+
       const meetingPrompt = [
         `## 足球博彩情報中心董事會 — ${presetName.toUpperCase()} 模式`,
         ``,
@@ -557,29 +677,35 @@ ${knowledgeContent}
         `${displayName(activeMember.name)} — ${activeMember.description}`,
         ``,
         `### 與會成員（${meetingMembers.length} 人）`,
-        ...meetingMembers.map(m => `- ${displayName(m.name)}：${m.description}`),
+        ...meetingMembers.map(m => `- ${displayName(m.name)}：${m.description} | 工具：${m.tools?.join(",") ?? "N/A"}`),
+        ``,
+        `### 會前數據收集（必須先執行）`,
+        `請先執行以下 bash 腳本，把真實數據帶入對話。所有後續分析必須引用這些數據，嚴禁虛構。`,
+        `\`\`\`bash`,
+        dataCollectionScript,
+        `\`\`\``,
         ``,
         `### 會議流程`,
-        `1. **召集人開場** — 說明分析目標（指定賽事/市場問題）`,
-        `2. **各成員輪流發言** — 按專業領域提供分析：`,
-        `   - Data Scout：球員數據、FC26 屬性`,
-        `   - Form Analyst：近期狀態、傷兵、主客場`,
-        `   - Stats Modeler：Poisson 模型、xG、勝率`,
-        `   - Odds Tracker：賠率走勢、平台差異`,
-        `   - Market Intel：市場情報、資金流向`,
-        `   - Value Hunter：價值機會、正 EV`,
-        `   - Risk Manager：風險評估、倉位建議`,
-        `3. **召集人總結** — 綜合各方分析，給出最終投注建議`,
+        `1. **召集人開場** — 基於數據選定 1-2 場目標賽事`,
+        `2. **Data Scout** — 球員數據、FC26 屬性對比`,
+        `3. **Form Analyst** — 近期狀態、傷兵、主客場`,
+        `4. **Stats Modeler** — Poisson 模型、xG、勝率`,
+        `5. **Odds Tracker** — 賠率走勢、平台差異`,
+        `6. **Market Intel** — 市場情報、資金流向`,
+        `7. **Value Hunter** — 價值機會、正 EV`,
+        `8. **Risk Manager** — 風險評估、倉位建議`,
+        `9. **Cloudbet Trader** — 可執行賠率與下單路徑`,
+        `10. **召集人總結** — 給出最終投注建議（含平台、賠率門檻、倉位大小）`,
         ``,
-        `### 輸出格式`,
-        `請生成一份完整的博彩分析報告，包含：`,
-        `- 賽事概述`,
-        `- 數據分析（各成員專業見解）`,
-        `- 投注建議（標注信心指數 1-5⭐）`,
-        `- 風險提示`,
-        `- 參考來源`,
+        `### 輸出格式要求`,
+        `請生成完整分析報告，必須包含：`,
+        `- 賽事概述與選擇理由`,
+        `- 七大專業報告（引用真實數據）`,
+        `- 投注建議：市場 / 方向 / 最佳賠率 / 真實勝率 / 隱含機率 / EV / 建議倉位 / USDT 金額`,
+        `- 風險提示與信心評級（高/中/低）`,
+        `- 會議結束時：總結建議 + 問用戶是否執行下單`,
         ``,
-        `請召集人（${displayName(activeMember.name)}）開始會議，指定要分析的賽事或市場問題。`,
+        `請召集人（${displayName(activeMember.name)}）開始會議：先執行數據收集，再選定賽事。`,
       ].join("\n");
 
       ctx.ui.setWidget(
@@ -589,21 +715,85 @@ ${knowledgeContent}
           lines.push(theme.fg("accent", theme.bold("  Football Betting Board Meeting  ")));
           lines.push(theme.fg("dim", `  Mode: ${presetName} | Members: ${meetingMembers.length}`));
           lines.push(theme.fg("dim", "  " + "─".repeat(50)));
-          meetingMembers.forEach((m, i) => {
+          meetingMembers.forEach((m) => {
             const marker = m.name === activeMember!.name ? theme.fg("accent", "▶") : theme.fg("dim", "○");
             lines.push(`  ${marker} ${displayName(m.name)}`);
           });
           lines.push(theme.fg("dim", "  " + "─".repeat(50)));
-          lines.push(theme.fg("muted", "  會議已開始 — 請召集人指定分析目標"));
+          lines.push(theme.fg("muted", "  會議已開始 — Director 請先執行數據收集腳本"));
           return {
             render(width: number) { return lines.map(l => truncateToWidth(l, width)); },
             invalidate() { },
           };
         },
-        { placement: "belowEditor", dismissAfter: 10000 }
+        { placement: "belowEditor", dismissAfter: 15000 }
       );
 
       ctx.ui.notify(meetingPrompt, "info");
+    },
+  });
+
+  // ── /member-bet ─────────────────────────────────────────────────────────────
+
+  pi.registerCommand("member-bet", {
+    description: "執行 Cloudbet 下單（/member-bet <marketUrl> <price> <stake> [side]）",
+    handler: async (args, ctx) => {
+      if (!boardConfig) { ctx.ui.notify("博彩板設定未載入", "error"); return; }
+
+      const parts = args?.trim().split(/\s+/) ?? [];
+      if (parts.length < 3) {
+        ctx.ui.notify(
+          "用法：/member-bet <marketUrl> <price> <stakeUSDT> [side]\n例：/member-bet https://sports-api.cloudbet.com/pub/v4/sports/... 1.85 0.1 home",
+          "warning"
+        );
+        return;
+      }
+
+      const [marketUrl, price, stake, side = ""] = parts;
+      const envPath = join(cwdRef, ".env");
+      const tokenExists = (await readFileUtf8(envPath).catch(() => "")).includes("CLOUDBET_API_TOKEN");
+      if (!tokenExists) {
+        ctx.ui.notify("找不到 .env 或 CLOUDBET_API_TOKEN，請先設定", "error");
+        return;
+      }
+
+      const payload = JSON.stringify({ marketUrl, price: String(price), stake: Number(stake), side: side || undefined });
+      const betScript = [
+        `export CLOUDBET_API_TOKEN=$(grep CLOUDBET_API_TOKEN "${envPath}" | cut -d '=' -f2)`,
+        `curl -s -X POST "https://sports-api.cloudbet.com/pub/v4/bets/place/straight" \\
+  -H "Content-Type: application/json" \\
+  -H "X-API-Key: $CLOUDBET_API_TOKEN" \\
+  -d '${payload}'`,
+      ].join("\n");
+
+      ctx.ui.notify(
+        `⚠️ 即將執行 Cloudbet 下單\nmarketUrl: ${marketUrl}\nprice: ${price}\nstake: ${stake} USDT\n\n請確認後把以下指令貼給 Cloudbet Trader 執行：\n\n\`\`\`bash\n${betScript}\n\`\`\``,
+        "info"
+      );
+    },
+  });
+
+  // ── /member-history ─────────────────────────────────────────────────────────
+
+  pi.registerCommand("member-history", {
+    description: "查詢 Cloudbet 下注歷史（/member-history [limit]）",
+    handler: async (args, ctx) => {
+      if (!boardConfig) { ctx.ui.notify("博彩板設定未載入", "error"); return; }
+
+      const limit = Number(args?.trim() || "20");
+      const envPath = join(cwdRef, ".env");
+
+      const historyScript = [
+        `export CLOUDBET_API_TOKEN=$(grep CLOUDBET_API_TOKEN "${envPath}" | cut -d '=' -f2)`,
+        `curl -s "https://sports-api.cloudbet.com/pub/v4/bets?limit=${limit}" \\
+  -H "Content-Type: application/json" \\
+  -H "X-API-Key: $CLOUDBET_API_TOKEN"`,
+      ].join("\n");
+
+      ctx.ui.notify(
+        `請把以下指令貼給 Cloudbet Trader 執行以獲取最近 ${limit} 筆下注歷史：\n\n\`\`\`bash\n${historyScript}\n\`\`\``,
+        "info"
+      );
     },
   });
 }

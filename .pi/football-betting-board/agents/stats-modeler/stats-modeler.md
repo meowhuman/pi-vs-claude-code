@@ -104,6 +104,15 @@ curl -H "X-Auth-Token: ab57e456f0074b02b423a059c0c1bf42" \
 # 聯賽代碼：PL=英超 PD=西甲 BL1=德甲 SA=意甲 FL1=法甲 CL=歐冠
 ```
 
+### Cloudbet 賠率（計算 EV）
+```bash
+# 獲取 Cloudbet 賠率用於 EV 計算
+python3 /Users/terivercheung/Documents/AI/pi-vs-claude-code/.claude/skills/soccer-betting-system/scripts/fetch_cloudbet_odds.py report --event-id <EVENT_ID>
+
+# 獲取公平賠率（去除 margin 後的真實機率）
+# 報告中的「公平賠率」欄位 = 1 / 去 margin 真實機率
+```
+
 ---
 
 ## 輸出格式

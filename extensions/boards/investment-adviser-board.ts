@@ -349,6 +349,9 @@ function generateHtmlReport(opts: {
   const { date, preset, memberNames, briefText, ceoFrame, boardResults, memo } = opts;
 
   const finalDecision = escapeHtml(extractMemoSection(memo, "Final Decision|最終建議|最终建议"));
+  const actionNow = escapeHtml(extractMemoSection(memo, "What To Do Now|現在該做什麼|現在怎麼做"));
+  const scenarioTree = escapeHtml(extractMemoSection(memo, "Scenario Tree|情境樹|情境分析"));
+  const invalidations = escapeHtml(extractMemoSection(memo, "Invalidations|失效條件|認錯條件"));
   const dissent = escapeHtml(extractMemoSection(memo, "Dissent.*Tensions|Dissent|分歧|張力|张力"));
   const tradeoffs = extractMemoSection(memo, "Trade.offs|Trade-offs|權衡|取捨|风险機會权衡");
   const nextActionsRaw = extractMemoSection(memo, "Next Actions|具體操作步驟|下一步行動|下一步|後續行動");
@@ -451,6 +454,10 @@ function generateHtmlReport(opts: {
     .decision-main { font-size: 1.0rem; font-weight: 600; color: var(--text); line-height: 1.75; }
     .risk-block { margin-top: 1rem; padding: 1rem 1.2rem; border-left: 3px solid var(--danger); background: rgba(248,81,73,0.05); border-radius: 0 6px 6px 0; font-size: 0.88rem; color: var(--muted); line-height: 1.8; }
     .risk-label { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--danger); font-weight: 600; margin-bottom: 0.5rem; }
+    .action-now-block, .scenario-block, .invalidations-block { margin-top: 1rem; padding: 1rem 1.2rem; border-left: 3px solid var(--secondary); background: rgba(88,166,255,0.05); border-radius: 0 6px 6px 0; font-size: 0.88rem; color: var(--muted); line-height: 1.8; white-space: pre-wrap; }
+    .invalidations-block { border-left-color: var(--danger); background: rgba(248,81,73,0.04); }
+    .block-label { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--secondary); font-weight: 600; margin-bottom: 0.5rem; }
+    .invalidations-block .block-label { color: var(--danger); }
     .stances-section { padding: 2.5rem 2rem; }
     .stances-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; }
     @media (max-width: 700px) { .stances-grid { grid-template-columns: repeat(2,1fr); } }
@@ -521,6 +528,18 @@ function generateHtmlReport(opts: {
     <div class="decision-block">
       <p class="decision-main">${finalDecision || escapeHtml(memo.split("\n").find(l => l.trim() && !l.startsWith("#")) || "")}</p>
     </div>
+    ${actionNow ? `<div class="action-now-block">
+      <div class="block-label">What To Do Now</div>
+      ${actionNow}
+    </div>` : ""}
+    ${scenarioTree ? `<div class="scenario-block">
+      <div class="block-label">Scenario Tree</div>
+      ${scenarioTree}
+    </div>` : ""}
+    ${invalidations ? `<div class="invalidations-block">
+      <div class="block-label">Invalidations</div>
+      ${invalidations}
+    </div>` : ""}
     ${riskSection ? `<div class="risk-block">
       <div class="risk-label">風險提示</div>
       ${riskSection}
@@ -970,6 +989,12 @@ export default function (pi: ExtensionAPI) {
         `撰寫結構化報告，包含以下章節：\n` +
         `## Final Decision\n` +
         `[整體市場觀點和核心建議 — 要果斷]\n\n` +
+        `## What To Do Now\n` +
+        `[請直接回答：若我已持倉 / 半倉 / 空手 / 已錯過最佳防守點，各自現在該怎麼做。先講現在可執行動作，再講市場觀點]\n\n` +
+        `## Scenario Tree\n` +
+        `[拆成 Bull Rebound / Base / Bear Continuation 三種情境；每個情境都要寫觸發條件、最可能發生時的最佳動作]\n\n` +
+        `## Invalidations\n` +
+        `[哪些條件出現代表原判斷失效？失效後第一個動作是什麼？]\n\n` +
         `## 長期宏觀部位\n` +
         `[方向、進場區間、目標價、止損位、倉位比例]\n\n` +
         `## 搖擺交易操作\n` +
@@ -986,7 +1011,7 @@ export default function (pi: ExtensionAPI) {
         `[3-5 個具體可執行的操作步驟]\n\n` +
         `## Deliberation Summary\n` +
         `[討論如何展開，什麼因素影響了最終判斷]\n\n` +
-        `重要：全程使用繁體中文。章節標題保持英文以便解析。技術術語可保留英文。${errorNote}`;
+        `重要：全程使用繁體中文。章節標題保持英文以便解析。技術術語可保留英文。重點不是事後檢討，而是回答現在要怎麼做。${errorNote}`;
 
       const synthResult = await runSubagent(ceoSystemPrompt, synthesisPrompt, ceoModel, "none");
       const memo = synthResult.output;
@@ -1597,6 +1622,12 @@ export default function (pi: ExtensionAPI) {
         `撰寫結構化報告，包含以下章節：\n` +
         `## Final Decision\n` +
         `[整體市場觀點和核心建議 — 要果斷]\n\n` +
+        `## What To Do Now\n` +
+        `[請直接回答：若我已持倉 / 半倉 / 空手 / 已錯過最佳防守點，各自現在該怎麼做。先講現在可執行動作，再講市場觀點]\n\n` +
+        `## Scenario Tree\n` +
+        `[拆成 Bull Rebound / Base / Bear Continuation 三種情境；每個情境都要寫觸發條件、最可能發生時的最佳動作]\n\n` +
+        `## Invalidations\n` +
+        `[哪些條件出現代表原判斷失效？失效後第一個動作是什麼？]\n\n` +
         `## 長期宏觀部位\n` +
         `[方向、進場區間、目標價、止損位、倉位比例]\n\n` +
         `## 搖擺交易操作\n` +
@@ -1613,7 +1644,7 @@ export default function (pi: ExtensionAPI) {
         `[3-5 個具體可執行的操作步驟]\n\n` +
         `## Deliberation Summary\n` +
         `[互動討論如何展開，人類委員的參與如何影響了最終判斷]\n\n` +
-        `重要：全程使用繁體中文。章節標題保持英文以便解析。技術術語可保留英文。`;
+        `重要：全程使用繁體中文。章節標題保持英文以便解析。技術術語可保留英文。重點不是事後檢討，而是回答現在要怎麼做。`;
 
       const synthResult = await runSubagent(ceoSystemPrompt, synthesisPrompt, sess.ceoModel, "none");
       const memo = synthResult.output;

@@ -1,0 +1,31 @@
+# Open Questions
+# Unresolved questions and hypotheses about this project
+
+open_questions:
+  - date_added: "2026-04-06"
+    question: "What is the meta-orchestrator board's exact role vs individual boards?"
+    status: open
+
+  - date_added: "2026-04-06"
+    question: "Are Pi board agents reusable across boards or board-specific?"
+    status: open
+
+  - date_added: "2026-04-06"
+    question: "What triggers the status line auto-switching logic (status_line_auto.py)?"
+    status: open
+
+  - date_added: "2026-04-06"
+    question: "Is there a unified data flow between Pi boards and CC skills, or fully separate?"
+    status: open
+
+  - date_added: "2026-04-06"
+    question: "football-data skill has SQLite DB (fc26.db) — shared with football-betting-board?"
+    status: open
+
+  - date_added: "2026-04-06"
+    question: "What is the ALI command group for? (ali-budget, ali-payment, ali-payroll, etc.)"
+    status: open
+
+  - date_added: "2026-04-08"
+    question: "Should mental model be extended to other Pi boards (football, drip, execution)?"
+    status: open

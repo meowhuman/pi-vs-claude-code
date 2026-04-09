@@ -1,0 +1,408 @@
+{
+  "snapshot_date": "2026-04-03",
+  "reporting_currency": "USD",
+  "source_type": "manual_from_screenshots",
+  "notes": [
+    "資料根據使用者提供的券商截圖手動整理，未連接券商 API。",
+    "已盡量使用 USD 作為投資組合主幣別。",
+    "對於原始截圖以 HKD 顯示且未提供可驗證匯率的欄位，保留 native_currency，未強行換算成 USD。"
+  ],
+  "accounts": [
+    {
+      "account_id": "broker_a_futu_2130",
+      "broker": "Futu",
+      "account_label": "保證金綜合帳戶(2130)",
+      "base_currency": "USD",
+      "summary": {
+        "total_assets": 116617.61,
+        "ytd_pnl": -2986.12,
+        "ytd_return_pct": -2.5
+      },
+      "asset_allocation_pct": {
+        "cash": 1.76,
+        "stocks": 13.44,
+        "funds": 34.88,
+        "bonds": 14.62,
+        "futures": 0.09,
+        "etfs": 35.22
+      },
+      "cash": [
+        {
+          "currency": "HKD",
+          "cash_buying_power": 1858.32,
+          "conversion_to_usd_applied": false
+        }
+      ],
+      "holdings": [
+        {
+          "symbol": "09988",
+          "name": "阿里巴巴-W",
+          "asset_type": "stock",
+          "region": "HK",
+          "currency": "HKD",
+          "quantity": 300,
+          "last_price": 118.5,
+          "cost_basis": 129.0,
+          "market_value": 35550.0,
+          "conversion_to_usd_applied": false
+        },
+        {
+          "symbol": "01299",
+          "name": "友邦保險",
+          "asset_type": "stock",
+          "region": "HK",
+          "currency": "HKD",
+          "quantity": 1,
+          "last_price": 86.15,
+          "cost_basis": 70.6,
+          "market_value": 86.15,
+          "conversion_to_usd_applied": false
+        },
+        {
+          "symbol": "AMZN",
+          "name": "Amazon",
+          "asset_type": "stock",
+          "region": "US",
+          "currency": "USD",
+          "quantity": 24,
+          "last_price": 209.77,
+          "cost_basis": 222.292,
+          "market_value": 5034.48
+        },
+        {
+          "symbol": "GLD",
+          "name": "SPDR Gold Shares",
+          "asset_type": "etf",
+          "region": "US",
+          "currency": "USD",
+          "quantity": 14,
+          "last_price": 429.41,
+          "cost_basis": 278.15,
+          "market_value": 6011.74
+        },
+        {
+          "symbol": "GOOG",
+          "name": "Alphabet C",
+          "asset_type": "stock",
+          "region": "US",
+          "currency": "USD",
+          "quantity": 9,
+          "last_price": 294.46,
+          "cost_basis": 167.0,
+          "market_value": 2650.14
+        },
+        {
+          "symbol": "INDA",
+          "name": "iShares MSCI India ETF",
+          "asset_type": "etf",
+          "region": "US",
+          "currency": "USD",
+          "quantity": 58,
+          "last_price": 46.65,
+          "cost_basis": 49.669,
+          "market_value": 2705.7
+        },
+        {
+          "symbol": "OKLO",
+          "name": "Oklo Inc",
+          "asset_type": "stock",
+          "region": "US",
+          "currency": "USD",
+          "quantity": 19,
+          "last_price": 48.13,
+          "cost_basis": 105.483,
+          "market_value": 914.47
+        },
+        {
+          "symbol": "SPY",
+          "name": "SPDR S&P 500 ETF",
+          "asset_type": "etf",
+          "region": "US",
+          "currency": "USD",
+          "quantity": 8,
+          "last_price": 655.83,
+          "cost_basis": 578.155,
+          "market_value": 5246.64
+        },
+        {
+          "symbol": "TSLA",
+          "name": "Tesla",
+          "asset_type": "stock",
+          "region": "US",
+          "currency": "USD",
+          "quantity": 7,
+          "last_price": 360.59,
+          "cost_basis": 384.0,
+          "market_value": 2524.13
+        },
+        {
+          "symbol": "VOO",
+          "name": "Vanguard S&P 500 ETF",
+          "asset_type": "etf",
+          "region": "US",
+          "currency": "USD",
+          "quantity": 33,
+          "last_price": 602.99,
+          "cost_basis": 565.327,
+          "market_value": 19898.67
+        },
+        {
+          "symbol": "XLK",
+          "name": "Technology Select Sector SPDR Fund",
+          "asset_type": "etf",
+          "region": "US",
+          "currency": "USD",
+          "quantity": 53,
+          "last_price": 135.99,
+          "cost_basis": 123.776,
+          "market_value": 7207.47
+        }
+      ],
+      "account_native_summaries": {
+        "hk_holdings_market_value_hkd": 35636.61,
+        "hk_holdings_pnl_hkd": -3133.99,
+        "us_holdings_market_value_usd": 52231.45,
+        "us_holdings_pnl_usd": 4221.34
+      }
+    },
+    {
+      "account_id": "broker_b_ibkr_u6822296",
+      "broker": "IBKR",
+      "account_label": "U6822296",
+      "base_currency": "USD_preferred",
+      "summary": {
+        "net_liquidation_value_native": 780860.41,
+        "net_liquidation_value_native_currency": "HKD",
+        "one_month_pnl_native": -30487.25,
+        "one_month_pnl_native_currency": "HKD",
+        "one_month_return_pct": -3.74,
+        "daily_pnl_native": -394,
+        "daily_pnl_native_currency": "UNKNOWN",
+        "conversion_to_usd_applied": false
+      },
+      "cash": [
+        {
+          "currency": "CAD",
+          "amount": 807.8,
+          "conversion_to_usd_applied": false
+        },
+        {
+          "currency": "GBP",
+          "amount": 3000.0,
+          "conversion_to_usd_applied": false
+        },
+        {
+          "currency": "HKD",
+          "amount": 32.15,
+          "conversion_to_usd_applied": false
+        },
+        {
+          "currency": "JPY",
+          "amount": 75300.0,
+          "conversion_to_usd_applied": false
+        },
+        {
+          "currency": "USD",
+          "amount": 69000.0,
+          "conversion_to_usd_applied": true
+        },
+        {
+          "currency": "UNKNOWN",
+          "amount": 580000.0,
+          "label": "總計現金（截圖顯示，幣別未完全明示）",
+          "conversion_to_usd_applied": false
+        }
+      ],
+      "holdings": [
+        {
+          "symbol": "DX",
+          "name": "DX NYBOT Jun15'26 @NYBOT",
+          "asset_type": "future",
+          "region": "US",
+          "currency": "UNKNOWN",
+          "quantity": -1,
+          "last_price": 99.855,
+          "pnl": -5.0,
+          "market_value": null,
+          "conversion_to_usd_applied": false
+        },
+        {
+          "symbol": "IONQ",
+          "name": "IonQ",
+          "asset_type": "stock",
+          "region": "US",
+          "currency": "USD",
+          "quantity": 55,
+          "last_price": 29.2,
+          "pnl": 77.55,
+          "market_value": 1606.0
+        },
+        {
+          "symbol": "SLV",
+          "name": "iShares Silver Trust",
+          "asset_type": "etf",
+          "region": "US",
+          "currency": "USD",
+          "quantity": 31,
+          "last_price": 65.81,
+          "pnl": -72.22,
+          "market_value": 2040.11
+        },
+        {
+          "symbol": "TSLA",
+          "name": "Tesla",
+          "asset_type": "stock",
+          "region": "US",
+          "currency": "USD",
+          "quantity": 3,
+          "last_price": 361.26,
+          "pnl": -60.0,
+          "market_value": 1083.78
+        },
+        {
+          "symbol": "VOO",
+          "name": "Vanguard S&P 500 ETF",
+          "asset_type": "etf",
+          "region": "US",
+          "currency": "USD",
+          "quantity": 24,
+          "last_price": 602.95,
+          "pnl": 15.6,
+          "market_value": 14470.8
+        },
+        {
+          "symbol": "XLK",
+          "name": "Technology Select Sector SPDR Fund",
+          "asset_type": "etf",
+          "region": "US",
+          "currency": "USD",
+          "quantity": 30,
+          "last_price": 135.83,
+          "pnl": 27.6,
+          "market_value": 4074.9
+        },
+        {
+          "symbol": "XLY",
+          "name": "Consumer Discretionary Select Sector SPDR Fund",
+          "asset_type": "etf",
+          "region": "US",
+          "currency": "USD",
+          "quantity": 20,
+          "last_price": 108.11,
+          "pnl": -33.8,
+          "market_value": 2162.2
+        }
+      ]
+    }
+  ],
+  "aggregate_known_positions": [
+    {
+      "symbol": "VOO",
+      "asset_type": "etf",
+      "currency": "USD",
+      "total_quantity": 57,
+      "accounts": ["broker_a_futu_2130", "broker_b_ibkr_u6822296"]
+    },
+    {
+      "symbol": "XLK",
+      "asset_type": "etf",
+      "currency": "USD",
+      "total_quantity": 83,
+      "accounts": ["broker_a_futu_2130", "broker_b_ibkr_u6822296"]
+    },
+    {
+      "symbol": "SPY",
+      "asset_type": "etf",
+      "currency": "USD",
+      "total_quantity": 8,
+      "accounts": ["broker_a_futu_2130"]
+    },
+    {
+      "symbol": "XLY",
+      "asset_type": "etf",
+      "currency": "USD",
+      "total_quantity": 20,
+      "accounts": ["broker_b_ibkr_u6822296"]
+    },
+    {
+      "symbol": "INDA",
+      "asset_type": "etf",
+      "currency": "USD",
+      "total_quantity": 58,
+      "accounts": ["broker_a_futu_2130"]
+    },
+    {
+      "symbol": "GLD",
+      "asset_type": "etf",
+      "currency": "USD",
+      "total_quantity": 14,
+      "accounts": ["broker_a_futu_2130"]
+    },
+    {
+      "symbol": "SLV",
+      "asset_type": "etf",
+      "currency": "USD",
+      "total_quantity": 31,
+      "accounts": ["broker_b_ibkr_u6822296"]
+    },
+    {
+      "symbol": "AMZN",
+      "asset_type": "stock",
+      "currency": "USD",
+      "total_quantity": 24,
+      "accounts": ["broker_a_futu_2130"]
+    },
+    {
+      "symbol": "GOOG",
+      "asset_type": "stock",
+      "currency": "USD",
+      "total_quantity": 9,
+      "accounts": ["broker_a_futu_2130"]
+    },
+    {
+      "symbol": "TSLA",
+      "asset_type": "stock",
+      "currency": "USD",
+      "total_quantity": 10,
+      "accounts": ["broker_a_futu_2130", "broker_b_ibkr_u6822296"]
+    },
+    {
+      "symbol": "OKLO",
+      "asset_type": "stock",
+      "currency": "USD",
+      "total_quantity": 19,
+      "accounts": ["broker_a_futu_2130"]
+    },
+    {
+      "symbol": "IONQ",
+      "asset_type": "stock",
+      "currency": "USD",
+      "total_quantity": 55,
+      "accounts": ["broker_b_ibkr_u6822296"]
+    },
+    {
+      "symbol": "09988",
+      "asset_type": "stock",
+      "currency": "HKD",
+      "total_quantity": 300,
+      "accounts": ["broker_a_futu_2130"],
+      "conversion_to_usd_applied": false
+    },
+    {
+      "symbol": "01299",
+      "asset_type": "stock",
+      "currency": "HKD",
+      "total_quantity": 1,
+      "accounts": ["broker_a_futu_2130"],
+      "conversion_to_usd_applied": false
+    },
+    {
+      "symbol": "DX",
+      "asset_type": "future",
+      "currency": "UNKNOWN",
+      "total_quantity": -1,
+      "accounts": ["broker_b_ibkr_u6822296"],
+      "conversion_to_usd_applied": false
+    }
+  ]
+}

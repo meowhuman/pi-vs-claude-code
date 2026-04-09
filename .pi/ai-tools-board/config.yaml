@@ -9,12 +9,6 @@ board:
   - name: director
     path: .pi/ai-tools-board/agents/director/director.md
     active: true
-  - name: music-ai-scout
-    path: .pi/ai-tools-board/agents/music-ai-scout/music-ai-scout.md
-    active: true
-  - name: video-ai-scout
-    path: .pi/ai-tools-board/agents/video-ai-scout/video-ai-scout.md
-    active: true
   - name: coding-ai-scout
     path: .pi/ai-tools-board/agents/coding-ai-scout/coding-ai-scout.md
     active: true
@@ -24,13 +18,33 @@ board:
   - name: github-researcher
     path: .pi/ai-tools-board/agents/github-researcher/github-researcher.md
     active: true
+  - name: agentic-architect
+    path: .pi/ai-tools-board/agents/agentic-architect/agentic-architect.md
+    active: true
+  - name: cost-performance-analyst
+    path: .pi/ai-tools-board/agents/cost-performance-analyst/cost-performance-analyst.md
+    active: true
+  - name: eval-engineer
+    path: .pi/ai-tools-board/agents/eval-engineer/eval-engineer.md
+    active: true
+  - name: music-ai-scout
+    path: .pi/ai-tools-board/agents/music-ai-scout/music-ai-scout.md
+    active: true
+  - name: video-ai-scout
+    path: .pi/ai-tools-board/agents/video-ai-scout/video-ai-scout.md
+    active: true
 
 presets:
-  full: [director, music-ai-scout, video-ai-scout, coding-ai-scout, system-analyst, github-researcher]
-  discovery: [director, music-ai-scout, video-ai-scout, coding-ai-scout]
+  full: [director, coding-ai-scout, system-analyst, github-researcher, agentic-architect, cost-performance-analyst, eval-engineer]
+  core-ai-systems: [director, coding-ai-scout, system-analyst, github-researcher, agentic-architect, cost-performance-analyst]
+  agentic-review: [director, system-analyst, coding-ai-scout, github-researcher, agentic-architect, eval-engineer]
+  cost-down: [director, system-analyst, cost-performance-analyst, eval-engineer]
+  new-tech-scout: [director, coding-ai-scout, github-researcher, agentic-architect]
+  media-ai: [director, music-ai-scout, video-ai-scout, system-analyst]
+  discovery: [director, coding-ai-scout, github-researcher, agentic-architect]
   music: [director, music-ai-scout]
   video: [director, video-ai-scout]
-  coding: [director, coding-ai-scout]
+  coding: [director, coding-ai-scout, agentic-architect]
   github: [director, github-researcher]
-  systems: [director, system-analyst]
-  quick: [director, coding-ai-scout]
+  systems: [director, system-analyst, cost-performance-analyst]
+  quick: [director, coding-ai-scout, system-analyst]

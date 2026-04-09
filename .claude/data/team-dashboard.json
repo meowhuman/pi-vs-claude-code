@@ -1,0 +1,11 @@
+{
+  "CortexAI": {
+    "model": "glm-5-turbo",
+    "input_tokens": 111844,
+    "output_tokens": 8412,
+    "cost": 0.461712,
+    "status": "active",
+    "session_start": "2026-04-06T19:32:43.554714",
+    "last_seen": "2026-04-06T19:33:42.893147"
+  }
+}

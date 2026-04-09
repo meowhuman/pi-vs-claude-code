@@ -139,14 +139,43 @@ def get_prompt_icon(prompt):
         return "💬"
 
 
+def get_cc_switch_model():
+    """Get current model from cc-switch config if available."""
+    try:
+        import json
+        cc_switch_config = Path.home() / ".cc-switch" / "config.json"
+        if cc_switch_config.exists():
+            with open(cc_switch_config, "r") as f:
+                config = json.load(f)
+            claude_config = config.get("claude", {})
+            current_id = claude_config.get("current", "")
+            providers = claude_config.get("providers", {})
+            if current_id and current_id in providers:
+                provider = providers[current_id]
+                env = provider.get("settingsConfig", {}).get("env", {})
+                # Return the ANTHROPIC_MODEL env var (e.g., kimi-k2.5)
+                model = env.get("ANTHROPIC_MODEL", "")
+                if model:
+                    return model
+                # Fallback to provider name
+                return provider.get("name", "")
+    except Exception:
+        pass
+    return None
+
+
 def generate_status_line(input_data):
     """Generate the status line with agent name and most recent prompt."""
     # Extract session ID from input data
     session_id = input_data.get("session_id", "unknown")
 
-    # Get model name
-    model_info = input_data.get("model", {})
-    model_name = model_info.get("display_name", "Claude")
+    # Get model name - prefer cc-switch config over Claude Code's reported model
+    cc_switch_model = get_cc_switch_model()
+    if cc_switch_model:
+        model_name = cc_switch_model
+    else:
+        model_info = input_data.get("model", {})
+        model_name = model_info.get("display_name", "Claude")
 
     # Get session data
     session_data, error = get_session_data(session_id)

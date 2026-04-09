@@ -268,11 +268,40 @@ def update_self_in_dashboard(
     dashboard[agent_name] = entry
 
 
+def get_cc_switch_model() -> str:
+    """Get current model from cc-switch config if available."""
+    try:
+        config_path = Path.home() / ".cc-switch" / "config.json"
+        if config_path.exists():
+            with open(config_path, "r") as f:
+                config = json.load(f)
+            claude_config = config.get("claude", {})
+            current_id = claude_config.get("current", "")
+            providers = claude_config.get("providers", {})
+            if current_id and current_id in providers:
+                provider = providers[current_id]
+                env = provider.get("settingsConfig", {}).get("env", {})
+                model = env.get("ANTHROPIC_MODEL", "")
+                if model:
+                    return model
+                return provider.get("name", "")
+    except Exception:
+        pass
+    return ""
+
+
 def generate_status(input_data: dict) -> str:
     project_dir = get_project_dir()
     session_id: str = input_data.get("session_id", "")
-    model_info: dict = input_data.get("model", {})
-    model_name: str = model_info.get("id", model_info.get("display_name", ""))
+
+    # Prefer cc-switch model over Claude Code's reported model
+    cc_switch_model = get_cc_switch_model()
+    if cc_switch_model:
+        model_name = cc_switch_model
+    else:
+        model_info: dict = input_data.get("model", {})
+        model_name: str = model_info.get("id", model_info.get("display_name", ""))
+
     transcript_path: str = input_data.get("transcript_path", "")
 
     # Detect current agent name

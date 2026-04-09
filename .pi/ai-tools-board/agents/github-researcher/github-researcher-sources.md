@@ -74,3 +74,35 @@
 | 056 | 2026-04-02 | commit | https://github.com/NanmiCoder/claude-code-haha | 洩漏碼 repo — 3,098 stars，最後 push 4/1 05:59Z |
 | 057 | 2026-04-02 | commit | https://github.com/openclaw/openclaw/commit/765e8fb | OpenClaw: perf(memory) trim matrix send media imports |
 | 058 | 2026-04-02 | commit | https://github.com/openclaw/openclaw/commit/7514324 | OpenClaw: docs plugin architecture table formatting |
+
+## 第三次全委員會議來源 (2026-04-06 增量)
+
+| ID | 日期 | 類型 | 來源 URL | 說明 |
+|----|------|------|----------|------|
+| 059 | 2026-04-06 | release | https://github.com/anthropics/claude-code/releases/tag/v2.1.92 | Claude Code v2.1.92: Bedrock wizard, /cost model breakdown, policy fail-closed |
+| 060 | 2026-04-06 | release | https://github.com/anthropics/claude-code/releases/tag/v2.1.91 | Claude Code v2.1.91: MCP 500K result size, plugin bin/, /feedback UX |
+| 061 | 2026-04-06 | release | https://github.com/openai/codex/releases/tag/rust-v0.119.0-alpha.11 | Codex Rust v0.119.0-alpha: context-window lineage, subagent analytics |
+| 062 | 2026-04-06 | PR | https://github.com/openai/codex/pull/15915 | Codex: subagent analytics — thread events + model gpt-5.3-codex |
+| 063 | 2026-04-06 | PR | https://github.com/openai/codex/pull/16758 | Codex: context-window lineage headers |
+| 064 | 2026-04-06 | PR | https://github.com/google-gemini/gemini-cli/pull/24649 | Gemini CLI: ACP /about command |
+| 065 | 2026-04-06 | commit | https://github.com/google-gemini/gemini-cli/commit/7311e24 | Gemini CLI: enhance tool confirmation UI and selection layout |
+| 066 | 2026-04-06 | commit | https://github.com/google-gemini/gemini-cli/commit/65024d4 | Gemini CLI: ensure global temp dir always in sandbox allowed paths |
+| 067 | 2026-04-06 | PR | https://github.com/openclaw/openclaw/pull/61563 | OpenClaw: Bedrock Mantle IAM credential auth |
+| 068 | 2026-04-06 | commit | https://github.com/openclaw/openclaw/commit/aeb9ad5 | OpenClaw: ComfyUI workflow media support |
+| 069 | 2026-04-06 | commit | https://github.com/openclaw/openclaw/commit/dc0ee2e | OpenClaw: music generation tooling |
+| 070 | 2026-04-06 | release | https://github.com/block/goose/releases/tag/v1.30.0 | Goose v1.30.0: MCP Roots guide, fast_model, ACP parallel loading |
+| 071 | 2026-04-06 | release | https://github.com/block/goose/releases/tag/v1.29.1 | Goose v1.29.1: macOS Intel code signing fix |
+| 072 | 2026-04-06 | release | https://github.com/Yeachan-Heo/oh-my-codex/releases/tag/v0.11.13 | OmX v0.11.13: CI stability + clawability hardening |
+| 073 | 2026-04-06 | commit | https://github.com/instructkr/claw-code/commit/d94d792 | Claw Code: actionable ids for opaque provider failures |
+| 074 | 2026-04-06 | commit | https://github.com/instructkr/claw-code/commit/af75a23 | Claw Code: Containerfile for Rust workspace |
+| 075 | 2026-04-06 | commit | https://github.com/instructkr/claw-code/commit/bc061ad | Claw Code: tagged binary release workflow |
+| 076 | 2026-04-06 | commit | https://github.com/openclaw/openclaw/commit/699b232 | OpenClaw: Bedrock embedding provider for memory search |
+| 077 | 2026-04-06 | commit | https://github.com/google-gemini/gemini-cli/commit/3f12c1d | Gemini CLI: enable compact tool output by default |
+| 078 | 2026-04-06 | commit | https://github.com/google-gemini/gemini-cli/commit/21a3925 | Gemini CLI: update sandboxing documentation |
+| 079 | 2026-04-06 | commit | https://github.com/openai/codex/commit/4fd5c35 | Codex: subagent analytics — custom events |
+| 080 | 2026-04-06 | commit | https://github.com/openai/codex/commit/91ca49e | Codex: allow disabling environment context injection |
+| 081 | 2026-04-06 | commit | https://github.com/openai/codex/commit/8d19646 | Codex: allow disabling prompt instruction blocks |
+| 082 | 2026-04-06 | repo | https://github.com/stablyai/orca | Orca: next-gen IDE for building with coding agents (427 stars) |
+| 083 | 2026-04-06 | repo | https://github.com/affaan-m/everything-claude-code | everything-claude-code: 140,507 stars (+9,256 from 4/2) |
+| 084 | 2026-04-06 | repo | https://github.com/shareAI-lab/learn-claude-code | learn-claude-code: 48,618 stars (+2,101 from 4/2) |
+| 085 | 2026-04-06 | release | https://github.com/google-gemini/gemini-cli/releases/tag/v0.37.0-preview.1 | Gemini CLI v0.37.0-preview.1: patch fix |

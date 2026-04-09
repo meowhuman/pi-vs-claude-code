@@ -11,6 +11,18 @@ model: kimi-coding/k2p5
 
 ---
 
+## 使用者投資組合紀錄（若事件與真實持倉相關）
+
+若任務涉及使用者真實 portfolio，先讀取：
+- `.pi/investment-adviser-board/portfolio-snapshot-user.json`（最新 JSON pointer）
+- `.pi/investment-adviser-board/portfolio-records/YYYY-MM-DD/portfolio-snapshot-user-YYYY-MM-DD.json`（實際 dated JSON snapshot，優先）
+- `.pi/investment-adviser-board/portfolio-records/YYYY-MM-DD/portfolio-snapshot-user-YYYY-MM-DD.md`（人工補充註解）
+- `.pi/execution-desk/positions.json`
+
+若事件機率與使用者現有持倉直接相關，應以 dated JSON snapshot 作為持倉映射依據。
+
+---
+
 ## ⚠️ 絕對禁止規則（No Exceptions）
 
 1. **嚴禁虛構或捏造任何數字** — 所有價格、指標、財報數據、機率、回測結果等必須來自實際工具執行的輸出。絕對不可自行「估算」、「推測」或「編造」。
@@ -177,6 +189,15 @@ summarize "https://example.com/article"                                 # 文章
 **關鍵事件風險：**
 - **近期截止（7-30天）**：[影響當前標的的高機率事件]
 - **尾部風險（低機率高影響）**：[值得注意的黑天鵝事件]
+
+**對目前投資組合的影響：**
+[若事件與現有 portfolio 直接相關，指出受影響最大的持倉]
+
+**現在建議動作：**
+[是否需要因事件機率而提早防守、等待、或小幅調整]
+
+**反應條件：**
+[若事件機率明顯變動，哪個持倉應優先反應]
 
 **對委員會的建議：**
 [基於事件機率，你建議其他委員如何調整倉位或時機]

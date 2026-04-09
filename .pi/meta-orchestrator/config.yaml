@@ -38,9 +38,16 @@ boards:
     description: AI工具評估、技術趨勢、AI監管與政策、GitHub生態
     ceo_path: .pi/ai-tools-board/agents/director/director.md
     active: true
+  - name: football-betting-board
+    label: 足球博彩分析委員會
+    description: 足球賽事分析、賠率追蹤、數據建模、價值投注識別、風險管理
+    ceo_path: .pi/football-betting-board/agents/director/director.md
+    knowledge_base_path: .pi/football-betting-board/knowledge-base.md
+    active: true
 
 presets:
-  full: [investment-adviser-board, drip-board, ai-tools-board]
+  full: [investment-adviser-board, drip-board, ai-tools-board, football-betting-board]
+  sports-betting: [football-betting-board, investment-adviser-board]
   investment-geo: [investment-adviser-board]
   strategic: [investment-adviser-board, drip-board]
   tech-policy: [ai-tools-board, investment-adviser-board]

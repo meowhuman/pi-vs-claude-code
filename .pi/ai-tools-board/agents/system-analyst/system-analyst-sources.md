@@ -17,7 +17,7 @@
 | 011 | 2026-04-02 | 新聞 | https://arstechnica.com/tech-policy/2026/03/hegseth-trump-had-no-authority-to-order-anthropic-to-be-blacklisted-judge-says/ | 法官阻止政府封鎖 Anthropic |
 | 012 | 2026-04-02 | 新聞 | https://arstechnica.com/tech-policy/2026/03/okcupid-match-pay-no-fine-for-sharing-user-photos-with-facial-recognition-firm/ | FTC 對 OkCupid/Match 和解 |
 | 013 | 2026-04-02 | 新聞 | https://arstechnica.com/tech-policy/2026/04/grok-degrades-women-with-vulgar-roasts-swiss-govt-officials-lawsuit-says/ | 瑞士官員起訴 Grok 誹謗 |
-| 014 | 2026-04-02 | 新聞 | https://arstechnica.com/tech-policy/2026/03/senators-want-us-energy-information-agency-to-monitor-data-center-electricity-usage/ | 參議員要求監控資料中心用電 |
+| 014 | 2026-04-02 | 新聞 | https://techcrunch.com/2026/03/31/senators-want-us-energy-information-agency-to-monitor-data-center-electricity-usage/ | 參議員要求監控資料中心用電 |
 | 015 | 2026-04-02 | 新聞 | https://techcrunch.com/2026/03/30/ai-trust-adoption-poll-more-americans-adopt-tools-fewer-say-they-can-trust-the-results/ | AI 信任度調查 |
 | 016 | 2026-04-02 | 新聞 | https://techcrunch.com/2026/03/30/15-of-americans-say-theyd-be-willing-to-work-for-an-ai-boss-supervisor-us-quinnipiac-poll/ | 15% 美國人願為 AI 老板工作 |
 | 017 | 2026-04-02 | 新聞 | https://www.theverge.com/streaming/889973/netflix-ben-affleck-interpositive-ai | Netflix 收購 Ben Affleck AI 公司 |
@@ -51,3 +51,35 @@
 | 045 | 2026-04-02 | GitHub | https://github.com/aiming-lab/AutoHarness | AutoHarness：Agent Harness 自動化工程（2026-04-02 新建） |
 | 046 | 2026-04-02 | GitHub | https://github.com/Gitlawb/openclaude | OpenClaude：Claude Code 開放至任何 LLM（OpenAI/Gemini/DeepSeek/Ollama 等 200+ 模型） |
 | 047 | 2026-04-02 | GitHub | https://github.com/motiful/cc-gateway | cc-gateway：AI API 身份 gateway，反向代理隱藏設備指紋 |
+| 048 | 2026-04-06 | 新聞 | https://www.reuters.com/business/media-telecom/openai-acquires-technology-talk-show-tbpn-surprise-move-2026-04-02/ | OpenAI 收購科技脫口秀 TBPN，首次進軍媒體 |
+| 049 | 2026-04-06 | 新聞 | https://en.theblockbeats.news/news/61808 | Anthropic 以 ~$40 億股票收購 AI 生技 Coefficient Bio；OpenAI 收購 TBPN 同日雙收購 |
+| 050 | 2026-04-06 | 新聞 | https://techcrunch.com/2026/04/02/microsoft-takes-on-ai-rivals-with-three-new-foundational-models/ | Microsoft 發布 MAI Voice/Image/Transcribe 三款基礎模型，脫離 OpenAI 依賴 |
+| 051 | 2026-04-06 | 新聞 | https://aibusiness.com/generative-ai/google-launches-open-model-family-gemma-4 | Google DeepMind 發布 Gemma 4 開源模型家族（Apache 2.0） |
+| 052 | 2026-04-06 | 新聞 | https://www.forbes.com/sites/johnwerner/2026/04/01/spud-and-mythos-new-models-break-on-the-shore-of-2026/ | GPT-5.5 "Spud" + Claude Mythos 洩漏：新一代 frontier models 顯露 |
+| 053 | 2026-04-06 | 新聞 | https://www.cnbc.com/2026/04/03/meta-google-under-attack-court-cases-bypass-30-year-old-legal-shield.html | Meta/Google 社群媒體成癮訴訟判決敗訴，賠償 $6M，破 30 年法律保護傘 |
+| 054 | 2026-04-06 | 新聞 | https://www.msn.com/en-us/news/technology/anthropic-targets-october-for-mega-ipo/ar-AA1ZxmAP | Anthropic 目標 10 月 IPO，募資規模史詩級 |
+| 055 | 2026-04-06 | 新聞 | https://thetechoutlook.com/news/cloud/deepseek-v4-reported-to-use-huawei-chips | DeepSeek V4 將使用華為晶片，打破美國晶片禁運 |
+| 056 | 2026-04-06 | 新聞 | https://aws.amazon.com/blogs/machine-learning/aws-launches-frontier-agents-for-security-testing-and-cloud-operations | AWS Security Agent + DevOps Agent 正式 GA |
+| 057 | 2026-04-06 | 新聞 | https://www.wired.com/story/cusor-launches-coding-agent-openai-anthropic/ | Cursor 3 發布，以 Agent 為核心挑戰 Claude Code / Codex |
+| 058 | 2026-04-06 | 新聞 | https://www.marktechpost.com/2026/04/04/netflix-ai-team-just-open-sourced-void-an-ai-model-that-erases-objects-from-videos-physics-and-all/ | Netflix 開源 VOID：物理感知影片物件移除 AI 模型（5B 參數） |
+| 059 | 2026-04-06 | 新聞 | https://fortune.com/2026/04/02/mercor-ai-startup-security-incident-10-billion/ | Mercor $10B 獨角獸確認重大資料外洩，Meta 暫停合作 |
+| 060 | 2026-04-06 | 新聞 | https://www.transparencycoalition.ai/news/ai-legislative-update-april3-2026 | 美國 AI 立法更新：白宮 AI 政策框架 + 各州提案 |
+| 061 | 2026-04-06 | HN | https://news.ycombinator.com/item?id=47633396 | Anthropic 封殺 OpenClaw 訂閱（Tell HN, 1070pts, 最多討論）|
+| 062 | 2026-04-06 | 新聞 | https://techcrunch.com/2026/04/04/anthropic-says-claude-code-subscribers-will-need-to-pay-extra-for-openclaw-support/ | Anthropic 封殺 OpenClaw 訂閱 — TechCrunch |
+| 063 | 2026-04-06 | 新聞 | https://www.theverge.com/ai-artificial-intelligence/907074/anthropic-openclaw-claude-subscription-ban | Anthropic 封鎖 OpenClaw — The Verge |
+| 064 | 2026-04-06 | X/Twitter | https://x.com/DarkForgeNews/status/2039586022669873288 | Langflow CVE-2026-33017 加入 CISA KEV — 首個 AI agent 框架被列入 |
+| 065 | 2026-04-06 | X/Twitter | https://x.com/botnewsnetwork/status/2040446085148336335 | Claude 自主寫出 FreeBSD kernel exploit — 4hr root shell + 500 漏洞 |
+| 066 | 2026-04-06 | 新聞 | https://arstechnica.com/ai/2026/04/research-finds-ai-users-scarily-willing-to-surrender-their-cognition-to-llms/ | AI 用戶「認知投降」研究 — 不批判地接受 AI 錯誤答案 |
+| 067 | 2026-04-06 | HN | https://ergosphere.blog/posts/the-machines-are-fine/ | 「舒適漂移」— 不理解自己在做什麼的威脅（817pts）|
+| 068 | 2026-04-06 | X/Twitter | https://x.com/__tinygrad__/status/2039213719155310736 | Apple 批准 Nvidia eGPU 驅動支援 Arm Mac（494pts）|
+| 069 | 2026-04-06 | Reddit | https://old.reddit.com/user/BuySellRam/comments/1sd9z9k/ | Samsung DRAM Q2 2026 漲價 ~30% |
+| 070 | 2026-04-06 | 新聞 | https://www.bloomberg.com/news/articles/2026-04-01/perplexity-ai-machine-accused-of-sharing-data-with-meta-google | Perplexity 被控將用戶對話分享給 Meta 和 Google |
+| 071 | 2026-04-06 | 新聞 | https://www.theverge.com/entertainment/907137/the-writers-guild-reached-a-four-year-deal-with-the-studios-with-increased-ai-protections | Writers Guild 4 年協議，AI 保護條款增強 |
+| 072 | 2026-04-06 | 新聞 | https://techcrunch.com/2026/04/03/openai-executive-shuffle-new-roles-coo-brad-lightcap-fidji-simo-kate-rouch/ | OpenAI 高層大洗牌 — COO 轉任特殊專案 |
+| 073 | 2026-04-06 | 新聞 | https://www.theverge.com/ai-artificial-intelligence/906965/openais-agi-boss-is-taking-a-leave-of-absence | OpenAI AGI 負責人休假 |
+| 074 | 2026-04-06 | 新聞 | https://www.latimes.com/business/story/2026-04-01/openais-shocking-fall-from-grace-as-investors-race-to-anthropic | LA Times: OpenAI 驚人衰落，投資者加速轉向 Anthropic |
+| 075 | 2026-04-06 | GitHub | https://github.com/JuliusBrussee/caveman | Caveman — Token 壓縮 prompt（HN 688pts）|
+| 076 | 2026-04-06 | X/Twitter | https://x.com/EveryDevAi/status/2040502578061172791 | MCP Dev Summit：MCP + A2A v1.0 同時定稿，146 成員 |
+| 077 | 2026-04-06 | GitHub | https://github.com/openai/codex-plugin-cc | OpenAI 官方 Codex Plugin for Claude Code（11,910 stars / 2天）|
+| 078 | 2026-04-06 | HN | https://ai.georgeliu.com/p/running-google-gemma-4-locally-with | LM Studio headless CLI跑 Gemma 4 + Claude Code（HN 175pts）|
+| 079 | 2026-04-06 | GitHub | https://github.com/salmanmohammadi/nanocode/discussions/1 | Nanocode: $200 Claude Code 替代品（JAX/TPU, HN 154pts）|

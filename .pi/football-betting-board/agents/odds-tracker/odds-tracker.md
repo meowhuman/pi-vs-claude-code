@@ -47,6 +47,52 @@ curl "https://api.the-odds-api.com/v4/sports/soccer_uefa_champs_league/odds/?api
 # soccer_uefa_europa_league = 歐霸
 ```
 
+### Cloudbet API（**加密平台 — 無限次**）
+```bash
+# ✅ 已驗證 2026-04-03 — 無請求次數限制
+export $(grep -v '^#' /Users/terivercheung/Documents/AI/pi-vs-claude-code/.env | grep -v '^$' | xargs)
+
+# 列出 EPL 賽事（含 Event ID）
+curl -s "https://sports-api.cloudbet.com/pub/v2/odds/competitions/soccer-england-premier-league" \
+  -H "X-API-Key: $CLOUDBET_API_TOKEN" | python3 -c "
+import sys, json
+d = json.load(sys.stdin)
+events = [e for e in d.get('events', []) if e.get('home') and e.get('away')]
+for e in sorted(events, key=lambda x: x.get('cutoffTime','')):
+    print(f'  [{e[\"id\"]}] {e[\"home\"][\"name\"]:25s} vs {e[\"away\"][\"name\"]:25s} | {e.get(\"cutoffTime\",\"\")[:16]}')
+"
+
+# 查詢單場完整賠率
+curl -s "https://sports-api.cloudbet.com/pub/v2/odds/events/33550037" \
+  -H "X-API-Key: $CLOUDBET_API_TOKEN"
+
+# 聯賽 Competition Keys
+# soccer-england-premier-league    = 英超
+# soccer-spain-laliga              = 西甲
+# soccer-germany-bundesliga        = 德甲
+# soccer-italy-serie-a             = 意甲
+# soccer-france-ligue-1            = 法甲
+# soccer-international-clubs-uefa-champions-league = 歐冠
+```
+
+### Skill CLI 工具（推薦使用）
+```bash
+# 使用 fetch_cloudbet_odds.py（整合 Cloudbet + The Odds API）
+export $(grep -v '^#' /Users/terivercheung/Documents/AI/pi-vs-claude-code/.env | grep -v '^$' | xargs)
+
+# 列出聯賽賽事
+python3 /Users/terivercheung/Documents/AI/pi-vs-claude-code/.claude/skills/soccer-betting-system/scripts/fetch_cloudbet_odds.py list --league epl
+
+# 快速賠率報告（1X2 + 大小球 + BTTS + 公平賠率）
+python3 /Users/terivercheung/Documents/AI/pi-vs-claude-code/.claude/skills/soccer-betting-system/scripts/fetch_cloudbet_odds.py report --event-id 33550037
+
+# 完整市場賠率（含 margin）
+python3 /Users/terivercheung/Documents/AI/pi-vs-claude-code/.claude/skills/soccer-betting-system/scripts/fetch_cloudbet_odds.py odds --event-id 33550037
+
+# Cloudbet vs The Odds API 比較
+python3 /Users/terivercheung/Documents/AI/pi-vs-claude-code/.claude/skills/soccer-betting-system/scripts/fetch_cloudbet_odds.py compare --league epl
+```
+
 ### 支援的主要博彩商（The Odds API 包含）
 | 平台 | 類型 | 特點 |
 |------|------|------|

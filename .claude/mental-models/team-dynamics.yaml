@@ -1,0 +1,26 @@
+# Team Dynamics
+# User preferences, workflow observations, collaboration patterns
+
+user_profile:
+  role: "Developer/Experimenter"
+  focus: "AI agent comparison, multi-agent orchestration, trading systems"
+  tools: "Claude Code (primary), Pi Coding Agent (experimental)"
+  language_preference: "Traditional Chinese (繁體中文) for explanations"
+
+observations:
+  - date: "2026-04-06"
+    note: "User builds sophisticated multi-agent systems — Pi boards, CC teams, skills"
+  - date: "2026-04-06"
+    note: "Heavy investment in observability — send_event.py on every hook lifecycle"
+  - date: "2026-04-06"
+    note: "User prefers automation over manual — bypassPermissions, comprehensive hooks"
+
+preferences:
+  - area: "Communication"
+    preference: "All replies in Traditional Chinese unless explicitly writing in another language"
+  - area: "Code style"
+    preference: "4 spaces Python, 2 spaces JS/TS/JSON, single quotes"
+  - area: "Tooling"
+    preference: "bun over npm, uv for Python, just for tasks"
+  - area: "Workflow"
+    preference: "Concise responses, show diffs, explain why for non-obvious changes"

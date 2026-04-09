@@ -9,7 +9,8 @@
  *   ├── Geopolitics Expert  ── 共享跨板專家（優先運行）
  *   ├── Investment Adviser Board (CEO)
  *   ├── Drip Music Board (Brand Lead)
- *   └── AI Tools Board (Director)
+ *   ├── AI Tools Board (Director)
+ *   └── Football Betting Board (Director)
  *
  * Config: .pi/meta-orchestrator/config.yaml
  * Agents: .pi/meta-orchestrator/agents/

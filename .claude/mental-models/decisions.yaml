@@ -1,0 +1,43 @@
+# Decisions
+# Key architectural and design decisions in this project
+
+decisions:
+  - date: "2026-03-12"
+    decision: "Dual agent ecosystem — Pi + Claude Code coexist in same repo"
+    rationale: "Purpose of project is comparison/experimentation between agents"
+    context: "Shared specs/, docs/, resources/ but separate config and runtime"
+
+  - date: "2026-03-12"
+    decision: "bun as package manager, just as task runner"
+    rationale: "Lightweight, fast, user preference"
+    context: "Not npm/yarn/pnpm"
+
+  - date: "2026-03-12"
+    decision: "Python hooks via uv run, not shell scripts"
+    rationale: "More structured, testable, supports dependencies"
+    context: "All .claude/hooks/*.py run with uv run"
+
+  - date: "2026-03-12"
+    decision: "bypassPermissions mode for Claude Code"
+    rationale: "Heavy automation use — hooks fire on every tool use, need no friction"
+    context: "Only appropriate for personal playground, not shared production"
+
+  - date: "2026-03-12"
+    decision: "3-tier team architecture for Claude Code agents"
+    rationale: "Orchestrator -> Leads -> Workers provides good separation"
+    context: "Leads use opus for reasoning, workers use sonnet for speed/cost"
+
+  - date: "2026-03-15"
+    decision: "Pi board system — 7 specialized boards under .pi/"
+    rationale: "Each board is self-contained: config, agents, memos"
+    context: "Boards: ai-tools, investment, football, execution, drip, intel, meta-orchestrator"
+
+  - date: "2026-03-15"
+    decision: "Pi shares commands with .claude/commands/ via settings.json"
+    rationale: "Cross-agent compatibility — same slash commands in both systems"
+    context: ".pi/settings.json prompts: [../.claude/commands]"
+
+  - date: "2026-04-06"
+    decision: "Mental Model skill with YAML expertise files"
+    rationale: "Persistent knowledge that survives conversation context limits"
+    context: "Stored in .claude/mental-models/, max 200 lines per file"

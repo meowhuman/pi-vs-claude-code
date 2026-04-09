@@ -30,15 +30,22 @@ board:
   - name: backtest
     path: .pi/investment-adviser-board/agents/backtest/backtest.md
     active: true
+  - name: position-manager
+    path: .pi/investment-adviser-board/agents/position-manager/position-manager.md
+    active: true
 
 presets:
-  full: [ceo, macro-strategist, fundamental-analyst, technical-analyst, risk-officer, market-intelligence, prediction-market-analyst, backtest]
+  full: [ceo, macro-strategist, fundamental-analyst, technical-analyst, risk-officer, market-intelligence, prediction-market-analyst, backtest, position-manager]
   macro-focus: [ceo, macro-strategist, fundamental-analyst, risk-officer, prediction-market-analyst, backtest]
-  swing-trade: [ceo, technical-analyst, risk-officer, backtest]
-  quick: [ceo, technical-analyst, risk-officer]
+  swing-trade: [ceo, technical-analyst, risk-officer, backtest, position-manager]
+  quick: [ceo, technical-analyst, risk-officer, position-manager]
   event-driven: [ceo, macro-strategist, prediction-market-analyst, risk-officer, backtest]
   pm-macro: [ceo, macro-strategist, prediction-market-analyst, backtest]
   pm-technical: [ceo, prediction-market-analyst, technical-analyst]
   ta-backtest: [ceo, technical-analyst, backtest]
   pm-only: [ceo, prediction-market-analyst]
   ta-only: [ceo, technical-analyst]
+  action-now: [ceo, technical-analyst, risk-officer, market-intelligence, backtest, position-manager]
+  position-rescue: [ceo, technical-analyst, risk-officer, macro-strategist, position-manager]
+  re-entry: [ceo, technical-analyst, market-intelligence, prediction-market-analyst, backtest, position-manager]
+  event-crisis: [ceo, macro-strategist, market-intelligence, risk-officer, prediction-market-analyst, position-manager]

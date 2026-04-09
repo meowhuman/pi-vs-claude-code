@@ -33,6 +33,12 @@
 
 ## 監控頻道 / 學習資源
 
+### X (Twitter) 技術分析師監控列表
+- **完整名單**: `./x-technical-analysts-monitor.md`
+- **高優先級**: Peter Brandt (@PeterLBrandt), Linda Raschke (@LindaRaschke), Mark Minervini (@MarkMinervini)
+- **日常檢查**: Scott Redler (@RedDogT3), Helene Meisler (@hmeisler)
+- **極端市況**: Chris Kimble (@KimbleCharting), Arun Chopra (@FusionptCapital)
+
 ### YouTube: 茄利略・CUP (@KelileoCUP)
 - **頻道**: https://www.youtube.com/@KelileoCUP
 - **風格**: 粵語投資評論，混合基本面 + 技術面分析，擅長市寬、VIX、均線、capitulation 識別

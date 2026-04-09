@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>投資顧問委員會報告</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0d1117; --card-bg: #161b22; --accent: #d4a017; --secondary: #58a6ff;
+      --text: #e6edf3; --muted: #8b949e; --border: rgba(212,160,23,0.2);
+      --border-accent: #d4a017; --success: #3fb950; --danger: #f85149;
+      --divider: rgba(255,255,255,0.06); --navy: #1c2333;
+    }
+    body { background: var(--bg); color: var(--text); font-family: 'Plus Jakarta Sans', sans-serif; font-size: 15px; line-height: 1.7; min-height: 100vh; }
+    .container { max-width: 960px; margin: 0 auto; padding: 0 2rem; }
+    header { text-align: center; padding: 4rem 2rem 2.5rem; border-bottom: 1px solid var(--divider); background: linear-gradient(180deg, rgba(212,160,23,0.05) 0%, transparent 100%); }
+    .logo { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.35em; color: var(--accent); text-transform: uppercase; margin-bottom: 0.6rem; }
+    .title { font-size: 1.9rem; font-weight: 800; color: var(--text); margin-bottom: 0.4rem; }
+    .subtitle { font-size: 0.82rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-bottom: 1.2rem; }
+    .meta { font-size: 0.8rem; color: var(--muted); display: flex; align-items: center; justify-content: center; gap: 0.5rem; flex-wrap: wrap; }
+    .dot { opacity: 0.4; }
+    .meta-badge { background: rgba(212,160,23,0.12); color: var(--accent); padding: 0.15rem 0.7rem; border-radius: 20px; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em; }
+    section { padding: 2.5rem 0; border-bottom: 1px solid var(--divider); }
+    section:last-of-type { border-bottom: none; }
+    .section-label { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.2rem; }
+    .brief-section { background: rgba(88,166,255,0.03); padding: 2.5rem 2rem; }
+    .brief-heading { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--secondary); margin: 1rem 0 0.4rem; }
+    .brief-heading:first-child { margin-top: 0; }
+    .brief-line { color: var(--muted); font-size: 0.9rem; line-height: 1.8; max-width: 700px; }
+    .brief-spacer { height: 0.5rem; }
+    .ceo-framing { margin-top: 1rem; padding: 1rem 1.2rem; border-left: 3px solid rgba(212,160,23,0.4); background: rgba(212,160,23,0.04); border-radius: 0 6px 6px 0; font-size: 0.88rem; color: var(--muted); line-height: 1.8; }
+    .ceo-label { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); font-weight: 600; margin-bottom: 0.5rem; }
+    .decision-section { background: rgba(212,160,23,0.04); padding: 2.5rem 2rem; }
+    .decision-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-bottom: 1.2rem; }
+    @media (max-width: 600px) { .decision-grid { grid-template-columns: 1fr; } }
+    .decision-card { border-radius: 10px; padding: 1.3rem 1.5rem; border: 1px solid var(--border); }
+    .decision-card.macro { background: rgba(212,160,23,0.06); border-top: 3px solid var(--accent); }
+    .decision-card.swing { background: rgba(63,185,80,0.05); border-top: 3px solid var(--success); }
+    .decision-card-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 0.8rem; }
+    .decision-card.macro .decision-card-label { color: var(--accent); }
+    .decision-card.swing .decision-card-label { color: var(--success); }
+    .decision-text { font-size: 0.92rem; font-weight: 500; color: var(--text); line-height: 1.75; white-space: pre-wrap; }
+    .decision-block { border-left: 4px solid var(--accent); padding: 1.2rem 1.5rem; background: rgba(212,160,23,0.05); border-radius: 0 8px 8px 0; }
+    .decision-main { font-size: 1.0rem; font-weight: 600; color: var(--text); line-height: 1.75; }
+    .risk-block { margin-top: 1rem; padding: 1rem 1.2rem; border-left: 3px solid var(--danger); background: rgba(248,81,73,0.05); border-radius: 0 6px 6px 0; font-size: 0.88rem; color: var(--muted); line-height: 1.8; }
+    .risk-label { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--danger); font-weight: 600; margin-bottom: 0.5rem; }
+    .action-now-block, .scenario-block, .invalidations-block { margin-top: 1rem; padding: 1rem 1.2rem; border-left: 3px solid var(--secondary); background: rgba(88,166,255,0.05); border-radius: 0 6px 6px 0; font-size: 0.88rem; color: var(--muted); line-height: 1.8; white-space: pre-wrap; }
+    .invalidations-block { border-left-color: var(--danger); background: rgba(248,81,73,0.04); }
+    .block-label { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--secondary); font-weight: 600; margin-bottom: 0.5rem; }
+    .invalidations-block .block-label { color: var(--danger); }
+    .stances-section { padding: 2.5rem 2rem; }
+    .stances-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; }
+    @media (max-width: 700px) { .stances-grid { grid-template-columns: repeat(2,1fr); } }
+    @media (max-width: 420px) { .stances-grid { grid-template-columns: 1fr; } }
+    .stance-card { background: var(--card-bg); border: 1px solid var(--border); border-top: 3px solid var(--border-accent); border-radius: 8px; padding: 1.2rem; }
+    .card-header { font-size: 0.88rem; font-weight: 700; color: var(--accent); margin-bottom: 1rem; letter-spacing: 0.05em; }
+    .micro-label { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--secondary); margin-top: 0.8rem; margin-bottom: 0.3rem; }
+    .micro-content { font-size: 0.82rem; color: var(--text); line-height: 1.65; }
+    .dissent-section, .tradeoffs-section, .actions-section { padding: 2.5rem 2rem; }
+    .dissent-block { background: rgba(212,160,23,0.04); border: 1px solid var(--border); border-radius: 8px; padding: 1.2rem 1.4rem; font-size: 0.9rem; line-height: 1.75; color: var(--text); }
+    .dissent-members { display: flex; gap: 0.5rem; margin-bottom: 0.75rem; flex-wrap: wrap; }
+    .dissent-tag { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; background: rgba(212,160,23,0.12); color: var(--accent); padding: 0.2rem 0.6rem; border-radius: 4px; }
+    .tradeoff-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    @media (max-width: 500px) { .tradeoff-grid { grid-template-columns: 1fr; } }
+    .gain, .lose { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; padding: 1.2rem 1.4rem; }
+    .gain { border-top: 3px solid var(--success); }
+    .lose { border-top: 3px solid var(--danger); }
+    .tradeoff-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.8rem; }
+    .gain .tradeoff-label { color: var(--success); }
+    .lose .tradeoff-label { color: var(--danger); }
+    .gain ul, .lose ul { list-style: none; padding: 0; }
+    .gain ul li, .lose ul li { font-size: 0.88rem; color: var(--text); line-height: 1.6; padding: 0.3rem 0; display: flex; align-items: flex-start; gap: 0.6rem; }
+    .gain ul li::before { content: '+'; color: var(--success); font-weight: 700; flex-shrink: 0; }
+    .lose ul li::before { content: '−'; color: var(--danger); font-weight: 700; flex-shrink: 0; }
+    .actions-list { list-style: none; padding: 0; counter-reset: actions; }
+    .actions-list li { counter-increment: actions; display: flex; align-items: flex-start; gap: 1rem; padding: 0.75rem 0; border-bottom: 1px solid var(--divider); font-size: 0.9rem; line-height: 1.65; }
+    .actions-list li:last-child { border-bottom: none; }
+    .actions-list li::before { content: counter(actions, decimal-leading-zero); color: var(--accent); font-weight: 700; font-size: 0.82rem; letter-spacing: 0.05em; flex-shrink: 0; margin-top: 0.1rem; min-width: 2rem; }
+    footer { text-align: center; padding: 2.5rem 2rem; display: flex; flex-direction: column; gap: 0.3rem; border-top: 1px solid var(--divider); }
+    footer span { font-size: 0.82rem; font-style: italic; color: var(--muted); opacity: 0.6; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">Investment Adviser Board</div>
+    <div class="title">投資顧問委員會報告</div>
+    <div class="subtitle">Multi-Agent Investment Analysis</div>
+    <div class="meta">
+      <span>2026-04-03</span><span class="dot">·</span>
+      <span class="meta-badge">full</span><span class="dot">·</span>
+      <span>9 位委員</span><span class="dot">·</span>
+      <span>CEO: openai-codex/gpt-5.2-codex</span>
+    </div>
+  </header>
+
+  <section class="brief-section">
+    <div class="section-label">分析簡報</div>
+    <div class="brief-body"><div class="brief-line">分析使用者目前真實投資組合，資料以 .pi/execution-desk/positions.json 與 .pi/investment-adviser-board/portfolio-snapshot-user.json 為準。請做全自動委員會分析，重點不是只講 market view，而是回答現在該怎麼做。請在內部收斂為三輪：先看 current market view 與持倉影響，再看重疊風險與最該處理部位，最後收斂 action now 與 reaction plan。報告請包含 Current Market View、Portfolio Risk Concentration、Top Priority Actions、What Not To Do Now、Reaction Plan、以及 Add/Hold/Trim/Exit-Avoid/Wait 分類，並輸出 HTML。</div></div>
+    <div class="ceo-framing">
+      <div class="ceo-label">CEO 框架</div>
+      目前我無法直接讀取 `.pi/execution-desk/positions.json` 與 `.pi/investment-adviser-board/portfolio-snapshot-user.json` 的內容。請貼上這兩個檔案的內容（或最新 snapshot 指向的 JSON），我才能精準識別分析標的與框架，並給出 200–300 字的委員會框架分析與後續全自動流程安排。
+    </div>
+  </section>
+
+  <section class="decision-section">
+    <div class="section-label">最終建議</div>
+    
+    <div class="decision-block">
+      <p class="decision-main">目前仍缺少 `.pi/execution-desk/positions.json` 與 `.pi/investment-adviser-board/portfolio-snapshot-user.json`（或最新 dated JSON）內容，無法完成全自動委員會整合報告。請直接貼上這兩個檔案內容（或最新 snapshot 指向的 JSON），我就能輸出你要的完整 HTML 報告。</p>
+    </div>
+    
+    
+    
+    
+  </section>
+
+  <section class="stances-section">
+    <div class="section-label">各委員立場</div>
+    <div class="stances-grid">
+      <div class="stance-card">
+        <div class="card-header">Ceo</div>
+        <div class="micro-label">立場</div><div class="micro-content">偏保守整理、先整併核心部位、降低高波動曝險。關鍵論點：目前持倉重疊集中於美股與科技指數（VOO/SPY/XLK），且 TSLA、IONQ、OKLO 增加波動；金屬部位提供有限對沖但不宜過度加碼。主要顧慮：若市場持續強勢上行，過早減碼可能錯失趨勢收益。想問其他委員：在不新增風險的前提下，你們會優先縮減哪一檔高波動持倉？&lt;/p&gt;
+```</div>
+        <div class="micro-label">關鍵論點</div><div class="micro-content">目前持倉重疊集中於美股與科技指數（VOO/SPY/XLK），且 TSLA、IONQ、OKLO 增加波動；金屬部位提供有限對沖但不宜過度加碼。主要顧慮：若市場持續強勢上行，過早減碼可能錯失趨勢收益。想問其他委員：在不新增風險的前提下，你們會優先縮減哪一檔高波動持倉？&lt;/p&gt;
+```</div>
+        <div class="micro-label">主要顧慮</div><div class="micro-content">若市場持續強勢上行，過早減碼可能錯失趨勢收益。想問其他委員：在不新增風險的前提下，你們會優先縮減哪一檔高波動持倉？&lt;/p&gt;
+```</div>
+      </div>
+
+      <div class="stance-card">
+        <div class="card-header">Macro Strategist</div>
+        
+        
+        
+      </div>
+
+      <div class="stance-card">
+        <div class="card-header">Fundamental Analyst</div>
+        
+        
+        
+      </div>
+
+      <div class="stance-card">
+        <div class="card-header">Technical Analyst</div>
+        
+        
+        
+      </div>
+
+      <div class="stance-card">
+        <div class="card-header">Risk Officer</div>
+        
+        
+        
+      </div>
+
+      <div class="stance-card">
+        <div class="card-header">Market Intelligence</div>
+        
+        
+        
+      </div>
+
+      <div class="stance-card">
+        <div class="card-header">Prediction Market Analyst</div>
+        
+        
+        
+      </div>
+
+      <div class="stance-card">
+        <div class="card-header">Backtest</div>
+        
+        
+        
+      </div>
+
+      <div class="stance-card">
+        <div class="card-header">Position Manager</div>
+        
+        
+        
+      </div></div>
+  </section>
+
+  
+
+  <section class="tradeoffs-section">
+    <div class="section-label">風險 / 機會權衡</div>
+    <div class="dissent-block"></div>
+  </section>
+
+  
+
+  <footer>
+    <span>本報告由投資顧問委員會多代理系統自動生成，僅供參考，不構成投資建議。</span>
+    <span>Investment Adviser Board — Generated by Pi Multi-Agent System</span>
+  </footer>
+</body>
+</html>

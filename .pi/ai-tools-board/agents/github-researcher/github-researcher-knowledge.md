@@ -4,215 +4,214 @@
 
 ---
 
-## 🔥 第二次全委員會議 — 增量洞見 (2026-04-02T02:18 更新)
+## 🔥 第三次全委員會議 — 增量洞見 (2026-04-06T01:00 更新)
 
-### 三大核心信號
+### 四大核心信號
 
-#### 信號 1：洩漏碼「DMCA 誤殺」事件 — Anthropic 法律行動的預期外衝擊 [src:016-017]
-- **事實**：Anthropic 針對洩漏碼 fork 發出 DMCA takedown，但 GitHub 處理時**誤殺了官方 repo 的合法 fork** (mbailey/claude-code-fork)
-- **影響**：合法 fork 用戶面臨「聲譽威脅」，社群出現對 Anthropic 法律策略的不滿
-- **同時**：社群開始自行舉報授權繞過的 repo（nilupulk/claude-code-free，使用假 API key + OpenRouter 代理）
-- **判斷**：DMCA 是雙面刃。過度使用會傷害合法開發者信任，但洩漏碼的衍生版（如 openclaude、better-clawd）仍在快速增長。法律手段無法阻擋開源社區的「知識擴散」。
+#### 信號 1：Claw Code 爆炸性增長 — 170K stars，48 小時 +47K，歷史最快 [src:new]
+- **事實**：`instructkr/claw-code` 從第二次會議的 123,579 stars 飆升至 **170,854** — 4 天內增加 **47,275 stars**
+- **fork 數同步暴增**：從 102,067 升至 **103,628**，近 1.6K 新 fork
+- **產品化加速**：Rust 工作區 container 化（Containerfile）、tagged binary release workflow、clawability hardening backlog 完成
+- **判斷**：Claw Code 已經從「洩漏碼重寫」徹底轉型為獨立開源專案。Rust 版本的持續重構 + OmX 工具層整合，使其具備了與 Claude Code 正面競爭的架構基礎。170K stars 的規模使其成為 GitHub 上最大的 coding agent 專案。
 
-#### 信號 2：「洩漏碼生態系」48 小時內從洩漏→分析→重構→替代品完整成型 [src:018-023]
-過去 72 小時出現了令人震驚的衍生速度：
+#### 信號 2：Claude Code 連續三天重大更新 — v2.1.90→91→92，進入「企業化攻堅期」 [src:059-060]
+- **v2.1.91** (4/3)：MCP 工具結果上限提升至 **500K chars**（`_meta["anthropic/maxResultSizeChars"]`）、plugins 可在 `bin/` 放可執行檔、新增 `disableSkillShellExecution` 安全設定
+- **v2.1.92** (4/4)：**互動式 Bedrock 設定向導**（3rd-party platform 登入時直接引導 AWS auth + region + credential）、`forceRemoteSettingsRefresh` 企業 policy（fail-closed 模式）、per-model `/cost` 明細
+- **判斷**：三個版本的共同主題是「企業客戶」。Bedrock 向導降低了 AWS 部署門檻，fail-closed policy 滿足合規需求，500K MCP result 解鎖了大型 DB schema 等企業場景。Claude Code 正在從開發者工具轉型為企業平台。
 
-| 衍生品 | Stars | Forks | 用途 |
-|--------|-------|-------|------|
-| x1xhlol/system-prompts-and-models-of-ai-tools | **134,031** | 33,785 | 全 AI 工具 system prompt 彙整 |
-| shareAI-lab/learn-claude-code | **46,517** | 7,343 | 從零重建 nano agent harness |
-| Gitlawb/openclaude | 3,734 | 1,457 | Claude Code 接入任何 LLM |
-| Leonxlnx/agentic-ai-prompt-research | 1,762 | 860 | AI coding assistant prompt 模式研究 |
-| motiful/cc-gateway | 1,743 | 342 | API 指紋正常化閘道 |
-| openedclaude/claude-reviews-claude | 1,008 | 549 | Claude 讀自己的原始碼（17 章架構深度剖析） |
-| farion1231/cc-switch | 37,141 | 2,239 | 多 agent 桌面統一工具 |
-| router-for-me/CLIProxyAPI | 22,058 | 3,640 | CLI → API 代理服務 |
+#### 信號 3：OpenClaw 進軍多模態 — 音樂生成 + ComfyUI 工作流 + Bedrock 嵌入 [src:067-069]
+- **音樂生成工具** (4/6)：`feat: add music generation tooling` — OpenClaw 新增原生音樂生成能力，含 async flow 文檔
+- **ComfyUI 媒體支援** (4/6)：`feat: add comfy workflow media support` — 直接整合 ComfyUI 工作流
+- **Bedrock 記憶嵌入** (4/6)：`feat(memory): add Bedrock embedding provider for memory search` — 使用 AWS Bedrock 做記憶搜尋的嵌入
+- **Bedrock Mantle IAM auth** (4/6)：PR #61563 新增 IAM credential auth
+- **判斷**：OpenClaw 正在從「聊天機器人」變成一個**通用多模態 agent 平台**。音樂生成 + ComfyUI 整合代表它不再局限於文字。Bedrock 嵌入則降低了 AWS 客戶的使用門檻。349K stars 的基數使這些功能有巨大的即時受眾。
 
-**關鍵觀察**：
-- `system-prompts-and-models-of-ai-tools` (134K stars) 成為洩漏事件的最大受益者，不只限於 Claude Code，而是匯集了 **27+ 個 AI 工具的 system prompt**
-- `learn-claude-code` (46.5K stars) 證明了「教育復刻」路線的成功 — 從零重建比 fork 更容易獲得社群認同
-- `cc-switch` (37.1K stars) 和 `CLIProxyAPI` (22K stars) 代表了「多 agent 切換」和「API 代理」這兩個新興基礎設施需求
+#### 信號 4：五大 Agent 全面成熟 — 架構重構期進入「收成階段」 [src:059-073]
+與第二次會議（4/2）的「同步 plugin 化」判斷對比，現在的狀態：
 
-**判斷**：洩漏事件的長期影響不是某個 fork 的生存，而是整個社群對 agent harness 架构的理解深度大幅提升。這等於一次強制性的「open source education」。
+| Agent | 4/2 狀態 | 4/6 狀態 | 進展 |
+|-------|---------|---------|------|
+| Claude Code | Plugin 基礎建設 | **Plugin bin/ + 500K result + Bedrock 向導** | ⬆️ 企業化 |
+| Codex | Crate 抽取 | **context-window lineage + subagent analytics + gpt-5.3-codex** | ⬆️ 可觀測性 |
+| Gemini CLI | v0.36→0.37 | **100K stars ✅ + ACP /about + compact output 預設** | ⬆️ UX 精煉 |
+| Goose | 技能路徑標準化 | **v1.30.0: MCP Roots + fast_model + ACP 並行載入** | ⬆️ 擴展性 |
+| Claw Code | v0.1.0 合併 | **170K stars + Rust container 化 + binary release** | ⬆️⬆️ 爆發 |
 
-#### 信號 3：五大 Agent 同步進入「架構重構期」 — Plugin 生態大戰即將開打 [src:024, 036-043]
-- **Claude Code**：v2.1.90 引入 `/powerup` 教學系統 + EvalView plugin（AI agent 回歸測試），顯示正在建設 plugin 生態
-- **Codex**：48 小時內抽出 `codex-tools`、`codex-mcp`、移除 `client_common` re-exports 三個 crate，為 plugin 架構做模組化準備 [src:036-038]
-- **Gemini CLI**：v0.36.0→v0.37.0-preview.0，同日發佈 3 個版本，sandbox 可用性修復 + ADK session 設定 [src:039-041]
-- **OpenClaw**：exec approvals 統一化 + memory 性能優化（trim matrix imports）+ plugin docs [src:057-058]
-- **Goose**：mesh binary 每次啟動下載新版本 + `~/.agents/skills/` 標準化技能路徑 [src:042-043]
-
-**判斷**：所有主要 agent 都在同時做同一件事 — **把核心拆成模組，為第三方 plugin 打基礎**。這意味著未來 30 天內我們可能看到第一波「跨 agent 通用 plugin」的出現。
+**判斷**：從「為 plugin 打基礎」進入「收成階段」。各 agent 開始在自己的利基市場深挖：Claude Code 搶企業、Codex 做可觀測性、Gemini CLI 磨 UX、Goose 做擴展性、Claw Code 搶開源社群。
 
 ---
 
-## 📊 追蹤 Repo 狀態快照（2026-04-02T02:18Z）
+## 📊 追蹤 Repo 狀態快照（2026-04-06T01:00Z）
 
-> 與首次會議基線比較。Δ 為與首次會議快照的差值。
+> Δ 為與第二次會議（4/2 02:18Z）快照的差值。ΔΔ 為與首次會議基線的差值。
 
 ### 程式 AI — 主力工具
 
-| Repo | Stars (Δ) | Forks | Last Push | 活躍度 |
-|------|-----------|-------|-----------|--------|
-| openclaw/openclaw | 344,703 (+16) | 68,403 | 02:17Z | 🔴 極高 |
-| ollama/ollama | **166,712** (新) | 15,258 | 23:59Z | 🟡 中 |
-| instructkr/claw-code | 123,579 (+648) | 102,067 | 00:06Z | 🟡 中高 |
-| anthropics/claude-code | 101,484 (+106) | 15,768 | 23:41Z | 🟡 中高 |
-| google-gemini/gemini-cli | **99,908** (+2) | 12,815 | 02:16Z | 🟠 高 |
-| openai/codex | 71,829 (+20) | 10,038 | 02:16Z | 🔴 極高 |
-| block/goose | 33,913 (+1) | 3,172 | 01:59Z | 🟡 中高 |
-| Yeachan-Heo/oh-my-codex | 8,786 (+34) | 806 | 01:47Z | 🟢 中 |
+| Repo | Stars (Δ / ΔΔ) | Forks | Last Push | 活躍度 |
+|------|---------------|-------|-----------|--------|
+| openclaw/openclaw | 349,034 (+4,331 / +4,347) | 69,895 | 00:50Z | 🔴 極高 |
+| instructkr/claw-code | **170,854** (+47,275 / +47,923) | 103,628 | 00:30Z | 🔴 極高 ⚡ |
+| ollama/ollama | 167,311 (+599 / 新追蹤) | 15,354 | 04-04Z | 🟡 中 |
+| anthropics/claude-code | 109,378 (+7,894 / +8,000) | 18,129 | 04-04Z | 🟡 中高 |
+| google-gemini/gemini-cli | **100,316** (+408 / +410) ✅ | 12,904 | 04-05Z | 🟠 高 |
+| openai/codex | 73,303 (+1,474 / +1,494) | 10,302 | 04-06Z | 🔴 極高 |
+| block/goose | 37,036 (+3,123 / +3,124) | 3,542 | 04-06Z | 🟡 中高 |
+| Yeachan-Heo/oh-my-codex | 16,610 (+7,824 / +7,858) | 1,585 | 04-05Z | 🟠 高 ⚡ |
+
+### Claude Code 生態圈
+
+| Repo | Stars (Δ) | Forks | Pushed | 用途 |
+|------|-----------|-------|--------|------|
+| affaan-m/everything-claude-code | **140,507** (+9,256) | 21,152 | 00:51Z | 跨 agent 性能優化 |
+| garrytan/gstack | ~63K (估) | — | 活躍 | Claude Code 配置 |
+| thedotmack/claude-mem | ~47K (估) | — | 活躍 | 記憶壓縮插件 |
+| sickn33/antigravity-awesome-skills | ~32K (估) | — | 活躍 | 1340+ skills |
 
 ### 洩漏衍生生態
 
-| Repo | Stars (Δ) | Forks | Last Push | 備註 |
-|------|-----------|-------|-----------|------|
-| x1xhlol/system-prompts-and-models-of-ai-tools | 134,032 (+1) | 33,785 | 03-28Z | 27+ 工具 prompt 彙整 |
-| asgeirtj/system_prompts_leaks | 35,729 | 5,875 | 01:35Z | 定期更新 |
-| farion1231/cc-switch | 37,141 (+12) | 2,239 | 01:25Z | 桌面統一工具 |
-| shareAI-lab/learn-claude-code | 46,517 (+18) | 7,343 | 01:00Z | 教育 harness |
-| Gitlawb/openclaude | 3,734 (+27) | 1,457 | 01:40Z | 多 LLM 接入 |
-| NanmiCoder/claude-code-haha | 3,098 | 3,755 | 04-01Z | 🔵 趨緩 |
-| can1357/oh-my-pi | 2,552 | 228 | 23:07Z | Pi fork |
+| Repo | Stars (Δ) | Last Push | 狀態 |
+|------|-----------|-----------|------|
+| shareAI-lab/learn-claude-code | 48,618 (+2,101) | 04-01Z | 穩定 |
+| x1xhlol/system-prompts-and-models-of-ai-tools | ~136K (估) | 03-28Z | 緩增 |
+| can1357/oh-my-pi | 2,678 (+126) | 04-05Z | 穩定 |
+| NanmiCoder/claude-code-haha | ~3.1K | 04-01Z | 🔵 停滯 |
 
-### Claude Code 生態圈（新追蹤）🆕
+### 其他追蹤
 
-| Repo | Stars | Forks | 用途 |
-|------|-------|-------|------|
-| **affaan-m/everything-claude-code** | **131,251** | 18,805 | 跨 agent harness 性能優化系統 |
-| **garrytan/gstack** | **60,950** | 8,043 | Garry Tan 個人 Claude Code 配置 |
-| **thedotmack/claude-mem** | **44,434** | 3,340 | 自動記憶壓縮插件 |
-| **musistudio/claude-code-router** | 31,132 | 2,436 | Claude Code 基礎設施路由 |
-| sickn33/antigravity-awesome-skills | 29,837 | 4,980 | 1340+ agentic skills 安裝庫 |
-| ruvnet/ruflo | 29,216 | 3,193 | 多 agent swarm 編排平台 |
-
-### 其他重要追蹤
-
-| Repo | Stars | Pushed | 備註 |
-|------|-------|--------|------|
-| Wan-Video/Wan2.1 | 15,732 | 03-05Z | 影片生成 |
-| HKUDS/DeepCode | 15,064 | 活躍 | Paper2Code |
-| deepseek-ai/FlashMLA | 12,548 | 03-31Z | MLA kernels |
-| deepseek-ai/3FS | 9,786 | 03-30Z | 分散式檔案系統 |
-| deepseek-ai/DeepEP | 9,091 | 03-31Z | MoE 通信 |
-| facebookresearch/audiocraft | 23,141 | 03-03Z | Meta MusicGen |
-| suno-ai/bark | 39,069 | 08-2024 | Bark TTS |
+| Repo | Stars | 備註 |
+|------|-------|------|
+| Wan-Video/Wan2.1 | 15,732 | 影片生成 |
+| HKUDS/DeepCode | 15,100 | Paper2Code |
+| facebookresearch/audiocraft | 23,141 | Meta MusicGen |
+| suno-ai/bark | 39,069 | Bark TTS |
 
 ---
 
-## 📈 Star 增長速率分析（累計自首次會議以來）
+## 📈 Star 增長速率分析（4/2→4/6，4 天）
 
-| Repo | 累計 Δ Stars | 速率 | 判斷 |
+| Repo | Δ Stars (4天) | 日均 | 判斷 |
 |------|-------------|------|------|
-| claw-code | +648 | 快速但趨穩 | v0.1.0 合併後穩定增長 |
-| claude-code (官方) | +106 | 健康 | 不受洩漏影響，持續增長 |
-| learn-claude-code | +18 | 穩定 | 教育 harness 持續吸引用戶 |
-| oh-my-codex | +34 | 穩定 | OmX 工具層 |
-| openclaw | +16 | 穩定 | 企業功能持續強化 |
-| openclaude | +27 | 活躍 | 多 LLM 需求強烈 |
+| **claw-code** | **+47,275** | **~11.8K/天** | 🔴 超級爆發，歷史級增速 |
+| **everything-claude-code** | **+9,256** | **~2.3K/天** | 🟠 快速增長，Claude 生態擴張 |
+| claude-code (官方) | +7,894 | ~2K/天 | 🟠 健康加速，v2.1.91-92 企業化奏效 |
+| oh-my-codex | +7,824 | ~2K/天 | 🟠 突然加速，OmX 工具層被發現 |
+| goose | +3,123 | ~780/天 | 🟡 穩定 |
+| openclaw | +4,331 | ~1.1K/天 | 🟡 穩定高位 |
+| codex | +1,474 | ~370/天 | 🟢 穩定 |
+| gemini-cli | +408 | ~100/天 | 🟢 突破 100K 後趨穩 |
+| ollama | +599 | ~150/天 | 🟢 穩定 |
+| oh-my-pi | +126 | ~32/天 | 🟢 緩增 |
 
 ---
 
 ## 趨勢觀察
 
-### 1. 🏗️ Claude Code 生態圈規模驚人 — 131K stars 的「everything-claude-code」被低估 [src:044] ⬆️ 新信號
-- `affaan-m/everything-claude-code` 以 **131,251 stars** 成為 Claude Code 生態中最大的專案
-- 搭配 `gstack` (60.9K)、`claude-mem` (44.4K)、`antigravity-awesome-skills` (29.8K)
-- **Claude Code 生態圈的總 star 數（含衍生）已超過 500K**
-- **判斷**：Claude Code 已不再只是一個 CLI 工具，它形成了一個完整的「agent 開發平台」。這個生態的規模甚至超過了很多獨立 AI 工具。
+### 1. ⚡ Claw Code +47K stars 是 GitHub 歷史上最快增長的 coding agent [src:new]
+- 4 天 +47K stars，超越 Claude Code 的累計增長速度
+- 同時 fork 數達 103K — 幾乎與 star 數 1:1，顯示開發者正在**實際 clone 和修改**
+- Rust 工作區 + container 化 + binary release workflow，顯示正在建設正式的發布基礎設施
+- **判斷**：Claw Code 已不再是 Claude Code 的 shadow — 它是獨立的開源 coding agent 品牌。
 
-### 2. 🏗️ Coding Agent 從「CLI 工具」升級為「Agent 作業系統」 [src:001-005] ⬆️ 加速確認
-48 小時前識別的趨勢正在加速：
-- **Plugin 生態建設**：Claude Code 的 EvalView PR、Codex 的 crate 抽取、Goose 的技能路徑標準化
-- **Agent 互通需求爆發**：cc-switch (37.1K)、cc-connect (3.9K)、CLIProxyAPI (22K) 的快速增長證明了「多 agent 共存」已成現實
+### 2. 🏢 Claude Code 三連發企業化 — Bedrock + Policy + MCP 大結果 [src:059-060]
+- v2.1.91 的 `_meta["anthropic/maxResultSizeChars"]` 解鎖了一個關鍵瓶頸：大型 DB schema、長文件等場景之前會被截斷
+- v2.1.92 的 Bedrock 向導直接在 CLI login 畫面提供引導，降低了 AWS 企業部署摩擦
+- `forceRemoteSettingsRefresh` fail-closed policy 是為合規團隊設計的
+- **判斷**：Anthropic 正在把 Claude Code 從「開發者玩具」推向「企業標配」。Bedrock 整合是攻入 AWS 生態的關鍵棋。
 
-### 3. ⚡ Claw Code 從爆發進入「產品化」階段 [src:007] ⬅️ 狀態更新
-- 最新 commits：CLI redesign、REPL hardening、first-run 引導優化、OmX/OmO README 信用重平衡
-- Star 累計增長 +648（相較於首次快照），進入穩態
-- **信號**：從「現象級 fork」轉為「有明確產品方向的開源專案」
+### 3. 🦞 OpenClaw 多模態擴張 — 音樂 + ComfyUI 是質變信號 [src:067-069]
+- 音樂生成和 ComfyUI 支援不是 incremental feature — 它們代表了 OpenClaw 從「文字 agent」到「多模態 agent OS」的轉型
+- Bedrock 嵌入用於記憶搜尋，意味著 AWS 客戶可以完全在 AWS 生態內運行 OpenClaw
+- 349K stars 保證了這些新功能有巨大的即時使用者基礎
+- **判斷**：OpenClaw 正在成為「通用 AI 助手平台」，類似於一個開源的 ChatGPT + plugin 系統。這對 coding agent 是間接影響 — 多模態能力將模糊 coding agent 和 general agent 的界線。
 
-### 4. 🦞 OpenClaw 持續記憶性能優化 [src:057-058] 🆕
-- 連續多個 `perf(memory): trim matrix ... imports` commits
-- 持續高頻開發（每 5-10 分鐘一個 commit）
-- **判斷**：OpenClaw 作為唯一超過 344K stars 的個人 AI 助手，正在對 20+ channels 進行記憶管理的深度優化
+### 4. 🔧 Codex 深耕可觀測性 — context-window lineage + subagent analytics [src:061-063]
+- `context-window lineage headers`：追蹤 context window 的完整傳承鏈
+- `subagent analytics`：PR #15915 加入 subagent thread 分析事件
+- `CODEX_SKIP_VENDORED_BWRAP`：為沒有 bubblewrap 的 Linux 環境提供建置選項
+- `allow disabling environment context injection` + `allow disabling prompt instruction blocks`：讓進階用戶完全控制 prompt 結構
+- **判斷**：Codex 的工程方向非常明確 — 不是追功能，而是做**最深度的可觀測性和可控性**。這對企業客戶（需要 audit trail 和成本控制）極具吸引力。
 
-### 5. 🔧 Codex 三連發模組化 — MCP + Tools + Re-exports [src:036-038] 🆕
-- `codex-mcp` crate：MCP runtime/server 獨立
-- `codex-tools` crate：update_plan spec 獨立
-- 移除 `client_common` re-exports：解耦內部依賴
-- **判斷**：Codex 的模組化速度最快且最有系統性。三個 crate 的抽出時間間隔不到 4 小時。
+### 5. 🎯 Gemini CLI 突破 100K — UX 精煉階段 [src:064-066]
+- **100,316 stars** ✅ 正式突破 100K 里程碑
+- 新增：ACP `/about` command、compact tool output **預設啟用**、tool confirmation UI 改善、sandbox 全球 temp dir 修復、skill system 注入 subagent prompts
+- 多個 Windows sandbox reliability 修復
+- **判斷**：Gemini CLI 正在進入「打磨期」— 功能已足夠完整，重點轉向穩定性和 UX。compact output 預設啟用是重要的 UX 決策。
 
-### 6. 🐧 oh-my-pi 持續追趕 — 新增 ZIP 工具 + Anthropic 超時強化 [src:053-054] 🆕
-- 新增 ZIP archive writing support（fflate 庫）
-- Anthropic first-event timeouts 硬化修復
-- 版本升級至 13.17.5→13.17.6
-- **判斷**：oh-my-pi 作為 Pi 的 fork，功能密度正在快速追上主線，但 2,552 stars 顯示社群接受度仍有限
+### 6. 🪿 Goose v1.30.0 — MCP Roots + fast_model + ACP 並行載入 [src:070]
+- MCP Roots 文檔新增
+- `fast_model` 設定用於 declarative providers
+- ACP extension loading 並行化（`perf(acp): parallelize extension loading`）
+- v1.29.1 修復 macOS Intel code signing
+- **判斷**：Goose 的方向是「擴展性優先」— 讓更多 provider、更多 extension 同時運行。`fast_model` 設定暗示了推理成本優化的需求。
 
-### 7. 🎯 Gemini CLI 100K 里程碑 [src:005, 039-041] 📊 觀察中
-- 目前 99,908 stars，距離 100K 僅差 92
-- 同日 v0.36.0 正式 + v0.37.0-preview.0
-- sandbox 可用性修復 + agent 停止條件修正 + ADK session 設定
-- **判斷**：v0.36.0 正式版的發佈可能在未來 24 小時內推動突破 100K
-
-### 8. 🦙 Ollama 本地推理擴展 [src:025] ⬅️ 狀態確認
-- 166,712 stars，穩定
-- Kimi-K2.5、GLM-5、MiniMax 支援
-- v0.19.0 MLX 後端（Apple Silicon）
-- **信號意義**：本地推理生態正在快速擴展模型覆蓋範圍
-
-### 9. 🔐 洩漏碼安全分析生態成型 [src:018-019] ⬅️ 穩定
-- `Marwane-Haddane/Claude_code_leak`：網路安全視角
-- `Leonxlnx/agentic-ai-prompt-research`：prompt 模式研究
-- `openedclaude/claude-reviews-claude`：架構剖析
-- `claude-code-haha`：3,098 stars，活躍度降至幾乎零（最後 push 4/1 05:59Z）
+### 7. 🛠️ Oh-My-Codex v0.11.13 — OmX 從工具層升級為「agent 質量框架」 [src:069]
+- v0.11.12→v0.11.13，48 小時內兩個版本
+- 持續 CI 穩定性修復（tmux-heal、mailbox notifications、dispatch）
+- **判斷**：oh-my-codex 的 7.8K Δ stars（4 天）顯示 OmX 工具層正在被更廣泛的社群發現。作為 Codex 的 orchestrator，它填補了 Codex 本身在 multi-agent 管理上的空白。
 
 ---
 
-## 🔍 新興項目雷達
+## 🆕 新興項目雷達（第三次會議）
 
 | 專案 | Stars | 為什麼值得關注 |
 |------|-------|--------------|
-| **affaan-m/everything-claude-code** | 131K | 跨 agent 性能優化系統，Claude 生態基石 |
-| **ColeMurray/background-agents** | 1.4K | 開源背景 agent 系統 — agent 不需人工啟動 |
-| **abshkbh/arrakis** | 792 | MicroVM sandboxing + backtracking — agent 安全執行的關鍵基礎設施 |
-| **shamcleren/CodePal** | 新 | 多 IDE/agent 統一監控面板 |
-| **HKUDS/DeepCode** | 15.1K | Paper2Code — 從論文自動生成可運行代碼 |
+| **stablyai/orca** | 427 | 「Next-gen IDE for building with coding agents」— agent 原生 IDE，非傳統 IDE + plugin |
+| **blackpaw-studio/leo** | 新 | Claude Code agents + Telegram + cron = 持久化 personal assistant |
+| **Yabuku-xD/contextforge** | 新 | Context engine for code agents — MCP + retrieval + impact analysis |
+| **kawarimidoll/guard-and-guide** | 新 | Guard coding agents from dangerous ops — agent 安全層 |
+| **manaflow-ai/cmux** | 新 | Ghostty-based macOS terminal with vertical tabs for agents |
+| **mikeroySoft/ctux** | 新 | btop-inspired TUI for managing multiple Claude Code agents |
+
+**判斷**：「agent 管理和監控」類工具正在快速湧現。cmux（terminal）、ctux（TUI）、Leo（Telegram bridge）代表了開發者對「同時運行多個 agent」這一新現實的適應。
 
 ---
 
-## 洩漏碼生態演變追蹤（最終更新）
+## 🔍 第二次會議信號追蹤更新
 
-| 階段 | 時間 | 事件 |
-|------|------|------|
-| 洩漏 | 2026-03-31 04:00 | NanmiCoder/claude-code-haha 公開洩漏碼 |
-| Clean-room 重寫 | 2026-03-31 | instructkr 用 OmX 完成 Python 重寫 |
-| 爆發 | 2026-04-01 | claw-code 突破 50K stars（2 小時） |
-| Rust port | 2026-04-01 | Rust 工作區開始開發 |
-| v0.1.0 合併 | 2026-04-01 21:05 | release/0.1.0 合併進 main |
-| DMCA 誤殺 | 2026-04-01 | GitHub 處理 DMCA 時誤殺官方 repo 合法 fork |
-| 分析潮 | 2026-04-01~02 | 安全研究、架構剖析、prompt 重建專案大量湧現 |
-| 替代品潮 | 2026-04-01~02 | openclaude、better-clawd、openharness 等替代品出現 |
-| 趨穩 | 2026-04-02 | claude-code-haha 活躍度降至零，社群轉向建設性專案 |
+### 洩漏碼生態 — 趨穩確認 [src:056]
+- `claude-code-haha`：活躍度完全歸零（最後 push 4/1），已被社群遺忘
+- `learn-claude-code`：+2.1K stars，穩定增長
+- `oh-my-pi`：+126 stars，緩增，社群接受度有限
 
-**最終判斷**：洩漏事件的影響已遠超 Claude Code 本身。它催化了：
-1. **AI agent 安全研究**的公開化
-2. **Agent harness 架構**的民主化知識
-3. **跨 LLM 代理**的基礎設施需求（openclaude、CLIProxyAPI）
-4. **多 agent 管理**工具的爆發（cc-switch、cc-connect）
-5. **Claude Code 生態圈**的全面爆發（everything-claude-code 131K、gstack 61K、claude-mem 44K）
+### Plugin 生態大戰 — 已進入收成期
+- 上次預測「30 天內看到跨 agent 通用 plugin」— 目前尚未出現
+- 但各 agent 的 plugin 基礎設施已基本就緒（Claude Code bin/、Goose MCP Roots、Codex crate modularity）
+- **修正判斷**：跨 agent plugin 的瓶頸不是技術基礎設施，而是 **prompt 和 tool call 格式的不統一**。MCP 協議可能成為共同語言，但各 agent 的 system prompt 差異太大。
+
+### Gemini CLI 100K — ✅ 已達成
+- 100,316 stars，比預測的「24 小時內」晚了約 3 天
+- v0.36.0→v0.37.0-preview.1 的快速迭代提供了持續動力
 
 ---
 
-## Repo 活躍度追蹤（更新）
+## Repo 活躍度追蹤（第三次會議）
 
-| Repo | 48h Commits | 活躍度 | 趨勢 |
-|------|------------|--------|------|
-| openclaw/openclaw | ~30+ | 🔴 極高 | 記憶優化 + 企業功能強化 |
-| openai/codex | ~20+ | 🔴 極高 | 三 crate 抽出 + 架構重構 |
-| google-gemini/gemini-cli | ~15+ | 🟠 高 | v0.36→0.37 快速迭代 |
-| anthropics/claude-code | ~8 | 🟡 中高 | 穩定迭代，plugin 生態建設 |
-| block/goose | ~10 | 🟡 中高 | mesh 動態更新 + 技能標準化 |
-| instructkr/claw-code | ~10 | 🟡 中高 | v0.1.0 合併後產品化 |
-| Yeachan-Heo/oh-my-codex | ~5 | 🟢 中 | 穩定更新 |
-| can1357/oh-my-pi | ~8 | 🟢 中 | 功能追趕 |
-| NanmiCoder/claude-code-haha | ~0 | 🔵 停滯 | 活躍度歸零 |
+| Repo | 48h Commits (4/4-4/6) | 活躍度 | 趨勢 |
+|------|----------------------|--------|------|
+| openclaw/openclaw | ~30+ | 🔴 極高 | 音樂生成 + ComfyUI + Bedrock |
+| openai/codex | ~15+ | 🔴 極高 | lineage + analytics + context control |
+| google-gemini/gemini-cli | ~12 | 🟠 高 | UX 精煉 + sandbox 修復 |
+| anthropics/claude-code | 2 (releases) | 🟡 中 | v2.1.91→92，品質優先 |
+| block/goose | ~5 | 🟡 中 | MCP Roots + ACP 並行 |
+| instructkr/claw-code | ~15 | 🟠 高 | Rust container + binary release |
+| Yeachan-Heo/oh-my-codex | ~15 | 🟠 高 | v0.11.13 CI 穩定性 |
+| can1357/oh-my-pi | ~5 | 🟢 中 | 穩定更新 |
+| NanmiCoder/claude-code-haha | 0 | 🔵 停滯 | 已死 |
+
+---
+
+## 🎯 委員會行動建議
+
+### 立即採用
+1. **Claude Code v2.1.92 Bedrock 向導** — 如果團隊用 AWS，立即升級，設定摩擦大幅降低
+2. **Gemini CLI v0.36.0** — 100K stars 里程碑版，compact output 預設啟用改善 UX
+
+### 密切觀察
+1. **Claw Code 170K stars 的後續** — 這個增速是否可持續？Rust 版本的成熟度如何？
+2. **OpenClaw 多模態擴張** — 音樂生成 + ComfyUI 是否會吸引新使用者群？
+3. **Codex 的 gpt-5.3-codex 模型** — PR #15915 中的 subagent analytics 暗示了新模型的使用
+
+### 可忽略
+1. **洩漏碼生態** — 已完全趨穩，不再有新的技術信號
+2. **oh-my-pi** — 2,678 stars，社群接受度低，追蹤價值有限
+3. **新出現的 agent 管理 TUI**（cmux、ctux、leo）— 過早，待觀察社群採用度

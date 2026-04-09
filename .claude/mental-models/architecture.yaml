@@ -1,0 +1,98 @@
+# Architecture
+# pi-vs-claude-code: Dual AI agent playground comparing Pi Coding Agent vs Claude Code
+
+project:
+  name: pi-vs-cc
+  purpose: "Extension playground comparing Pi Coding Agent vs Claude Code capabilities"
+  package_manager: "bun"
+  task_runner: "just"
+  language: "TypeScript (extensions), Python (hooks/scripts)"
+  type: module (ESM)
+
+# === PARALLEL AGENT SYSTEMS ===
+# This project has TWO independent agent ecosystems that coexist
+
+pi_system:
+  pattern: "Pi Coding Agent — terminal-based AI coding agent with extension system"
+  runtime: "jiti (JIT TypeScript loader)"
+  extensions_via: "pi -e extensions/<name>.ts"
+  config: .pi/settings.json
+  theme: "synthwave"
+  key_dirs:
+    - path: extensions/
+      note: "Pi extension .ts files (themeMap.ts currently active)"
+    - path: .pi/agents/
+      note: "~23 agent definitions (.md) + teams.yaml"
+    - path: .pi/skills/
+      note: "Pi skills (bowser/)"
+    - path: .pi/themes/
+      note: "13 terminal themes (catppuccin, cyberpunk, nord, etc.)"
+  board_systems:
+    - name: ai-tools-board
+      note: "AI coding tool comparison research"
+    - name: investment-adviser-board
+      note: "Investment analysis with portfolio tracking, 9 agents, has mental-model.yaml"
+    - name: football-betting-board
+      note: "Soccer betting with knowledge base"
+    - name: execution-desk
+      note: "Trade execution with orders/positions/trades"
+    - name: drip-board
+      note: "Music study with briefs and knowledge base"
+    - name: intel-board
+      note: "Intelligence gathering, memos only"
+    - name: meta-orchestrator
+      note: "Multi-board orchestration layer"
+  notable_agents:
+    - name: deep-researcher
+      note: "Web research specialist"
+    - name: planner/reviewer/red-team
+      note: "Dev workflow agents"
+    - name: onchain-scout
+      note: "Blockchain data analyst"
+
+claude_code_system:
+  pattern: "Claude Code — CLI AI agent with skills/hooks/commands/agents"
+  config: .claude/settings.json
+  permission_mode: "bypassPermissions"
+  key_dirs:
+    - path: .claude/agents/
+      note: "9 agent definitions (3-tier: leads + workers)"
+    - path: .claude/skills/
+      note: "12+ skills (mental-model, meta-skill, china-data, ccxt, etc.)"
+    - path: .claude/hooks/
+      note: "10 lifecycle hooks (all via uv run Python)"
+    - path: .claude/commands/
+      note: "9 user-invocable slash commands"
+    - path: .claude/output-styles/
+      note: "11 output formatting styles"
+    - path: .claude/teams/
+      note: "Team configs (teams.json — dev-team with 3 leads)"
+    - path: .claude/status_lines/
+      note: "3 status line variants (auto/main/team)"
+    - path: .claude/mental-models/
+      note: "Persistent knowledge files (this system)"
+  team_architecture:
+    tier: "3-tier"
+    pattern: "Orchestrator -> Team Leads (opus) -> Workers (sonnet)"
+    teams:
+      planning_lead: "Product Manager, UX Researcher"
+      engineering_lead: "Frontend Dev, Backend Dev"
+      validation_lead: "QA Engineer, Security Reviewer"
+  hooks_coverage:
+    - "PreToolUse / PostToolUse"
+    - "SessionStart / SessionEnd"
+    - "Notification / Stop / SubagentStop"
+    - "PreCompact / UserPromptSubmit"
+    - "All hooks use send_event.py for multi-agent observability"
+
+shared_infrastructure:
+  - path: specs/
+    note: "6 feature specs (agent-forge, workflow, daily-log, etc.)"
+  - path: doc/
+    note: "Reference docs (crypto-onchain-monitor, polymarket-agent)"
+  - path: logs/
+    note: "Session/event logs (json + markdown)"
+  - path: .env
+    note: "API keys and secrets (gitignored)"
+  - path: justfile
+    note: "30+ task recipes for both agent systems"

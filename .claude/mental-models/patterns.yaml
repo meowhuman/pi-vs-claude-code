@@ -1,0 +1,52 @@
+# Patterns
+# Conventions, recurring patterns, and gotchas
+
+patterns:
+  naming:
+    files: "kebab-case (e.g., status-line-auto.py, team-launch.sh)"
+    agents: "kebab-case .md files in .claude/agents/ or .pi/agents/"
+    skills: "kebab-case directories with SKILL.md"
+    commands: "kebab-case .md files in .claude/commands/"
+
+  extension_pattern:
+    language: "TypeScript (.ts)"
+    runtime: "Pi's jiti — JIT compiled, no build step"
+    imports:
+      - "@mariozechner/pi-coding-agent"
+      - "@mariozechner/pi-tui"
+      - "@mariozechner/pi-ai"
+      - "@sinclair/typebox"
+    rule: "Register tools at top level of extension function, NOT inside event handlers"
+    type_narrowing: "Use isToolCallEventType() for tool_call events"
+
+  hook_pattern:
+    language: "Python"
+    runner: "uv run (auto-manages deps)"
+    location: ".claude/hooks/"
+    convention: "Each hook file handles one lifecycle event"
+    observability: "send_event.py wraps all hooks for multi-agent tracking"
+
+  skill_pattern:
+    structure: "Directory with SKILL.md (YAML frontmatter + markdown body)"
+    frontmatter_required: "name (max 64 chars), description (max 1024 chars)"
+    optional: "allowed-tools, supporting files in scripts/ or docs/"
+    discovery: "Model-invoked — Claude auto-triggers based on description"
+
+  command_pattern:
+    structure: "Single .md file in .claude/commands/"
+    invocation: "User-invoked via /command-name"
+    sharing: "Pi reads from .claude/commands/ via prompts path"
+
+  board_pattern:
+    structure: "Directory under .pi/<board-name>/"
+    required: "config.yaml, agents/, memos/"
+    optional: "knowledge-base.md, briefs/, reports/, orders/, trades/"
+
+gotchas:
+  - "Pi extensions are JIT loaded by jiti, no tsc needed"
+  - "bypassPermissions means no safety net — be careful with destructive ops"
+  - ".mcp.json is empty — no MCP servers at project level"
+  - "package.json has minimal deps (only yaml) — most tooling is external"
+  - "logs/ can get large (~65 files) — consider cleanup"
+  - "Pi agents and CC agents use same .md format, just different directories"
+  - ".env is gitignored — never commit it"

@@ -1,0 +1,10 @@
+{
+  "latest_snapshot_date": "2026-04-03",
+  "latest_snapshot_json_path": ".pi/investment-adviser-board/portfolio-records/2026-04-03/portfolio-snapshot-user-2026-04-03.json",
+  "latest_snapshot_md_path": ".pi/investment-adviser-board/portfolio-records/2026-04-03/portfolio-snapshot-user-2026-04-03.md",
+  "rules": {
+    "storage_pattern": ".pi/investment-adviser-board/portfolio-records/YYYY-MM-DD/portfolio-snapshot-user-YYYY-MM-DD.json",
+    "reporting_currency_preference": "USD",
+    "agent_priority": "Agents should use the dated JSON snapshot first, then consult the dated markdown snapshot only for human notes or ambiguity."
+  }
+}

@@ -1,0 +1,68 @@
+# Investment Adviser Board — Mental Model
+# Structured expertise that persists across sessions for all board members
+
+# === BOARD ARCHITECTURE ===
+board:
+  name: investment-adviser-board
+  members: 9 agents (ceo, macro-strategist, fundamental-analyst, technical-analyst, risk-officer, market-intelligence, prediction-market-analyst, backtest, position-manager)
+  meeting_time: 10 minutes discussion
+  ceo_model: openai-codex/gpt-5.2-codex
+  member_model: kimi-coding/k2p5
+
+data_flow:
+  portfolio_snapshot:
+    - path: portfolio-snapshot-user.json
+      note: "Latest JSON pointer (always read this first)"
+    - path: portfolio-records/YYYY-MM-DD/portfolio-snapshot-user-YYYY-MM-DD.json
+      note: "Dated JSON snapshot (authoritative)"
+    - path: portfolio-records/YYYY-MM-DD/portfolio-snapshot-user-YYYY-MM-DD.md
+      note: "Human annotations only"
+  positions:
+    path: .pi/execution-desk/positions.json
+    note: "Live positions from execution desk"
+
+# === CURRENT STATE ===
+current_portfolio:
+  last_snapshot: "2026-04-03"
+  core_holdings:
+    - ticker: VOO
+      note: "S&P 500 ETF, largest position"
+    - ticker: XLK
+      note: "Technology sector ETF"
+    - ticker: SPY
+      note: "S&P 500 ETF"
+  risk_capital:
+    note: "Excludes bank/living reserve, USD perspective"
+
+# === OBSERVED PATTERNS ===
+market_regime:
+  - date: "2026-04-03"
+    note: "Portfolio analyzed in full board meeting — result in memos"
+
+tool_reliability:
+  - tool: sta-v2
+    note: "Self-contained TA, VPS-compatible, 26+ indicators"
+  - tool: ccxt
+    note: "Crypto OHLCV + indicators, supports 1m-12h intraday"
+  - tool: wsp-v3
+    note: "Dual-engine search (Brave+Tavily), needs cd to skill dir first"
+  - tool: backtest-system
+    note: "Supports stock/forex/crypto with --crypto flag for crypto"
+
+# === OPEN QUESTIONS ===
+open_questions:
+  - date_added: "2026-04-08"
+    question: "Should macro-strategist track China A-shares exposure separately from US portfolio?"
+    status: open
+  - date_added: "2026-04-08"
+    question: "Is portfolio reanalysis needed after recent market moves since 2026-04-03?"
+    status: open
+
+# === DECISIONS LOG ===
+decisions:
+  - date: "2026-04-03"
+    decision: "Full board analysis of real portfolio completed"
+    context: "3-round convergence, all 9 agents participated"
+  - date: "2026-03-28"
+    decision: "Two trading styles defined: Macro Long-term + Swing Trading"
+    context: "Clear timeframe/risk/reward criteria established"

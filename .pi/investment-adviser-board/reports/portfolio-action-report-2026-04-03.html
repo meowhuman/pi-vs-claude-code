@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Portfolio Action Report - 2026-04-03</title>
+  <style>
+    body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#0b1220;color:#e5e7eb;line-height:1.6;margin:0;padding:24px}
+    .wrap{max-width:1080px;margin:0 auto}
+    h1,h2,h3{color:#fff}
+    .card{background:#111827;border:1px solid #1f2937;border-radius:14px;padding:18px 20px;margin:14px 0}
+    .muted{color:#9ca3af}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+    .pill{display:inline-block;padding:4px 10px;border-radius:999px;font-size:12px;font-weight:700;margin-right:8px}
+    .red{background:#3f1d1d;color:#fca5a5}.yellow{background:#3b3416;color:#fde68a}.green{background:#163824;color:#86efac}.blue{background:#172554;color:#93c5fd}
+    table{width:100%;border-collapse:collapse;margin-top:10px}
+    th,td{border-bottom:1px solid #1f2937;padding:10px 8px;text-align:left;vertical-align:top}
+    th{color:#93c5fd;font-weight:700}
+    ul{margin:8px 0 0 18px}
+    code{background:#0f172a;padding:2px 6px;border-radius:6px;color:#cbd5e1}
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <h1>使用者投資組合 Action Report</h1>
+  <p class="muted">日期：2026-04-03｜資料來源：<code>.pi/execution-desk/positions.json</code>、dated snapshot JSON｜說明：本報告以你目前已記錄的真實持倉做結構化判讀。由於自動委員會工具當前失敗，本報告為手動整合版。未接入即時行情工具之處，不新增任何未驗證數字。</p>
+
+  <div class="card">
+    <h2>Executive Summary</h2>
+    <p><span class="pill yellow">核心結論</span> 你的組合目前最明顯的問題不是單一虧損股，而是<strong>美股大盤 / 科技 beta 重疊過高</strong>：<code>VOO + SPY + XLK + TSLA + XLY + AMZN + GOOG + IONQ + OKLO</code> 在風險偏好轉弱時會同向受壓。相對地，<code>GLD</code>、<code>SLV</code>、<code>DX</code>、<code>09988</code>、<code>INDA</code> 屬於不同敘事桶，但仍需要更清楚的角色定義。</p>
+    <p><span class="pill blue">Now</span> 現在最合理的做法是先做<strong>組合整理</strong>，不是全面加碼：先減少重複 beta、保留高品質 core、把高波動 / 敘事型部位與核心 ETF 分開處理。</p>
+  </div>
+
+  <div class="grid">
+    <div class="card"><h3>Top Risk Bucket</h3><p>美股指數 + 科技成長重疊曝險</p></div>
+    <div class="card"><h3>Core ETF Exposure</h3><p>VOO 57、SPY 8、XLK 83</p></div>
+    <div class="card"><h3>High Beta Names</h3><p>TSLA 10、IONQ 55、OKLO 19、XLY 20</p></div>
+    <div class="card"><h3>Diversifiers</h3><p>GLD 14、SLV 31、INDA 58、09988 300、DX -1</p></div>
+  </div>
+
+  <div class="card">
+    <h2>Current Market View</h2>
+    <ul>
+      <li>從持倉結構看，你目前主體押注仍偏向<strong>美股風險資產延續</strong>，尤其是大盤與科技。</li>
+      <li>組合裡同時存在<strong>防守 / 對沖元素</strong>（GLD、SLV、DX），但比例與角色尚未完全形成明確防線。</li>
+      <li>港股的 <code>09988</code> 與印度主題 <code>INDA</code> 提供了地區分散，但未必能在所有情境下對沖美股 beta。</li>
+      <li>因此，當前真正的 market view 應解讀為：<strong>你不是在做均衡配置，而是在做「美股成長為主，少量跨資產修飾」</strong>。</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>Portfolio Risk Concentration</h2>
+    <table>
+      <thead>
+        <tr><th>風險桶</th><th>相關持倉</th><th>問題</th><th>判斷</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>美股大盤 / Beta</td>
+          <td>VOO, SPY, XLK, XLY</td>
+          <td>重複度高，回檔時可能一起跌</td>
+          <td><span class="pill red">高</span></td>
+        </tr>
+        <tr>
+          <td>高波動成長</td>
+          <td>TSLA, IONQ, OKLO</td>
+          <td>波動大，若風險偏好下降，易擴大回撤</td>
+          <td><span class="pill red">高</span></td>
+        </tr>
+        <tr>
+          <td>貴金屬 / 宏觀避險</td>
+          <td>GLD, SLV</td>
+          <td>可分散，但需要明確區分長持避險還是交易倉</td>
+          <td><span class="pill yellow">中</span></td>
+        </tr>
+        <tr>
+          <td>地區分散</td>
+          <td>INDA, 09988</td>
+          <td>提供非美股敘事，但政策 / 監管風險不同</td>
+          <td><span class="pill yellow">中</span></td>
+        </tr>
+        <tr>
+          <td>衍生品 / 美元方向</td>
+          <td>DX -1</td>
+          <td>部位小但定義不清，若無明確 thesis 易成噪音</td>
+          <td><span class="pill yellow">中</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>Top Priority Actions</h2>
+    <ol>
+      <li><strong>先定義核心 ETF，只留一個主軸。</strong> 你目前同時持有 <code>VOO</code>、<code>SPY</code>、<code>XLK</code>，其中 <code>VOO + SPY</code> 功能高度重疊。第一優先是決定：你的 core beta 是 VOO / SPY 哪一個，避免重複持有造成管理混亂。</li>
+      <li><strong>把高波動部位與核心持倉分帳思考。</strong> <code>TSLA</code>、<code>IONQ</code>、<code>OKLO</code> 不應被你當成和 <code>VOO</code> 同一層級的部位。現在先把它們標記為 tactical / swing bucket，而不是 core bucket。</li>
+      <li><strong>明確定義對沖角色。</strong> <code>GLD</code>、<code>SLV</code>、<code>DX</code> 目前像是存在，但角色尚不夠清楚。你要決定：它們是風險對沖、通膨交易，還是獨立 alpha 倉。若無清楚 thesis，應縮減噪音部位。</li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <h2>What Not To Do Now</h2>
+    <ul>
+      <li>不要在還沒整理完 <code>VOO / SPY / XLK</code> 重疊前，繼續增加同方向美股 beta。</li>
+      <li>不要把 <code>TSLA / IONQ / OKLO</code> 當作「便宜了就自然能攤平」的核心部位。</li>
+      <li>不要讓 <code>DX -1</code> 這類衍生品在 thesis 不清楚時長期留在組合裡。</li>
+      <li>不要把銀行生活資金與交易資金混為一談；你已經定義得很好，應繼續嚴格分開。</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>Holding Classification</h2>
+    <table>
+      <thead>
+        <tr><th>分類</th><th>持倉</th><th>理由</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Add</td>
+          <td>暫無明確新增名單</td>
+          <td>在未完成組合整理前，不建議主動擴大風險。</td>
+        </tr>
+        <tr>
+          <td>Hold</td>
+          <td>VOO, GOOG, AMZN, INDA, GLD</td>
+          <td>可作為相對較高品質或具主題定位的中樞部位，但仍需看整體比重。</td>
+        </tr>
+        <tr>
+          <td>Trim</td>
+          <td>SPY, XLK, TSLA</td>
+          <td>主要基於重疊 beta 與波動管理，不代表基本面一定轉壞。</td>
+        </tr>
+        <tr>
+          <td>Exit / Avoid</td>
+          <td>DX（若無清楚 thesis）, 01299（若只是殘留 1 股）</td>
+          <td>小且不成體系的部位容易干擾決策。</td>
+        </tr>
+        <tr>
+          <td>Wait</td>
+          <td>IONQ, OKLO, SLV, XLY, 09988</td>
+          <td>這些更需要由技術位 / 事件 / 政策確認後再決定是否加減。</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>Reaction Plan</h2>
+    <h3>若市場上行</h3>
+    <ul>
+      <li>優先讓 core ETF（VOO 或保留後的主軸）受益，而不是同時追高多個重疊 ETF。</li>
+      <li>高波動成長股只在確認強勢延續時小幅加碼，不宜一次性放大。</li>
+      <li>若上行主要由科技帶動，重新檢查 XLK 與個股科技曝險是否過度疊加。</li>
+    </ul>
+    <h3>若市場下行</h3>
+    <ul>
+      <li>先砍重疊 beta，再處理高波動敘事股。</li>
+      <li>優先考慮減少 SPY / XLK / TSLA 這類與核心 ETF 同方向的壓力源。</li>
+      <li>保留明確對沖或分散角色的部位，但前提是 thesis 清楚。</li>
+    </ul>
+    <h3>若市場震盪</h3>
+    <ul>
+      <li>避免過度交易，以倉位整理為主。</li>
+      <li>把 tactical bucket 與 core bucket 切開管理。</li>
+      <li>等待更清楚的 breakout / breakdown 訊號，再調整高波動部位。</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>Important Caveats</h2>
+    <ul>
+      <li>本報告基於你目前記錄的持倉結構與截圖數字，不含即時技術指標 / 新聞 / 宏觀 API 更新。</li>
+      <li>HKD 與 UNKNOWN 幣別部位未強行換算成 USD。</li>
+      <li>若你要真正做到「今天立刻執行」層級，下一步應該補一輪即時 technical / risk / macro 檢查。</li>
+    </ul>
+  </div>
+</div>
+</body>
+</html>

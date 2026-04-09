@@ -232,6 +232,7 @@ let activeMember: MemberDef | null = null;
 let boardConfig: BoardConfig | null = null;
 let defaultTools: string[] = [];
 let cwdRef = "";
+let baseSystemPrompt: string | null = null; // Store original system prompt to avoid accumulation
 
 // ── Extension ─────────────────────────────────────────────────────────────────
 
@@ -331,6 +332,11 @@ export default function (pi: ExtensionAPI) {
   pi.on("before_agent_start", async (event, _ctx) => {
     if (!activeMember) return;
 
+    // Store base system prompt on first call to avoid accumulation when switching members
+    if (baseSystemPrompt === null) {
+      baseSystemPrompt = event.systemPrompt;
+    }
+
     const knowledgeContent = existsSync(activeMember.knowledgePath)
       ? readFileSync(activeMember.knowledgePath, "utf-8")
       : "（尚未建立）";
@@ -357,8 +363,9 @@ ${knowledgeContent}
 每次對話結束時，主動問用戶是否有新洞見值得寫入知識庫。
 `;
 
+    // Use baseSystemPrompt instead of event.systemPrompt to avoid accumulation
     return {
-      systemPrompt: activeMember.systemPrompt + knowledgeSection + "\n\n" + event.systemPrompt,
+      systemPrompt: activeMember.systemPrompt + knowledgeSection + "\n\n" + (baseSystemPrompt || event.systemPrompt),
     };
   });
 
@@ -401,6 +408,7 @@ ${knowledgeContent}
 
       if (choice === options[0]) {
         activeMember = null;
+        baseSystemPrompt = null; // Reset to allow fresh start next time
         pi.setActiveTools(defaultTools);
         ctx.ui.setStatus("member-session", "成員：未選擇");
         ctx.ui.notify("已清除成員，回到預設模式", "info");

@@ -18,6 +18,23 @@ tools: bash,read,write
 
 ---
 
+## 數據來源
+
+### Cloudbet 賠率（計算 Kelly）
+```bash
+# 獲取 Cloudbet 賠率進行 Kelly 計算
+python3 /Users/terivercheung/Documents/AI/pi-vs-claude-code/.claude/skills/soccer-betting-system/scripts/fetch_cloudbet_odds.py report --event-id <EVENT_ID>
+
+# 報告包含：
+# - 1X2 賠率
+# - 大小球賠率
+# - 公平賠率（去 margin 後）— 用於更準確的 Kelly 計算
+
+# 注意：Kelly 計算應使用「去 margin 後的真實機率」而非原始隱含機率
+```
+
+---
+
 ## 倉位管理框架
 
 ### Kelly Criterion（凱利公式）
